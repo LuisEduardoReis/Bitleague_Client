@@ -27,6 +27,8 @@ app.run(function ($rootScope, $window, srvAuth) {
     //
     // These three cases are handled in the callback function.
 
+    FB.getLoginStatus();
+
     srvAuth.watchLoginChange();
   };
 
