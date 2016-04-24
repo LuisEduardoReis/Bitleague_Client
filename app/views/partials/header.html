@@ -16,15 +16,17 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
         <ul class="nav navbar-nav">
-          <li><a href="#/">Home</a></li>
-          <li><a ng-href="#/about" ng-click="checkLoginState()">About</a></li>
+          <li><a ui-sref="home">Home</a></li>
+          <li><a ui-sref="about">About</a></li>
         </ul>
 
         <div class="nav navbar-nav navbar-right">
-          <div ng-if="!loggedIn()" ng-include="'views/partials/fbLoginButton.html'"></div>
+          <div ng-if="!loggedIn()">
+            <a ui-sref="login"> Login </a>
+          </div>
           <div ng-if="loggedIn()">
-            <a href="#/" ng-click="logout()">{{user.name}}</a>
-            <a href="#/"><img ng-src="{{user.picture.data.url}}"></a>
+            <a>{{user.name}}</a>
+            <a><img ng-src="{{user.picture.data.url}}"></a>
           </div>
 
         </div>

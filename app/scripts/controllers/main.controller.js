@@ -1,7 +1,8 @@
 'use strict';
 
-app.controller('MainCtrl', function ($scope, srvAuth) {
+app.controller('MainCtrl', function ($scope, $state, srvAuth) {
 
-  $scope.logout = srvAuth.logout;
-
+  $scope.onlogin = function () {
+    $state.go('home');
+  };
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 
-
+// Init
 app.run(function ($rootScope, $window, srvAuth) {
 
   $rootScope.user = {id: -1}
@@ -15,26 +15,25 @@ app.run(function ($rootScope, $window, srvAuth) {
       version: 'v2.5' // use graph api version 2.5
     });
 
-    // Now that we've initialized the JavaScript SDK, we call
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
     FB.getLoginStatus();
 
     srvAuth.watchLoginChange();
   };
-
 });
 
-app.factory('srvAuth', function ($rootScope) {
+
+// Load the SDK Asynchronously
+(function(d){
+  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement('script'); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js";
+  ref.parentNode.insertBefore(js, ref);
+}(document));
+
+
+// Create a authentication service
+app.factory('srvAuth', function ($rootScope, $state) {
 
   var service = {};
 
@@ -52,6 +51,7 @@ app.factory('srvAuth', function ($rootScope) {
     FB.api('/me?fields=id,name,email,picture', function (res) {
       $rootScope.$apply(function () {
         $rootScope.user = _self.user = res;
+        $state.go('home');
       });
     });
   };
