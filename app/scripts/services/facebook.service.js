@@ -33,14 +33,18 @@ app.run(function ($rootScope, $window, srvAuth) {
 
 
 // Create a authentication service
-app.factory('srvAuth', function ($rootScope, $state) {
+app.factory('srvAuth', function ($rootScope, $state, $http) {
 
   var service = {};
+
+  service.token = null;
 
   service.watchLoginChange = function () {
     var _self = this;
     FB.Event.subscribe('auth.authResponseChange', function (res) {
       if (res.status == 'connected') {
+        console.log(res);
+        _self.res = res;
         _self.getUserInfo();
       }
     });
@@ -51,10 +55,30 @@ app.factory('srvAuth', function ($rootScope, $state) {
     FB.api('/me?fields=id,name,email,picture', function (res) {
       $rootScope.$apply(function () {
         $rootScope.user = _self.user = res;
+        _self.serverLogin();
         $state.go('home');
       });
     });
   };
+
+  service.serverLogin = function () {
+    var _self = this;
+    console.log(_self);
+    $http({
+      url: $rootScope.SERVER_URL + "/api/login",
+      method: "POST",
+      data: {
+        id: _self.user.id,
+        access_token: _self.res.authResponse.accessToken
+      }
+    }).success(function (data) {
+      _self.token = data;
+    });
+  }
+
+  service.loggedIn = function () {
+    return this.token != null;
+  }
 
   service.logout = function() {
     var _self = this;
