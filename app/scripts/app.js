@@ -19,23 +19,13 @@ var app = angular
     'ui.router'
   ]);
 
-app.config(function ($routeProvider) {
-  $routeProvider
-    .when('/', {
-      templateUrl: 'views/home.view.html'
-    })
-    .when('/about', {
-      templateUrl: 'views/about.view.html'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
-});
 
-app.run(function ($rootScope) {
+app.run(function ($rootScope, srvAuth, $state) {
   $rootScope.user = { id: -1 };
 
-  $rootScope.setUser = function(user) { $rootScope.user = user; }
-  $rootScope.loggedIn = function() {return $rootScope.user.id > 0}
-})
+  $rootScope.setUser = function(user) { $rootScope.user = user; };
+
+  $rootScope.SERVER_URL = "http://localhost:9090";
+
+});
 

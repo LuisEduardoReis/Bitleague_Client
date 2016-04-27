@@ -23,7 +23,7 @@
     <div ng-include="'views/partials/header.html'"></div>
 
     <div class="container">
-    <div ng-view=""></div>
+      <div ui-view></div>
     </div>
 
     <div ng-include="'views/partials/footer.html'"></div>
@@ -51,13 +51,15 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="//connect.facebook.net/en_US/sdk.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/routes.js"></script>
         <script src="scripts/services/facebook.service.js"></script>
         <script src="scripts/controllers/main.controller.js"></script>
+        <script src="scripts/controllers/login.controller.js"></script>
+        <script src="scripts/controllers/userpage.controller.js"></script>
   </body>
 </html>
