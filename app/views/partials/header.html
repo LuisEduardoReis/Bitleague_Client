@@ -25,8 +25,8 @@
             <a ui-sref="login"> Login </a>
           </div>
           <div ng-if="loggedIn()">
-            <a>{{user.name}}</a>
-            <a><img ng-src="{{user.picture.data.url}}"></a>
+            <a ui-sref="userpage">{{user.name}}</a>
+            <a ui-sref="userpage"><img width="50" height="50" ng-src="{{user.picture.data.url}}"></a>
           </div>
 
         </div>

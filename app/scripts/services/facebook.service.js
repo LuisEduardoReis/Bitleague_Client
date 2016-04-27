@@ -36,55 +36,50 @@ app.run(function ($rootScope, $window, srvAuth) {
 app.factory('srvAuth', function ($rootScope, $state, $http) {
 
   var service = {};
-
   service.token = null;
+  service.res = null;
+  service.user = {id: -1}
 
   service.watchLoginChange = function () {
-    var _self = this;
     FB.Event.subscribe('auth.authResponseChange', function (res) {
       if (res.status == 'connected') {
-        console.log(res);
-        _self.res = res;
-        _self.getUserInfo();
+        service.res = res;
+        service.getUserInfo();
       }
     });
   };
 
   service.getUserInfo = function () {
-    var _self = this;
     FB.api('/me?fields=id,name,email,picture', function (res) {
       $rootScope.$apply(function () {
-        $rootScope.user = _self.user = res;
-        _self.serverLogin();
+        $rootScope.user = service.user = res;
+        service.serverLogin();
         $state.go('home');
       });
     });
   };
 
   service.serverLogin = function () {
-    var _self = this;
-    console.log(_self);
     $http({
       url: $rootScope.SERVER_URL + "/api/login",
       method: "POST",
       data: {
-        id: _self.user.id,
-        access_token: _self.res.authResponse.accessToken
+        id: service.user.id,
+        access_token: service.res.authResponse.accessToken
       }
     }).success(function (data) {
-      _self.token = data;
+      service.token = data;
     });
   }
 
   service.loggedIn = function () {
-    return this.token != null;
+    return service.token != null;
   }
 
   service.logout = function() {
-    var _self = this;
     FB.logout(function(response) {
       $rootScope.$apply(function() {
-        $rootScope.user = _self.user = {};
+        $rootScope.user = service.user = {};
       });
     });
   };

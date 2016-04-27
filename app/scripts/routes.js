@@ -1,9 +1,9 @@
 'use strict';
 
-app.run(function ($rootScope, $state) {
+app.run(function ($rootScope, $state, srvAuth) {
   $rootScope.$on('$stateChangeStart', function(event, toState) {
-    if((toState.data.requireLogin && !$rootScope.loggedIn()) ||
-      (toState.data.requireLogout && $rootScope.loggedIn()) ) {
+    if((toState.data.requireLogin && !srvAuth.loggedIn()) ||
+      (toState.data.requireLogout && srvAuth.loggedIn()) ) {
       $state.go('home');
       event.preventDefault();
     }
@@ -25,6 +25,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('about', {
       url: '/about',
       templateUrl: 'views/about.view.html',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
+    .state('userpage', {
+      url: '/userpage',
+      templateUrl: 'views/userpage.view.html',
       data: {
         requireLogin: true,
         requireLogout: false
