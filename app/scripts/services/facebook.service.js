@@ -43,6 +43,7 @@ app.factory('srvAuth', function ($rootScope, $state, $http) {
   service.watchLoginChange = function () {
     FB.Event.subscribe('auth.authResponseChange', function (res) {
       if (res.status == 'connected') {
+        //console.log(res);
         service.res = res;
         service.getUserInfo();
       }
@@ -68,12 +69,13 @@ app.factory('srvAuth', function ($rootScope, $state, $http) {
         access_token: service.res.authResponse.accessToken
       }
     }).success(function (data) {
-      service.token = data;
+      //console.log(data);
+      service.login = data;
     });
   }
 
   service.loggedIn = function () {
-    return service.token != null;
+    return service.login != null;
   }
 
   service.logout = function() {

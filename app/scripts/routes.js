@@ -33,6 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('userpage', {
       url: '/userpage',
       templateUrl: 'views/userpage.view.html',
+      controller: 'UserPageCtrl',
       data: {
         requireLogin: true,
         requireLogout: false
