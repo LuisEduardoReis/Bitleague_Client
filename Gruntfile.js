@@ -76,6 +76,11 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+              connect().use('/', function (req, res, next) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', '*');
+                next();
+              }),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -123,7 +128,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          //'<%= yeoman.app %>/scripts/{,*/}*.js'
         ]
       },
       test: {
