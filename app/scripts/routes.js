@@ -30,6 +30,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('drag', {
+      url: '/drag',
+      templateUrl: 'views/drag.view.html',
+      controller: 'DragCtrl',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
+    .state('sortable', {
+      url: '/sortable',
+      templateUrl: 'views/sortable.view.html',
+      controller: 'sortableController',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
+    .state('table', {
+      url: '/table',
+      templateUrl: 'views/table.view.html',
+      controller: 'TableCtrl',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
     .state('userpage', {
       url: '/userpage',
       templateUrl: 'views/userpage.view.html',
