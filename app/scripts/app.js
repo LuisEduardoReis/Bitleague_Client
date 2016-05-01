@@ -18,7 +18,8 @@ var app = angular
     'ngTouch',
     'ui.router',
     'ngDragDrop',
-    'ui.sortable'
+    'ui.sortable',
+    'ngWebsocket'
   ]);
 
 
@@ -27,7 +28,9 @@ app.run(function ($rootScope, srvAuth, $state) {
 
   $rootScope.setUser = function(user) { $rootScope.user = user; };
 
-  $rootScope.SERVER_URL = "http://localhost:9090";
+  $rootScope.SERVER_URI = "localhost:9090"
+  $rootScope.SERVER_URL = "http://" + $rootScope.SERVER_URI;
+
 
 });
 

@@ -66,6 +66,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('draft', {
+      url: '/draft',
+      templateUrl: 'views/draft.view.html',
+      controller: 'DraftCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'views/login.view.html',
