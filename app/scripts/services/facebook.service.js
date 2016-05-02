@@ -36,7 +36,7 @@ app.run(function ($rootScope, $window, srvAuth) {
 app.factory('srvAuth', function ($rootScope, $state, $http) {
 
   var service = {};
-  service.token = null;
+  service.login = null;
   service.res = null;
   service.user = {id: -1}
 

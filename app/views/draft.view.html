@@ -1,8 +1,12 @@
-<p ng-if="state=='connecting'"> Connecting to draft...</p>
+<p ng-if="draft_state=='connecting'"> Connecting to draft...</p>
 
-<div ng-if="state=='connected'">
+<div ng-if="draft_state=='connected'">
   <p>Online users:</p>
-  <div class="online-users-list">
+  <ul>
+  <li ng-repeat="user in draft_user_list">
+      {{user}}
+  </li>
+  </ul>
 </div>
 
 </div>
