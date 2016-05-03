@@ -6,7 +6,7 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $http, srvAuth) {
 
   if (srvAuth.loggedIn()) {
     $http({
-      url: $rootScope.SERVER_URL + "/api/user?id=" + srvAuth.login.user,
+      url: 'http://' + window.location.hostname + ':' + $rootScope.SERVER_PORT + "/api/user?id=" + srvAuth.login.user,
       method: "GET",
       headers: {
         "Authorization": srvAuth.login.token

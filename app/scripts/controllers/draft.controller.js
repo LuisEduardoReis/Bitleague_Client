@@ -1,28 +1,20 @@
 'use strict';
 
-app.controller('DraftCtrl', function ($scope, $rootScope, srvAuth, $websocket) {
+app.controller('DraftCtrl', function ($scope, $rootScope, srvAuth, srvDraft, $websocket) {
 
-  $scope.draft_state = 'connecting';
-  $scope.draft_user_list = [];
+  srvDraft.draft.init('test');
+  $scope.draft = srvDraft.draft;
 
-  var ws = $websocket.$new("ws://"+$rootScope.SERVER_URI+"/api/socket")
+  /*var updateState = function () {
+    $scope.state = srvDraft.state;
+    $scope.user_list = srvDraft.user_list;
+    console.log($scope.state);
+    //$scope.$apply();
+  }*/
+  //updateState();
+  //srvDraft.registerStateObserver(updateState);
 
-  ws.$on('$open', function() {
-    console.log("open");
-    $scope.$apply();
-    
-    ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': 'test'});
-    
-    ws.$on('$message', function(res) {
-      $scope.draft_state = 'connected';
-      console.log(res);
-      if(res.event == 'user_list') {
-        $scope.draft_user_list = res.data;
-      }
-      $scope.$apply();
-    });
-    
-  });
+
 
 
 });
