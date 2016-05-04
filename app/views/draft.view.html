@@ -1,11 +1,19 @@
 <p ng-if="draft.state=='connecting'"> Connecting to draft...</p>
+<p ng-if="draft.state=='loading'"> Loading...</p>
 
 <div ng-if="draft.state=='connected'">
   <p>Online users:</p>
   <ul>
-  <li ng-repeat="user in draft.user_list">
+    <li ng-repeat="user in draft.user_list">
       {{user}}
-  </li>
+    </li>
+  </ul>
+
+  <p>Players:</p>
+  <ul>
+    <li ng-repeat="player in draft.players_left">
+      <button ng-click="draft.pick(player._id)">{{player.number}} - {{player.name}} - {{player.positionDescription}} - {{player.team}}</button>
+    </li>
   </ul>
 </div>
 
