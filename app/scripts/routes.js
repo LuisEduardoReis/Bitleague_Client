@@ -75,6 +75,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('league', {
+      url: '/league/:id',
+      templateUrl: 'views/league.view.html',
+      controller: 'LeagueCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'views/login.view.html',
