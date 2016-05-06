@@ -68,7 +68,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -76,6 +76,11 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+              connect().use('/', function (req, res, next) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', '*');
+                next();
+              }),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -123,7 +128,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          //'<%= yeoman.app %>/scripts/{,*/}*.js'
         ]
       },
       test: {
