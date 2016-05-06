@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('DraftCtrl', function ($scope, $rootScope, srvAuth, srvDraft, $websocket) {
-
-  srvDraft.draft.init('test');
+app.controller('DraftCtrl', function ($scope,  srvDraft, $stateParams) {
+  
+  srvDraft.draft.init($stateParams.league_id);
   $scope.draft = srvDraft.draft;
 
 

@@ -18,6 +18,9 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
     draft.picked_players = {};
     draft.picknumber = 0;
 
+    draft.timer = 0;
+    draft.currentUser = "";
+
     $http({
       method: 'GET',
       url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
@@ -29,7 +32,7 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
 
       draft.ws.$on('$open', function() {
         console.log('open');
-        draft.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': 'test'});
+        draft.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': draft.league_id});
       });
 
       draft.ws.$on('$message', function(res) {
@@ -37,6 +40,13 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
         draft.notifyStateObservers();
         console.log(res);
 
+        if (res == 'close') {
+          draft.state = 'closed'
+        } else
+        if (res.event == 'turn_update') {
+          draft.timer = res.data.timeLeft;
+          draft.currentUser = res.data.currentUser;
+        } else
         if(res.event == 'user_list') {
           draft.user_list = res.data;
         } else
@@ -51,16 +61,20 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
 
         $rootScope.$apply();
       });
+
+      draft.ws.$on('$close', function() {
+        draft.state='closed';
+      })
     });
   }
 
   draft.updatePlayersLeft = function () {
     draft.picked_players = {};
-    for(var i = 0; i < draft.picks.length; i++) {
+    for(var i in draft.picks) {
       draft.picked_players[draft.picks[i].player_id] = true;
     }
     draft.players_left = {};
-    for(var i = 0; i < draft.players.length; i++) {
+    for(var i in draft.players) {
       if (draft.picked_players[draft.players[i]._id]) continue;
       draft.players_left[draft.players[i]._id] = draft.players[i];
     }

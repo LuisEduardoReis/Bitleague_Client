@@ -2,10 +2,21 @@
 <p ng-if="draft.state=='loading'"> Loading...</p>
 
 <div ng-if="draft.state=='connected'">
-  <p>Online users:</p>
+  <p>Time left: {{draft.timer}}</p>
+  <p>Currently picking: {{draft.user_list.usernames[draft.currentUser]}}</p>
+
+  <p>Users:</p>
   <ul>
-    <li ng-repeat="user in draft.user_list">
-      {{user}}
+    <li ng-repeat="user_id in draft.user_list.users">
+      {{draft.user_list.usernames[user_id]}} <span ng-if="draft.user_list.online[user_id]"> - online</span>
+    </li>
+
+  </ul>
+
+  <p>Picks:</p>
+  <ul>
+    <li ng-repeat="pick in draft.picks">
+      {{draft.user_list.usernames[pick.user_id]}}: {{draft.players[pick.player_id].name}} - {{draft.players[pick.player_id].team}} - {{draft.players[pick.player_id].positionDescription}}
     </li>
   </ul>
 
