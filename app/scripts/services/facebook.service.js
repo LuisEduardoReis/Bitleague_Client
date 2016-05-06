@@ -36,7 +36,7 @@ app.run(function ($rootScope, $window, srvAuth) {
 app.factory('srvAuth', function ($rootScope, $state, $http) {
 
   var service = {};
-  service.token = null;
+  service.login = null;
   service.res = null;
   service.user = {id: -1}
 
@@ -62,7 +62,7 @@ app.factory('srvAuth', function ($rootScope, $state, $http) {
 
   service.serverLogin = function () {
     $http({
-      url: $rootScope.SERVER_URL + "/api/login",
+      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/login",
       method: "POST",
       data: {
         id: service.user.id,

@@ -7,4 +7,7 @@ app.controller('MainCtrl', function ($scope, $state, srvAuth) {
   };
 
   $scope.loggedIn = srvAuth.loggedIn;
+
+  $state.go('draft');
+
 });
