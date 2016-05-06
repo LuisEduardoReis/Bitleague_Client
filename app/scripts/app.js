@@ -8,26 +8,27 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('bitleagueClientApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+    'ngTouch',
+    'ui.router',
+    'ngDragDrop',
+    'ui.sortable',
+    'ngWebsocket'
+  ]);
+
+
+app.run(function ($rootScope, srvAuth, $state) {
+  $rootScope.user = { id: -1 };
+
+  $rootScope.setUser = function(user) { $rootScope.user = user; };
+
+  $rootScope.SERVER_PORT = 9090;
+
+});
+
