@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/angular-dragdrop/src/angular-dragdrop.js',
       'bower_components/angular-ui-sortable/sortable.js',
       'bower_components/ng-websocket/ng-websocket.js',
+      'bower_components/angular-utils-pagination/dirPagination.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
