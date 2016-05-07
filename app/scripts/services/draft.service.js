@@ -8,7 +8,7 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
 
   draft.init = function (league_id) {
     if (draft.state != 'closed') return;
-
+    draft.sortKey = 'position';
     draft.state = 'loading';
     draft.league_id = league_id;
     draft.user_list = [];
@@ -73,15 +73,20 @@ app.factory('srvDraft', function ($rootScope, srvAuth, $websocket, $http ) {
     for(var i in draft.picks) {
       draft.picked_players[draft.picks[i].player_id] = true;
     }
-    draft.players_left = {};
+    draft.players_left = [];
     for(var i in draft.players) {
       if (draft.picked_players[draft.players[i]._id]) continue;
-      draft.players_left[draft.players[i]._id] = draft.players[i];
+      draft.players_left.push(draft.players[i]);
     }
   }
 
   draft.pick = function (player_id) {
     draft.ws.$emit('pick',{'player_id': player_id});
+  }
+
+  draft.sortTable = function (keyname){
+    draft.sortKey = keyname;   //set the sortKey to the param passed
+    draft.reverse = !draft.reverse; //if true make it false and vice versa
   }
 
   draft.registerStateObserver = function (callback) { stateObservers.push(callback); }
