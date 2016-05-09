@@ -2,7 +2,13 @@
 
 <p>code: {{league_id}}<p>
 
-<a ui-sref="draft({id:league_id})">Draft</a>
+<p><a ui-sref="draft({id:league_id})">Draft</a></p>
 
+Users:
+<ul>
+  <li  ng-repeat="user in league.users">
+    {{user.name}}
+  </li>
+</ul>
 
 

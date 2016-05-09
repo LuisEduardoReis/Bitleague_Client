@@ -23,12 +23,10 @@ app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $htt
       url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league',
       headers: {'Authorization': srvAuth.login.token},
       data: {
-        name: $scope.league_name,
-
+        name: $scope.league_name
       }
-
     }).success(function(data) {
-      alert("League "+$scope.league.name+" was created!");
+      alert("League "+$scope.league_name+" was created!");
       $state.go("userpage")
     }).error(function(data) {
       alert("It seems that due to some shenanigans your request has failed, returning such data:" + data);
@@ -41,14 +39,14 @@ app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $htt
 app.controller('JoinLeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth) {
 
 
-  $scope.createLeague = function ()
+  $scope.joinLeague = function ()
   {
     $http({
       method: 'POST',
       url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league/user',
       headers: {'Authorization': srvAuth.login.token},
       data: {
-        name: $scope.league_id,
+        id: $scope.league_id
 
       }
 
