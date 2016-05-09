@@ -67,9 +67,36 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('draft', {
-      url: '/draft/:league_id',
+      url: '/draft/:id',
       templateUrl: 'views/draft.view.html',
       controller: 'DraftCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
+    .state('league', {
+      url: '/league/:id',
+      templateUrl: 'views/league.view.html',
+      controller: 'LeagueCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
+    .state('new_league', {
+      url: '/new_league',
+      templateUrl: 'views/new_league.view.html',
+      controller: 'NewLeagueCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
+    .state('join_league', {
+      url: '/join_league',
+      templateUrl: 'views/join_league.view.html',
+      controller: 'JoinLeagueCtrl',
       data: {
         requireLogin: true,
         requireLogout: false
