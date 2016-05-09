@@ -67,7 +67,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('draft', {
-      url: '/draft/:league_id',
+      url: '/draft/:id',
       templateUrl: 'views/draft.view.html',
       controller: 'DraftCtrl',
       data: {
