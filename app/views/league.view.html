@@ -1,0 +1,14 @@
+<p>League "{{league.name}}" </p>
+
+<p>code: {{league_id}}<p>
+
+<p><a ui-sref="draft({id:league_id})">Draft</a></p>
+
+Users:
+<ul>
+  <li  ng-repeat="user in league.users">
+    {{user.name}}
+  </li>
+</ul>
+
+
