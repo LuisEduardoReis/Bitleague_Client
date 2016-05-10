@@ -1,9 +1,10 @@
 'use strict';
 
-app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth) {
+app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
 
   $scope.league = null;
   $scope.league_id = $stateParams.id;
+  $scope.user = srvAuth.login.user;
   $http({
     method: 'GET',
     url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
@@ -12,6 +13,15 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     $scope.league = data;
   })
 
+  $scope.delete = function() {
+    $http({
+      method: 'DELETE',
+      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
+      headers: {'Authorization': srvAuth.login.token}
+    }).success(function() {
+      $state.go("userpage");
+    });
+  }
 });
 
 app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
