@@ -1,13 +1,13 @@
 'use strict';
 
 app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $websocket, srvAuth) {
-  $scope.currentPage = 1;
-  $scope.pageSize = 8;
 
-  $scope.sortKey = 'position';
-  $scope.state = 'closed';
   $scope.started = false;
   $scope.league_id = $stateParams.id;
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 8;
+  $scope.sortKey = 'position';
 
   $scope.state = 'loading';
   $scope.user_list = [];
@@ -17,8 +17,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.picked_players = {};
   $scope.picknumber = 0;
 
-  $scope.timer = 0;
-  $scope.currentUser = "";
+  $scope.ws = null;
+
+  $scope.timer = -1;
+  $scope.currentUser = 'noone';
 
   $http({
     method: 'GET',
@@ -62,8 +64,8 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     });
 
     $scope.ws.$on('$close', function() {
-      draft.state='closed';
-    })
+      $scope.state='closed';
+    });
   });
 
   $scope.updatePlayersLeft = function () {
@@ -93,7 +95,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/draft/start',
       headers: {"Authorization":srvAuth.login.token},
       data: {"id": $scope.league_id}
-    }).then(function(data) { console.log(data)});
+    }).error(function(data) { console.log(data)});
   }
 
 });

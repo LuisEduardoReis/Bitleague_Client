@@ -2,6 +2,7 @@
 
 app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth) {
 
+  $scope.league = null;
   $scope.league_id = $stateParams.id;
   $http({
     method: 'GET',
@@ -47,7 +48,6 @@ app.controller('JoinLeagueCtrl', function ($rootScope, $scope, $stateParams, $ht
       headers: {'Authorization': srvAuth.login.token},
       data: {
         id: $scope.league_id
-
       }
 
     }).success(function(data) {

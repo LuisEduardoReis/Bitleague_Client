@@ -10,8 +10,8 @@
     <div class="row">
       <div class="col-lg-12">
       <div class="col-lg-3">
-        <p>Time left: {{timer}}</p>
-        <p>Currently picking: {{user_list.usernames[currentUser]}}</p>
+        <p ng-if="timer > 0">Time left: {{timer}}</p>
+        <p ng-if="currentUser != 'noone'">Currently picking: {{user_list.usernames[currentUser]}}</p>
 
         <p>Users:</p>
         <ul>
