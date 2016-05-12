@@ -66,7 +66,7 @@
                 </thead>
 
                 <tbody>
-                  <tr dir-paginate="player in filtered = (players_left | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                  <tr  pagination-id="0" dir-paginate="player in filtered = (players_left | filter:{positionDescription: ''} |filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
@@ -74,6 +74,11 @@
                   </tr>
                 </tbody>
               </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="0" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
             </tab>
             <tab index="1" heading="Guarda-redes">
               <table class="table table-bordered table-striped">
@@ -93,7 +98,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <tr dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Guarda-redesX'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                <tr  pagination-id="1" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Guarda-redes'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -101,6 +106,11 @@
                   </tr>
                 </tbody>    
               </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls pagination-id="1" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
             </tab>
             <tab index="2" heading="Defesas">
               <table class="table table-bordered table-striped">
@@ -120,7 +130,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <tr dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Defesa'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                <tr  pagination-id="2" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Defesa'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -128,6 +138,11 @@
                   </tr>
                 </tbody>    
               </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="2" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
             </tab>
             <tab index="3" heading="Médio">
               <table class="table table-bordered table-striped">
@@ -148,7 +163,7 @@
                 </thead>
 
                 <tbody>
-                  <tr dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Médio'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                  <tr  pagination-id="3" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Médio'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
@@ -156,6 +171,11 @@
                   </tr>
                 </tbody>
               </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="3" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
             </tab>
             <tab index="4" heading="Avançado">
               <table class="table table-bordered table-striped">
@@ -176,7 +196,7 @@
                 </thead>
 
                 <tbody>
-                  <tr dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Avançado'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                  <tr pagination-id="4" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Avançado'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
@@ -184,14 +204,15 @@
                   </tr>
                 </tbody>
               </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls pagination-id="4" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
             </tab>
           </tabset>
   
-          <div >
-            <div class="text-center">
-              <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
-            </div>
-          </div>
+          
         </div>
 
         <div class="col-lg-3">
