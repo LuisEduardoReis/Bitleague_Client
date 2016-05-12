@@ -31,6 +31,13 @@
       <button ng-click="pick(player._id)">{{player.number}} - {{player.name}} - {{player.positionDescription}} - {{player.team}}</button>
     </li>
   </ul>
+
+  <p>ShortList:</p>
+  <ul>
+    <li ng-repeat="player in shortList">
+      <button ng-click="removeFromShortList(player._id)">{{player.number}} - {{player.name}} - {{player.positionDescription}} - {{player.team}}</button>
+    </li>
+  </ul>
 </div>
 
 </div>

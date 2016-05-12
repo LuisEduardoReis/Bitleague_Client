@@ -10,6 +10,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.user_list = [];
   $scope.players = [];
   $scope.picks = [];
+  $scope.shortList = [];
   $scope.players_left = {};
   $scope.picked_players = {};
   $scope.picknumber = 0;
@@ -53,6 +54,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       if(res.event == 'pick') {
         $scope.picks.push(res.data);
         $scope.updatePlayersLeft();
+      } else
+      if(res.event == 'shorlist_update') {
+        $scope.shortList.push(res.data);
+        $scope.updatePlayersLeft();
       }
 
       $rootScope.$apply();
@@ -78,6 +83,12 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
   }
+
+
+  $scope.removeFromShortList = function (player_id) {
+    //$scope.ws.$emit('pick',{'player_id': player_id});
+  }
+
 
   $scope.startDraft = function () {
     $http({
