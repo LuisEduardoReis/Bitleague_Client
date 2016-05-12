@@ -19,7 +19,6 @@ var app = angular
     'ui.router',
     'ngDragDrop',
     'ui.sortable',
-    'ui.bootstrap',
     'ngWebsocket',
     'angularUtils.directives.dirPagination'
   ]);
