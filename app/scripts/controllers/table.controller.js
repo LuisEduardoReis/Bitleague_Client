@@ -1,12 +1,11 @@
 'use strict';
 
 app.controller('TableCtrl', function($scope) {
-  $scope.sortType     = 'name'; // set the default sort type
-  $scope.sortReverse  = false;  // set the default sort order
-  $scope.searchFish   = '';     // set the default search/filter term
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
   
   // create the list of sushi rolls 
-  $scope.sushi = [
+  $scope.players = [
     { name: 'Player1', team: 'Porto', rank: 2 },
     { name: 'Player2', team: 'Benfica', rank: 2 },
     { name: 'Player3', team: 'Porto', rank: 2 },
@@ -18,3 +17,4 @@ app.controller('TableCtrl', function($scope) {
   ];
   
 });
+

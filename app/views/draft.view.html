@@ -1,4 +1,3 @@
-
 <p ng-if="state=='connecting'"> Connecting to draft...</p>
 <p ng-if="state=='loading'"> Loading...</p>
 
@@ -7,30 +6,257 @@
     <button ng-click="startDraft()">Start Draft</button>
   </div>
 
-  <p>Time left: {{timer}}</p>
-  <p>Currently picking: {{user_list.usernames[currentUser]}}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        
+        <div class="col-lg-3">
+          <p ng-if="timer > 0">Time left: {{timer}}</p>
+          <p ng-if="currentUser != 'noone'">Currently picking: {{user_list.usernames[currentUser]}}</p>
 
-  <p>Users:</p>
-  <ul>
-    <li ng-repeat="user_id in user_list.users">
-      {{user_list.usernames[user_id]}} <span ng-if="user_list.online[user_id]"> - online</span>
-    </li>
+          <p>Users:</p>
+          <ul>
+            <li ng-repeat="user_id in user_list.users">
+              {{user_list.usernames[user_id]}} <span ng-if="user_list.online[user_id]"> - online</span>
+            </li>
 
-  </ul>
+          </ul>
 
-  <p>Picks:</p>
-  <ul>
-    <li ng-repeat="pick in picks">
-      {{user_list.usernames[pick.user_id]}}: {{players[pick.player_id].name}} - {{players[pick.player_id].team}} - {{players[pick.player_id].positionDescription}}
-    </li>
-  </ul>
+          <p>Picks:</p>
+          <ul>
+            <li ng-repeat="pick in picks">
+              {{user_list.usernames[pick.user_id]}}: {{players[pick.player_id].name}} - {{players[pick.player_id].team}} - {{players[pick.player_id].positionDescription}}
+            </li>
+          </ul>
+        </div>
 
-  <p>Players:</p>
-  <ul>
-    <li ng-repeat="player in players_left">
-      <button ng-click="pick(player._id)">{{player.number}} - {{player.name}} - {{player.positionDescription}} - {{player.team}}</button>
-    </li>
-  </ul>
-</div>
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-xs-4">
+              <label for="search">Search:</label>
+              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+              <label for="search">items per page:</label>
+              <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div>
+            <div class="col-xs-4">
+              <h4>Players: {{filtered.length}}</h4>
+            </div>
+          </div>
 
+          <br>
+          <tabset >
+            <tab index="0" heading="Todos">
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th ng-click="sortTable('position')">Position
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('name')">Player
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('team')">Team
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr  pagination-id="0" dir-paginate="player in filtered = (players_left | filter:{positionDescription: ''} |filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <td>{{ player.positionDescription }}</td>
+                    <td>{{ player.name }}</td>
+                    <td>{{ player.team }}</td>
+                    <td><button ng-click="pick(player._id)">Pick</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="0" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
+            </tab>
+            <tab index="1" heading="Guarda-redes">
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th ng-click="sortTable('position')">Position
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('name')">Player
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('team')">Team
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr  pagination-id="1" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Guarda-redes'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                      <td>{{ player.positionDescription }}</td>
+                      <td>{{ player.name }}</td>
+                      <td>{{ player.team }}</td>
+                      <td><button ng-click="pick(player._id)">Pick</button></td>
+                  </tr>
+                </tbody>    
+              </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls pagination-id="1" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
+            </tab>
+            <tab index="2" heading="Defesas">
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th ng-click="sortTable('position')">Position
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('name')">Player
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('team')">Team
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr  pagination-id="2" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Defesa'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                      <td>{{ player.positionDescription }}</td>
+                      <td>{{ player.name }}</td>
+                      <td>{{ player.team }}</td>
+                      <td><button ng-click="pick(player._id)">Pick</button></td>
+                  </tr>
+                </tbody>    
+              </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="2" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
+            </tab>
+            <tab index="3" heading="Médio">
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th ng-click="sortTable('position')">Position
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('name')">Player
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('team')">Team
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr  pagination-id="3" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Médio'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <td>{{ player.positionDescription }}</td>
+                    <td>{{ player.name }}</td>
+                    <td>{{ player.team }}</td>
+                    <td><button ng-click="pick(player._id)">Pick</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls  pagination-id="3" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
+            </tab>
+            <tab index="4" heading="Avançado">
+              <table class="table table-bordered table-striped">
+
+                <thead>
+                  <tr>
+                    <th ng-click="sortTable('position')">Position
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('name')">Player
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th ng-click="sortTable('team')">Team
+                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr pagination-id="4" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Avançado'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <td>{{ player.positionDescription }}</td>
+                    <td>{{ player.name }}</td>
+                    <td>{{ player.team }}</td>
+                    <td><button ng-click="pick(player._id)">Pick</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div >
+                <div class="text-center">
+                  <dir-pagination-controls pagination-id="4" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+  
+          
+        </div>
+
+        <div class="col-lg-3">
+          <accordion close-others="oneAtATime">
+            <accordion-group heading="Guarda-Redes">
+              <ul>
+                <li ng-repeat="pick in picks">
+                  <div ng-if="players[pick.player_id].positionDescription =='Guarda-redes'">
+                    {{players[pick.player_id].name}}
+                  </div>
+                </li>
+              </ul>
+            </accordion-group>
+            <accordion-group heading="Defesas">
+              <ul>
+                <li ng-repeat="pick in picks">
+                  <div ng-if="players[pick.player_id].positionDescription =='Defesa'">
+                    {{players[pick.player_id].name}}
+                  </div>
+                </li>
+              </ul>
+            </accordion-group>
+            <accordion-group heading="Médios">
+              <ul>
+                <li ng-repeat="pick in picks">
+                  <div ng-if="players[pick.player_id].positionDescription =='Médio'">
+                    {{players[pick.player_id].name}}
+                  </div>
+                </li>
+              </ul>
+            </accordion-group>
+            <accordion-group heading="Avançados">
+              <ul>
+                <li ng-repeat="pick in picks">
+                  <div ng-if="players[pick.player_id].positionDescription =='Avançado'">
+                    {{players[pick.player_id].name}}
+                  </div>
+                </li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
