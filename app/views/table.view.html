@@ -1,0 +1,65 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="row">
+        <div class="col-xs-4">
+          <label for="search">Search:</label>
+          <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+        </div>
+        <div class="col-xs-4">
+          <label for="search">items per page:</label>
+          <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+        </div>
+        <div class="col-xs-4">
+          <h3>Results: {{filtered.length}}</h3>
+        </div>
+      </div>
+      <br>
+      <table class="table table-bordered table-striped">
+
+        <thead>
+          <tr>
+            <td>
+              <a ui-sref="table" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                Player 
+                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a ui-sref="table" ng-click="sortType = 'team'; sortReverse = !sortReverse">
+                Team 
+                <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a ui-sref="table" ng-click="sortType = 'rank'; sortReverse = !sortReverse">
+                Rank 
+                <span ng-show="sortType == 'rank' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'rank' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr dir-paginate="player in filtered = (players | filter:q) | itemsPerPage: pageSize | orderBy:sortType:sortReverse" current-page="currentPage" >
+            <td>{{ player.name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.rank }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+  
+      <div >
+        <div class="text-center">
+          <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<p ng-if="league==null">Loading...</p>
+<div ng-if="league != null">
+  <p>League "{{league.name}}" </p>
+
+  <p>code: {{league_id}}<p>
+  <pre>{{league}}</pre>
+
+  <p ng-if="league.state != 'DURATION'"><a ui-sref="draft({id:league_id})">Draft</a></p>
+
+  Users:
+  <ul>
+    <li  ng-repeat="user in league.users">
+      {{user.name}}
+    </li>
+  </ul>
+
+  <p ng-if="user==league.creator"><a ng-click="delete()">Delete</a></p>
+
+</div>
+

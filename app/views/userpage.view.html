@@ -1,0 +1,8 @@
+<p>Hello {{user.name}}!</p>
+
+<p>Your Leagues:</p>
+<ul>
+  <li ng-repeat="league in leagues">
+    <a ui-sref="league({id:league.id})">{{league.name}}</a>
+  </li>
+</ul>
