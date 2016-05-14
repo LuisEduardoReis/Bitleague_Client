@@ -35,7 +35,7 @@ app.controller('TeamCtrl', function($scope) {
     return $scope.goalkeeper.length + $scope.defense.length + $scope.midfield.length + $scope.forward.length;
     
   }
-
+  
   // Goalkeeper
   $scope.gk_rest = {
     accept: function() {

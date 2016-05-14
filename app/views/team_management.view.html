@@ -1,10 +1,13 @@
-  <h2>Nome da Equipa</h2>
+  <h2>Team's Name</h2>
+  <h4>
+    Team Formation: {{defense.length}} - {{midfield.length}} - {{forward.length}}
+  </h4>
   <div>
       <div class="col-lg-12">
         <div class='contentWrapper ng-cloak col-lg-7'>
           <div class='content'>
             <div class="row-fluid">
-              <h3>Titulares</h3>
+              <h3>Lineup</h3>
               <ul class="thumbnails">
     
                 <li class="span3" style='margin-left:10px;'>
@@ -44,7 +47,7 @@
         </div>
     
         <div class="navbar-inner col-lg-5">
-        <h3>Suplentes</h3>
+        <h3>Benchers</h3>
         <div class="thumbnail" data-drop="true" ng-model='bench' data-jqyoui-options="bench"  jqyoui-droppable="{multiple:true}">
             <div class="caption">
               <div class="btn btn-info btn-draggable" ng-repeat="item in bench" ng-show="item.title" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="bench" jqyoui-draggable="{index: {{$index}},animate:true}">{{item.title}}</div>
