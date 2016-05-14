@@ -1,0 +1,53 @@
+@import "navbar";
+
+.jumbotron {
+  margin-top: -2em;
+  margin-bottom: 0;
+  background: rgba(242, 97, 1, 0.3);
+  min-height: 500px;
+
+  .fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+  }
+
+  .fullscreen-bg_video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  #jumbotron-info {
+    color: white;
+
+    h1 {
+      font-size: 7em;
+      margin-top: 0.7em;
+      text-shadow: 3px 3px $contrast;
+    }
+
+    p {
+      margin-top: 1.5em;
+      font-size: 2.5em;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+#home-marketing-section {
+  background-color: $darker_2;
+}
+
+#home-rules-section {
+  background-color: $lighter_2;
+}
