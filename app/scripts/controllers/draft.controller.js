@@ -13,6 +13,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.user_list = [];
   $scope.players = [];
   $scope.picks = [];
+  $scope.favorites = [];
   $scope.players_left = {};
   $scope.picked_players = {};
   $scope.picknumber = 0;
