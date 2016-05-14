@@ -48,6 +48,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('players', {
+      url: '/players',
+      templateUrl: 'views/players.view.html',
+      controller: 'PlayersCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
     .state('sortable', {
       url: '/sortable',
       templateUrl: 'views/sortable.view.html',
