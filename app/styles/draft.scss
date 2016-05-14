@@ -114,6 +114,7 @@
 
     #draft_favorite_section, #draft_team_section {
       padding-right: 15px !important;
+      margin-top: 5em;
 
       .accordion-title {
         color: $darker_1;
@@ -136,8 +137,9 @@
               border: 0;
 
               a {
-                &:hover {
+                &:hover, &:focus {
                   text-decoration: none;
+                  outline: none;
                 }
               }
             }
