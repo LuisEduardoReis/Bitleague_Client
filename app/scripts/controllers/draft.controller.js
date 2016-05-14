@@ -31,16 +31,14 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
-    
+
     $scope.ws.$on('$open', function() {
-      console.log('open');
       $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
     });
     console.log($scope.ws.$status())
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
-      console.log(res);
 
       if (res == 'close') {
         $scope.state = 'closed'

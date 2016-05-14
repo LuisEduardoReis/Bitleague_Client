@@ -23,8 +23,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
   @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
-  @import "mixins&variables";
-
   body {
     background: #fff;
     font-family: 'Lato', sans-serif;
@@ -2737,11 +2735,3 @@ span.stButton_gradient,
   border-radius: 100%;
   margin: 10px 0;
 }
-
-.no-padding {
-  padding: 0;
-}
-
-
-@import "navbar";
-@import "draft";

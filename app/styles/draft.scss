@@ -1,88 +1,277 @@
-#draft {
-  .user-status {
-    font-size: 1.1em;
+@import "navbar";
 
-    &.user-status-online {
-      color: limegreen;
-    }
-    &.user-status-offline {
-      color: red;
+#draft {
+  #roundsRow {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 20%;
+
+    #roundsAccordion {
+      display: block;
+      width: 100%;
+      max-height: 100%;
+      margin: 0 auto;
+      overflow: scroll hidden;
+      border-radius: 0;
+      background-color: $darker_2;
+
+      .user-status {
+        font-size: 1.1em;
+
+        &.user-status-online {
+          color: limegreen;
+        }
+        &.user-status-offline {
+          color: red;
+        }
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      #roundsList {
+        padding: 0 15px;
+        display: table-row;
+        height: 10em;
+        overflow-x: scroll;
+        background: transparent;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        .panel-horizontal {
+          display: table-cell;
+          margin: 0;
+          border-radius: 0;
+          height: 10em;
+          border: none;
+
+          .panel-heading, .panel-body {
+            display: table-cell;
+            height: 10em;
+          }
+
+          .panel-body {
+            display: none;
+            padding: 0;
+            overflow-y: scroll;
+            min-width: 8em;
+            background: $lighter_1;
+
+            &::-webkit-scrollbar {
+              width: 1px;
+            }
+
+            ul {
+              width: 100%;
+              height: 100%;
+              padding: 0;
+
+              li {
+                border: none;
+                width: 100%;
+                padding: 5px 10px;
+              }
+            }
+          }
+          .panel-heading {
+            cursor: pointer;
+            background: $contrast;
+            color: white;
+            border-top: none;
+            border-bottom: none;
+            border-right: 1px solid white;
+            border-radius: 0;
+            padding: 5px 7px;
+
+            .panel-title {
+              width: 1em;
+              word-break: break-all;
+              text-align: center;
+
+              hr {
+                margin-top: 10px;
+                text-align: center;
+                color: transparent;
+                margin-bottom: 0;
+              }
+            }
+
+            &.active + .panel-body {
+              display: table-cell;
+            }
+          }
+        }
+      }
     }
   }
 
-  #roundsAccordion {
-    display: block;
-    width: 100%;
-    max-height: 100%;
-    margin: 0 auto;
-    overflow: scroll hidden;
-    border-radius: 0;
+  #draftRow {
+    max-height: 80%;
 
-    ul {
-      list-style: none;
-    }
+    #draft_favorite_section, #draft_team_section {
+      padding-right: 15px !important;
 
-    #roundsList {
-      padding: 0 15px;
-      display: table-row;
-      height: 10em;
-      overflow-x: scroll;
-
-      &::-webkit-scrollbar {
-        width: 4px;
+      .accordion-title {
+        color: $darker_1;
+        text-align: center;
       }
 
-      .panel-horizontal {
-        display: table-cell;
-        margin: 0;
-        border-radius: 0;
-        height: 10em;
+      accordion {
+        .panel-group {
+          border: none;
 
-        .panel-heading, .panel-body{
-          display:table-cell;
-          height: 10em;
+          .panel {
+            border-radius: 0;
+            border: none;
+            margin-top: 0;
+
+            .panel-heading {
+              color: white;
+              background-color: $darker_1;
+              border-radius: 0;
+              border: 0;
+
+              a {
+                &:hover {
+                  text-decoration: none;
+                }
+              }
+            }
+
+            .panel-body {
+                background-color: $lighter_1;
+
+              ul {
+                margin: 0;
+              }
+            }
+          }
         }
+      }
+    }
 
-        .panel-body {
-          display: none;
-          padding: 0;
-          overflow-y: scroll;
-          min-width: 8em;
+    #draft_table_section {
+      #draft-filter {
+        padding-left: 0;
+        margin-top: 3em;
 
-          &::-webkit-scrollbar {
-            width: 1px;
+        input {
+          border-radius: 0;
+          color: black;
+          border-color: black;
+
+          &:focus {
+            box-shadow: none;
           }
 
-          ul {
-            width: 100%;
-            height: 100%;
-            padding: 0;
+          &#search {
+            border-radius: 20px;
+
+            &:focus {
+              box-shadow: inset 0 1px 1px $contrast, 0 0 8px $contrast;
+            }
+          }
+        }
+      }
+
+      #draft-main-table {
+        .nav-tabs {
+          li {
+            a {
+              background-color: $darker_1;
+              color: $lighter_2;
+              border: none;
+              border-radius: 0;
+              margin-right: 0;
+              @include transition(all, 0.3s, ease);
+            }
+
+            &.active {
+              a {
+                background-color: $contrast;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+
+        .tab-content {
+          .pagination {
+            margin-top: 0;
+            border-radius: 0;
 
             li {
-              border: none;
-              width: 100%;
-              padding: 5px 10px;
-            }
-          }
-        }
-        .panel-heading {
-          border-right: 1px solid #ddd;
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 4px;
-          cursor: pointer;
+              a {
+                color: black;
+                border-radius: 0;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-color: $darker_2;
+              }
 
-          .panel-title {
-            width: 1px;
-            word-break: break-all;
-
-            hr {
-              margin-top: 10px;
-              margin-bottom: 0;
+              &.active {
+                a {
+                  border-color: $darker_2;
+                  background-color: $darker_2;
+                }
+              }
             }
           }
 
-          &.active+.panel-body {
-            display: table-cell;
+          table {
+            border: none;
+
+            thead {
+              th {
+                cursor: pointer;
+                background: $contrast;
+                color: white;
+                border: none;
+
+                span {
+                  float: right;
+                }
+              }
+            }
+
+            tbody {
+              tr:nth-of-type(odd) {
+                background: $lighter_1;
+              }
+
+              tr:last-child {
+                td {
+                  border-bottom: none;
+                }
+              }
+
+              td {
+                border-color: $lighter_1;
+                border-left: none;
+                border-right: none;
+
+                button {
+                  border: none;
+                  font-size: 1.1em;
+                  font-weight: bold;
+                  background-color: $darker_2;
+                  color: white;
+                  padding: 1px 7px;
+
+                  @include transition(all, 0.3s, ease-in-out);
+
+                  &:hover, &:focus {
+                    background-color: $contrast;
+                    outline: none;
+                  }
+                }
+              }
+            }
           }
         }
       }
