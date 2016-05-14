@@ -1,0 +1,54 @@
+@import "general";
+@import "mixins&variables";
+
+#my-navbar {
+  background-color: $darker_1;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 3.5px solid $contrast;
+  border-radius: 0;
+
+  .navbar-header {
+    padding-left: 15px;
+  }
+
+  .navbar-nav {
+
+    li {
+      cursor: pointer;
+      @include transition(all, 0.3s, ease-in-out);
+
+      a {
+        text-transform: uppercase;
+        font-size: 1em;
+        font-weight: bold;
+        color: $lighter_2;
+
+        &:hover, &:active {
+          text-decoration: none;
+        }
+      }
+
+      &:hover, &:target {
+        background-color: $contrast;
+      }
+    }
+  }
+
+  .navbar-right {
+    background-color: $darker_2;
+
+    a {
+      text-transform: uppercase;
+      font-size: 1em;
+      font-weight: bold;
+      color: $lighter_2;
+      padding-left: 15px;
+
+      &:hover, &:active, &:visited {
+        text-decoration: none;
+      }
+    }
+  }
+}
