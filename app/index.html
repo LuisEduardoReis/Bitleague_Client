@@ -11,9 +11,13 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/responsive.css">
     <link rel="stylesheet" href="styles/sortable.css">
+
+    <link rel = "stylesheet" href = "styles/draft.css"/>
+
 
     <!-- endbuild -->
   </head>
@@ -25,7 +29,7 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/partials/header.html'"></div>
 
-    <div class="container">
+    <div class="container-fluid">
       <div ui-view></div>
     </div>
 
@@ -40,7 +44,7 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-    
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -78,7 +82,7 @@
         <script src="scripts/controllers/sortable.controller.js"></script>
         <script src="scripts/controllers/draft.controller.js"></script>
         <script src="scripts/controllers/league.controller.js"></script>
-    
-    
+
+
   </body>
 </html>

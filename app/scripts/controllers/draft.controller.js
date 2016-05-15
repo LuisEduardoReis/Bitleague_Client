@@ -13,7 +13,8 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.user_list = [];
   $scope.players = [];
   $scope.picks = [];
-  $scope.players_left = {};
+  $scope.favorites = [];
+  $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
 
@@ -21,6 +22,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.timer = -1;
   $scope.currentUser = 'noone';
+
+  $scope.$on("$destroy", function() {
+    if ($scope.ws != null) $scope.ws.$close();
+    $scope.ws = null;
+  });
 
   $http({
     method: 'GET',
@@ -30,16 +36,17 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
-    
+    $scope.ws.$open();
+
     $scope.ws.$on('$open', function() {
-      console.log('open');
-      $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      if ($scope.ws != null) {
+        $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      }
     });
-    console.log($scope.ws.$status())
+
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
-      console.log(res);
 
       if (res == 'close') {
         $scope.state = 'closed'
@@ -78,7 +85,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     }
     $scope.players_left = [];
     for(var i in $scope.players) {
-      if ($scope.picked_players[$scope.players[i]._id]) continue;
+      if ($scope.picked_players[$scope.players[i].data_id]) continue;
       $scope.players_left.push($scope.players[i]);
     }
   }
