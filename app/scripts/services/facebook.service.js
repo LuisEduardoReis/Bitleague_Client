@@ -55,7 +55,6 @@ app.factory('srvAuth', function ($rootScope, $state, $http) {
       $rootScope.$apply(function () {
         $rootScope.user = service.user = res;
         service.serverLogin();
-        $state.go('home');
       });
     });
   };
