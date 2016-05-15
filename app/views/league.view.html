@@ -14,6 +14,18 @@
     </li>
   </ul>
 
+  Matches:
+  <ul>
+    <li ng-repeat="matchday in league.matches">
+      Matchday
+      <ul>
+        <li ng-repeat="match in matchday">
+          {{usernames[match.homePlayer]}} vs {{usernames[match.awayPlayer]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+
   <p ng-if="user==league.creator"><a ng-click="delete()">Delete</a></p>
 
 </div>
