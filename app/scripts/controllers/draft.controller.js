@@ -85,7 +85,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     }
     $scope.players_left = [];
     for(var i in $scope.players) {
-      if ($scope.picked_players[$scope.players[i]._id]) continue;
+      if ($scope.picked_players[$scope.players[i].data_id]) continue;
       $scope.players_left.push($scope.players[i]);
     }
   }
