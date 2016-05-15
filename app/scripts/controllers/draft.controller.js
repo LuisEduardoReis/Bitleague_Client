@@ -14,7 +14,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.players = [];
   $scope.picks = [];
   $scope.favorites = [];
-  $scope.players_left = {};
+  $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
 
@@ -22,6 +22,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.timer = -1;
   $scope.currentUser = 'noone';
+
+  $scope.$on("$destroy", function() {
+    if ($scope.ws != null) $scope.ws.$close();
+    $scope.ws = null;
+  });
 
   $http({
     method: 'GET',
@@ -31,11 +36,14 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
+    $scope.ws.$open();
 
     $scope.ws.$on('$open', function() {
-      $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      if ($scope.ws != null) {
+        $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      }
     });
-    console.log($scope.ws.$status())
+
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
