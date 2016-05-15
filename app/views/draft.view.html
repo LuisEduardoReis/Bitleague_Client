@@ -104,7 +104,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr  pagination-id="1" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Guarda-redes'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <tr  pagination-id="1" dir-paginate="player in filtered = (players_left | filter:{position: 1} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -136,7 +136,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr  pagination-id="2" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Defesa'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <tr  pagination-id="2" dir-paginate="player in filtered = (players_left | filter:{position: 2} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -169,7 +169,7 @@
                     </thead>
 
                     <tbody>
-                    <tr  pagination-id="3" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Médio'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <tr  pagination-id="3" dir-paginate="player in filtered = (players_left | filter:{position: 3} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -202,7 +202,7 @@
                     </thead>
 
                     <tbody>
-                    <tr pagination-id="4" dir-paginate="player in filtered = (players_left | filter:{positionDescription: 'Avançado'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                    <tr pagination-id="4" dir-paginate="player in filtered = (players_left | filter:{position: 4} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
