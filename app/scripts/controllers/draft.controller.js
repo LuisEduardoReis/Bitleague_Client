@@ -4,7 +4,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.started = false;
   $scope.league_id = $stateParams.id;
-
   $scope.currentPage = 1;
   $scope.pageSize = 8;
   $scope.sortKey = 'position';
