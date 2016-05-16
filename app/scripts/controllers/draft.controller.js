@@ -7,7 +7,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.currentPage = 1;
   $scope.pageSize = 8;
   $scope.sortKey = 'position';
-
   $scope.state = 'loading';
   $scope.user_list = [];
   $scope.players = [];
@@ -16,6 +15,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
+  $scope.team = 0;
+  $scope.goalkeeper = 0;
+  $scope.defense = 0; 
+  $scope.midfield = 0;
+  $scope.forward = 0;
 
   $scope.ws = null;
 
@@ -91,6 +95,15 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
+    if ($scope.players[player_id].positionDescription == 'Goalkeeper')
+      $scope.goalkeeper++;
+    else if ($scope.players[player_id].positionDescription == 'Defender')
+      $scope.defense++;
+    else if ($scope.players[player_id].positionDescription == 'Midfielder')
+      $scope.midfield++;
+    else if ($scope.players[player_id].positionDescription == 'Forward')
+      $scope.forward++;
+    $scope.team++;
   }
 
   $scope.sortTable = function(keyname) {
@@ -108,5 +121,9 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   }
 
   $scope.oneAtATime = false;
+
+  $scope.getGK = function () {
+      //console.log ($scope.players)
+  }
 
 });
