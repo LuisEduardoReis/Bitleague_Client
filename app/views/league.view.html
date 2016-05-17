@@ -1,24 +1,52 @@
 <div class = "container-fluid">
   <p ng-if = "league==null">Loading...</p>
   <div ng-if = "league != null">
-    <p>League "{{league.name}}" </p>
+    <p ng-if = "user==league.creator"> League: {{league.name}} </br> </p>
 
-    <p>code: {{league_id}}
-    <p>
+    <!-- Testing
+    <p>code: {{league_id}}</p>
     <pre>{{league}}</pre>
-
-    <p ng-if = "league.state != 'DURATION'"><a ui-sref = "draft({id:league_id})">Draft</a></p>
-    <p><a ui-sref = "team_management">My Team</a></p>
-    <p><a ui-sref = "players">League Players</a></p>
-
-    Users:
+    -->
+    
     <ul>
-      <li ng-repeat = "user in league.users">
-        {{user.name}}
+      <li>
+        <p ng-if = "league.state != 'DURATION'"><a ui-sref = "draft({id:league_id})">Draft</a></p>
+      </li>
+      <li>
+        <p><a ui-sref = "team_management">My Team</a></p>
+      </li>
+      <li>
+        <p><a ui-sref = "players">League Players</a></p>
+      </li>
+      </br>
+      <li>
+        <p><a ng-click = "delete()">Delete League</a></p>
       </li>
     </ul>
+    
+    <!--MATCHDAY TABLE-->
+    <div class="col-lg-4">
+      <table class="table table-bordered table-striped">
 
-    <p ng-if = "user==league.creator"><a ng-click = "delete()">Delete</a></p>
+        <thead>
+          <tr><th colspan="2" > <center> Matchday X</th></tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="game in games" >
+              <td ng-if="game.winner == game.teamA" > <center><b>{{ game.teamA }}</td>
+              <td ng-if="game.winner == game.teamA" > <center>{{ game.teamB }}</td>
+              <td ng-if="game.winner == game.teamB" > <center>{{ game.teamA }}</td>
+              <td ng-if="game.winner == game.teamB" > <center><b>{{ game.teamB }}</td>
+              <td ng-if="game.winner == 'None'" > <center>{{ game.teamA }}</td>
+              <td ng-if="game.winner == 'None'" > <center>{{ game.teamB }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+
+    
 
   </div>
 </div>
