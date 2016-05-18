@@ -152,8 +152,10 @@
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
                       <td>
-                        <button ng-if="team < 23" ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
-                        <button ng-if="team < 23" ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
+                        <div ng-if="team < 23" >
+                         <button ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
+                         <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
+                        </div>
                       </td>
                     </tr>
                     </tbody>
@@ -186,9 +188,9 @@
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
-                      <td>
-                        <button ng-href="#"><i class="fa fa-star"></i> Favorite</button>
+                      <td>                        
                         <div ng-if="team < 23">
+                          <button ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
                         </div>
                       </td>
@@ -223,8 +225,8 @@
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
                       <td>
-                        <button ng-href="#"><i class="fa fa-star"></i> Favorite</button>
                         <div ng-if="team < 23">
+                          <button ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
                         </div>
                       </td>
@@ -261,8 +263,8 @@
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
                       <td>
-                        <button ng-href="#"><i class="fa fa-star"></i> Favorite</button>
                         <div ng-if="team < 23">
+                          <button ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
                         </div>
                       </td>
@@ -299,8 +301,8 @@
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
                       <td>
-                        <button ng-href="#"><i class="fa fa-star"></i> Favorite</button>
-                        <div ng-if="team < 23">
+                        <div ng-if="team < 23">                        
+                          <button  ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
                         </div>
                       </td>
