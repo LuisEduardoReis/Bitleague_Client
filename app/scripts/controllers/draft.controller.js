@@ -2,21 +2,36 @@
 
 app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $websocket, srvAuth) {
 
-  $scope.state = 'closed';
   $scope.started = false;
   $scope.league_id = $stateParams.id;
-
+  $scope.currentPage = 1;
+  $scope.pageSize = 8;
+  $scope.sortKey = 'position';
   $scope.state = 'loading';
   $scope.user_list = [];
   $scope.players = [];
   $scope.picks = [];
-  $scope.shortList = [];
-  $scope.players_left = {};
+  $scope.favorites = [];
+  $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
+  $scope.team = 0;
+  $scope.goalkeeper = 0;
+  $scope.defense = 0; 
+  $scope.midfield = 0;
+  $scope.forward = 0;
 
-  $scope.timer = 0;
-  $scope.currentUser = "";
+  $scope.shortList = [];
+
+  $scope.ws = null;
+
+  $scope.timer = -1;
+  $scope.currentUser = 'noone';
+
+  $scope.$on("$destroy", function() {
+    if ($scope.ws != null) $scope.ws.$close();
+    $scope.ws = null;
+  });
 
   $http({
     method: 'GET',
@@ -26,18 +41,22 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
+    $scope.ws.$open();
 
     $scope.ws.$on('$open', function() {
-      console.log('open');
-      $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      if ($scope.ws != null) {
+        $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
+      }
     });
+
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
-      console.log(res);
 
       if (res == 'close') {
         $scope.state = 'closed'
+        $scope.ws.$close();
+        $scope.ws = null;
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
@@ -64,8 +83,8 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     });
 
     $scope.ws.$on('$close', function() {
-      draft.state='closed';
-    })
+      $scope.state='closed';
+    });
   });
 
   $scope.updatePlayersLeft = function () {
@@ -73,15 +92,29 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     for(var i in $scope.picks) {
       $scope.picked_players[$scope.picks[i].player_id] = true;
     }
-    $scope.players_left = {};
+    $scope.players_left = [];
     for(var i in $scope.players) {
-      if ($scope.picked_players[$scope.players[i]._id]) continue;
-      $scope.players_left[$scope.players[i]._id] = $scope.players[i];
+      if ($scope.picked_players[$scope.players[i].data_id]) continue;
+      $scope.players_left.push($scope.players[i]);
     }
   }
 
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
+    if ($scope.players[player_id].positionDescription == 'Goalkeeper')
+      $scope.goalkeeper++;
+    else if ($scope.players[player_id].positionDescription == 'Defender')
+      $scope.defense++;
+    else if ($scope.players[player_id].positionDescription == 'Midfielder')
+      $scope.midfield++;
+    else if ($scope.players[player_id].positionDescription == 'Forward')
+      $scope.forward++;
+    $scope.team++;
+  }
+
+  $scope.sortTable = function(keyname) {
+    $scope.sortKey = keyname;
+    $scope.reverse = !$scope.reverse;
   }
 
 
@@ -96,7 +129,13 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/draft/start',
       headers: {"Authorization":srvAuth.login.token},
       data: {"id": $scope.league_id}
-    }).then(function(data) { console.log(data)});
+    }).error(function(data) { console.log(data)});
+  }
+
+  $scope.oneAtATime = false;
+
+  $scope.getGK = function () {
+      //console.log ($scope.players)
   }
 
 });
