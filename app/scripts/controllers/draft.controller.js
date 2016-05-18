@@ -73,10 +73,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       if(res.event == 'pick') {
         $scope.picks.push(res.data);
         $scope.updatePlayersLeft();
+        $scope.updateFavouritesLeft(res.data.player_id);
       } else
-      if(res.event == 'shorlist_update') {
-        $scope.shortList.push(res.data);
-        $scope.updatePlayersLeft();
+      if(res.event == 'favourite') {
+        $scope.favorites.push(res.data);
       }
 
       $rootScope.$apply();
@@ -99,6 +99,18 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     }
   }
 
+  $scope.updateFavouritesLeft = function(player_id)
+  {
+    var temp = [];
+    for(var fav in $scope.favorites)
+    {
+      if(fav === player_id) continue;
+      temp.push(fav);
+    }
+    $scope.favorites = temp;
+
+  }
+
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
     if ($scope.players[player_id].positionDescription == 'Goalkeeper')
@@ -112,14 +124,18 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.team++;
   }
 
+  $scope.favourite = function (player_id) {
+    $scope.ws.$emit('favourite',{'player_id': player_id});
+  }
+
   $scope.sortTable = function(keyname) {
     $scope.sortKey = keyname;
     $scope.reverse = !$scope.reverse;
   }
 
 
-  $scope.removeFromShortList = function (player_id) {
-    //$scope.ws.$emit('pick',{'player_id': player_id});
+  $scope.removeFavourite = function (player_id) {
+    $scope.ws.$emit('remove_fav',{'player_id': player_id});
   }
 
 
