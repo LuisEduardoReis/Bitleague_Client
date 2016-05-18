@@ -328,8 +328,8 @@
                 <li ng-repeat="favorite in favorites">
                   <div ng-if="players[favorite.player_id].positionDescription =='Goalkeeper'">
                     {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
+                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
+                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
                   </div>                  
                 </li>
               </ul>
@@ -339,8 +339,8 @@
                 <li ng-repeat="favorite in favorites">
                   <div ng-if="players[favorite.player_id].positionDescription =='Defender'">
                     {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
+                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
+                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
                   </div>                  
                 </li>
               </ul>
@@ -350,8 +350,8 @@
                 <li ng-repeat="favorite in favorites">
                   <div ng-if="players[favorite.player_id].positionDescription =='Midfielder'">
                     {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
+                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
+                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
                   </div>                  
                 </li>
               </ul>
@@ -361,8 +361,8 @@
                 <li ng-repeat="favorite in favorites">
                   <div ng-if="players[favorite.player_id].positionDescription =='Forward'">
                     {{players[favorite.player_id].name}}
-                     <td><button ng-click="pick(player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                     <td><button ng-click="removeFavourite(player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
+                     <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
+                     <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
                   </div>                 
                 </li>
               </ul>

@@ -21,8 +21,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.midfield = 0;
   $scope.forward = 0;
 
-  $scope.shortList = [];
-
   $scope.ws = null;
 
   $scope.timer = -1;
@@ -78,6 +76,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       if(res.event == 'favourite') {
         $scope.favorites.push(res.data);
       }
+      else
+      if(res.event == 'removeFavourite') {
+        $scope.updateFavouritesLeft(res.data.player_id);
+      }
 
       $rootScope.$apply();
     });
@@ -104,8 +106,8 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     var temp = [];
     for(var fav in $scope.favorites)
     {
-      if(fav === player_id) continue;
-      temp.push(fav);
+      if($scope.favorites[fav].player_id == player_id) continue;
+      temp.push($scope.favorites[fav]);
     }
     $scope.favorites = temp;
 
@@ -135,7 +137,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
 
   $scope.removeFavourite = function (player_id) {
-    $scope.ws.$emit('remove_fav',{'player_id': player_id});
+    $scope.ws.$emit('removeFavourite',{'player_id': player_id});
   }
 
 
