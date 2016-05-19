@@ -4,11 +4,9 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.started = false;
   $scope.league_id = $stateParams.id;
-
   $scope.currentPage = 1;
   $scope.pageSize = 8;
   $scope.sortKey = 'position';
-
   $scope.state = 'loading';
   $scope.user_list = [];
   $scope.players = [];
@@ -17,6 +15,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
+  $scope.team = 0;
+  $scope.goalkeeper = 0;
+  $scope.defense = 0; 
+  $scope.midfield = 0;
+  $scope.forward = 0;
 
   $scope.ws = null;
 
@@ -68,6 +71,14 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       if(res.event == 'pick') {
         $scope.picks.push(res.data);
         $scope.updatePlayersLeft();
+        $scope.updateFavouritesLeft(res.data.player_id);
+      } else
+      if(res.event == 'favourite') {
+        $scope.favorites.push(res.data);
+      }
+      else
+      if(res.event == 'removeFavourite') {
+        $scope.updateFavouritesLeft(res.data.player_id);
       }
 
       $rootScope.$apply();
@@ -90,14 +101,45 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     }
   }
 
+  $scope.updateFavouritesLeft = function(player_id)
+  {
+    var temp = [];
+    for(var fav in $scope.favorites)
+    {
+      if($scope.favorites[fav].player_id == player_id) continue;
+      temp.push($scope.favorites[fav]);
+    }
+    $scope.favorites = temp;
+
+  }
+
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
+    if ($scope.players[player_id].positionDescription == 'Goalkeeper')
+      $scope.goalkeeper++;
+    else if ($scope.players[player_id].positionDescription == 'Defender')
+      $scope.defense++;
+    else if ($scope.players[player_id].positionDescription == 'Midfielder')
+      $scope.midfield++;
+    else if ($scope.players[player_id].positionDescription == 'Forward')
+      $scope.forward++;
+    $scope.team++;
+  }
+
+  $scope.favourite = function (player_id) {
+    $scope.ws.$emit('favourite',{'player_id': player_id});
   }
 
   $scope.sortTable = function(keyname) {
     $scope.sortKey = keyname;
     $scope.reverse = !$scope.reverse;
   }
+
+
+  $scope.removeFavourite = function (player_id) {
+    $scope.ws.$emit('removeFavourite',{'player_id': player_id});
+  }
+
 
   $scope.startDraft = function () {
     $http({
@@ -109,5 +151,9 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   }
 
   $scope.oneAtATime = false;
+
+  $scope.getGK = function () {
+      //console.log ($scope.players)
+  }
 
 });

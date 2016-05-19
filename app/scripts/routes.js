@@ -39,6 +39,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('team_management', {
+      url: '/team_management',
+      templateUrl: 'views/team_management.view.html',
+      controller: 'TeamCtrl',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
+    .state('players', {
+      url: '/players',
+      templateUrl: 'views/players.view.html',
+      controller: 'PlayersCtrl',
+      data: {
+        requireLogin: true,
+        requireLogout: false
+      }
+    })
     .state('sortable', {
       url: '/sortable',
       templateUrl: 'views/sortable.view.html',

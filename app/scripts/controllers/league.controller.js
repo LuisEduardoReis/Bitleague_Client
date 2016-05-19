@@ -27,6 +27,17 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       $state.go("userpage");
     });
   }
+
+  $scope.games = [
+    { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
+    { teamA: 'Team 2', winner: 'Team 10', teamB: 'Team 10' },
+    { teamA: 'Team 3', winner: 'Team 11', teamB: 'Team 11' },
+    { teamA: 'Team 4', winner: 'Team 4', teamB: 'Team 12' },
+    { teamA: 'Team 5', winner: 'None', teamB: 'Team 13' },
+    { teamA: 'Team 6', winner: 'Team 6', teamB: 'Team 14' },
+    { teamA: 'Team 7', winner: 'Team 15', teamB: 'Team 15' },
+    { teamA: 'Team 8', winner: 'None', teamB: 'Team 16' }
+  ];
 });
 
 app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {

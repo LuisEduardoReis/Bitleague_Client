@@ -10,7 +10,7 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $http, srvAuth) {
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
     $scope.leagues = data;
-  })
+  });
 
 
   if (srvAuth.loggedIn()) {
