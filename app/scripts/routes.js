@@ -120,6 +120,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'views/admin.view.html',
+      controller: 'AdminCtrl',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'views/login.view.html',

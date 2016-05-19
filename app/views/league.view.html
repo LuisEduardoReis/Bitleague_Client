@@ -5,13 +5,13 @@
 
     <!-- Testing
     <p>code: {{league_id}}</p>
-    <pre>{{league}}</pre>
+  <pre>{{league}}</pre>
     -->
     
-    <ul>
+  <ul>
       <li>
         <p ng-if = "league.state != 'DURATION'"><a ui-sref = "draft({id:league_id})">Draft</a></p>
-      </li>
+    </li>
       <li>
         <p><a ui-sref = "team_management">My Team</a></p>
       </li>
@@ -22,12 +22,25 @@
       <li>
         <p><a ng-click = "delete()">Delete League</a></p>
       </li>
-    </ul>
+  </ul>
     
     <!--MATCHDAY TABLE-->
     <div class="col-lg-4">
       <table class="table table-bordered table-striped">
 
+  Matches:
+  <ul>
+    <li ng-repeat="matchday in league.matches">
+      Matchday
+      <ul>
+        <li ng-repeat="match in matchday">
+          {{usernames[match.homePlayer]}} vs {{usernames[match.awayPlayer]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p ng-if="user==league.creator"><a ng-click="delete()">Delete</a></p>
         <thead>
           <tr><th colspan="2" > <center> Matchday X</th></tr>
         </thead>

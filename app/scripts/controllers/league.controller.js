@@ -11,7 +11,12 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
     $scope.league = data;
-  })
+    $scope.usernames = {};
+    for(var i in $scope.league.users) {
+      var elem = $scope.league.users[i];
+      $scope.usernames[elem.id] = elem.name;
+    }
+  });
 
   $scope.delete = function() {
     $http({
