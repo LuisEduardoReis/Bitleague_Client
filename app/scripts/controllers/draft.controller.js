@@ -50,18 +50,21 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $http({
     method: 'GET',
-    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me'
+    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
+      headers: {'Authorization': srvAuth.login.token}
   }).success(function (me) {
         $http({
             method: 'GET',
-            url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?' + $scope.league_id
+            url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?id=' + $scope.league_id,
+      headers: {'Authorization': srvAuth.login.token}
           }).success(function (league) {
-              if(league.creator === me.id)
+              if(league.creator === me.id_string)
                 $scope.owner = true;
             
-            });
+            }).error(function(data) { console.log(data)});
 
-    });
+    }).error(function(data) { console.log(data)});
+  
 
 
 
