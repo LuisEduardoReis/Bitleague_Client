@@ -70,7 +70,8 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       } else
       if(res.event == 'pick') {
         $scope.picks.push(res.data);
-        $scope.updatePlayersLeft();
+        $scope.updatePlayersLeft();        
+        $scope.incrementTeamDisplay(res.data.player_id);
         $scope.updateFavouritesLeft(res.data.player_id);
       } else
       if(res.event == 'favourite') {
@@ -88,6 +89,20 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       $scope.state='closed';
     });
   });
+
+
+  $scope.incrementTeamDisplay = function(player_id)
+  {
+    if ($scope.players[player_id].positionDescription == 'Goalkeeper')
+      $scope.goalkeeper++;
+    else if ($scope.players[player_id].positionDescription == 'Defender')
+      $scope.defense++;
+    else if ($scope.players[player_id].positionDescription == 'Midfielder')
+      $scope.midfield++;
+    else if ($scope.players[player_id].positionDescription == 'Forward')
+      $scope.forward++;
+    $scope.team++;
+  }
 
   $scope.updatePlayersLeft = function () {
     $scope.picked_players = {};
@@ -115,15 +130,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
-    if ($scope.players[player_id].positionDescription == 'Goalkeeper')
-      $scope.goalkeeper++;
-    else if ($scope.players[player_id].positionDescription == 'Defender')
-      $scope.defense++;
-    else if ($scope.players[player_id].positionDescription == 'Midfielder')
-      $scope.midfield++;
-    else if ($scope.players[player_id].positionDescription == 'Forward')
-      $scope.forward++;
-    $scope.team++;
   }
 
   $scope.favourite = function (player_id) {
