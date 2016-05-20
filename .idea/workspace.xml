@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6880a53-10e0-4e13-98b7-888816bd5b8e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/draft.scss" afterPath="$PROJECT_DIR$/app/styles/draft.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/about.view.html" afterPath="$PROJECT_DIR$/app/views/about.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/draft.view.html" afterPath="$PROJECT_DIR$/app/views/draft.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home.view.html" afterPath="$PROJECT_DIR$/app/views/home.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/join_league.view.html" afterPath="$PROJECT_DIR$/app/views/join_league.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/league.view.html" afterPath="$PROJECT_DIR$/app/views/league.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/login.view.html" afterPath="$PROJECT_DIR$/app/views/login.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/new_league.view.html" afterPath="$PROJECT_DIR$/app/views/new_league.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/team_management.view.html" afterPath="$PROJECT_DIR$/app/views/team_management.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/userpage.view.html" afterPath="$PROJECT_DIR$/app/views/userpage.view.html" />
-    </list>
+    <list default="true" id="a6880a53-10e0-4e13-98b7-888816bd5b8e" name="Default" comment="" />
     <ignored path="Client.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +24,8 @@
       <file leaf-file-name="draft.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/styles/draft.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+            <state relative-caret-position="196">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding>
                 <element signature="e#3650#5894#0" expanded="false" />
                 <element signature="e#3670#4109#0" expanded="false" />
@@ -359,12 +346,12 @@
       <workItem from="1463143375761" duration="8447000" />
       <workItem from="1463176214291" duration="8603000" />
       <workItem from="1463233021976" duration="17926000" />
-      <workItem from="1463434741305" duration="931000" />
+      <workItem from="1463434741305" duration="1531000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38870000" />
+    <option name="totallyTimeSpent" value="39470000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1117,8 +1104,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/draft.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        <state relative-caret-position="196">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding>
             <element signature="e#3650#5894#0" expanded="false" />
             <element signature="e#3670#4109#0" expanded="false" />
