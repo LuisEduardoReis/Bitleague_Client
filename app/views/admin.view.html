@@ -1,13 +1,19 @@
 
-<h3>LockState: {{(lockstate == "true") ? "locked" : "unlocked"}}</h3>
+<h3>LockState: {{lockstate}}</h3>
 <p>
   <button ng-click="lock()">Lock</button>
   <button ng-click="unlock()">Unlock</button>
 </p>
 
 <h4>Matchdays:</h4>
-<ul>
-  <li ng-repeat="matchday in matchdays">
-    Matchday: {{matchday.name}} -  <a ng-click="load">Load</a>
-  </li>
-</ul>
+<table>
+  <tr ng-repeat="matchday in matchdays">
+    <td>{{matchday.name}}</td>
+    <td><button ng-click="load(matchday.number)">Load</button></td>
+    <!--<ul>
+      <li ng-repeat="match in matchday.matches">
+        {{teams[match.homeTeamId].name}} vs {{teams[match.awayTeamId].name}}
+      </li>
+    </ul>-->
+  </tr>
+</table>
