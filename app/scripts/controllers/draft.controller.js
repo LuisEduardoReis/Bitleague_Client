@@ -20,6 +20,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.defense = 0; 
   $scope.midfield = 0;
   $scope.forward = 0;
+  $scope.owner = false;
 
   $scope.ws = null;
 
@@ -46,6 +47,26 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
         $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
       }
     });
+
+    $http({
+    method: 'GET',
+    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
+      headers: {'Authorization': srvAuth.login.token}
+  }).success(function (me) {
+        $http({
+            method: 'GET',
+            url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?id=' + $scope.league_id,
+      headers: {'Authorization': srvAuth.login.token}
+          }).success(function (league) {
+              if(league.creator === me.id_string)
+                $scope.owner = true;
+            
+            }).error(function(data) { console.log(data)});
+
+    }).error(function(data) { console.log(data)});
+  
+
+
 
 
     $scope.ws.$on('$message', function(res) {

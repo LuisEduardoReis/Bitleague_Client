@@ -87,7 +87,7 @@
         <div class="col-lg-6"  id="draft_table_section">
           <div class="row no-side-margin">
             <div id="timer" class="col-md-12 col-sm-12 col-xs-12">
-              <button ng-if="!started" ng-click="startDraft()">Start Draft</button>
+              <button ng-if="!started && owner" ng-click="startDraft()">Start Draft</button>
               <h1 ng-if="started">{{timer}}</h1>
             </div>
 
