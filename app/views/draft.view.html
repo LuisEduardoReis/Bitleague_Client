@@ -1,5 +1,6 @@
 <p ng-if="state=='connecting'"> Connecting to draft...</p>
 <p ng-if="state=='loading'"> Loading...</p>
+<p ng-if="state=='closed'"> Closed.</p>
 <div ng-if="state=='connected'">
   <div class="" id="draft">
     <!-- ROUNDS  -->
@@ -188,7 +189,7 @@
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
-                      <td>                        
+                      <td>
                         <div ng-if="team < 23">
                           <button ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
@@ -301,7 +302,7 @@
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
                       <td>
-                        <div ng-if="team < 23">                        
+                        <div ng-if="team < 23">
                           <button  ng-click="favourite(player.data_id)"><i class="fa fa-star"></i> Favorite</button>
                           <button ng-click="pick(player.data_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button>
                         </div>
@@ -332,7 +333,7 @@
                     {{players[favorite.player_id].name}}
                     <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
                     <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>                  
+                  </div>
                 </li>
               </ul>
             </accordion-group>
@@ -343,7 +344,7 @@
                     {{players[favorite.player_id].name}}
                     <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
                     <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>                  
+                  </div>
                 </li>
               </ul>
             </accordion-group>
@@ -354,7 +355,7 @@
                     {{players[favorite.player_id].name}}
                     <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
                     <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>                  
+                  </div>
                 </li>
               </ul>
             </accordion-group>
@@ -365,7 +366,7 @@
                     {{players[favorite.player_id].name}}
                      <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
                      <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>                 
+                  </div>
                 </li>
               </ul>
             </accordion-group>
@@ -375,40 +376,40 @@
 
         <!-- Picked Players -->
         <div class="col-lg-3 no-padding"  id="draft_team_section">
-          <h3 class="accordion-title"><span class="fa fa-users"></span> My Team {{ team }} of 23</h3>
+          <h3 class="accordion-title"><span class="fa fa-users"></span> My Team {{ my_picks[1].length + my_picks[2].length + my_picks[3].length + my_picks[4].length}} of 23</h3>
           <accordion close-others="oneAtATime">
-            <accordion-group heading="Goalkeepers - {{ goalkeeper }}" is-open="true">
+            <accordion-group heading="Goalkeepers - {{ my_picks[1].length }}" is-open="true">
               <ul>
-                <li ng-repeat="pick in picks">
-                  <div ng-if="players[pick.player_id].positionDescription == 'Goalkeeper'">
-                    {{players[pick.player_id].name}}
+                <li ng-repeat="pick in my_picks[1]">
+                  <div ng-if="players[pick].positionDescription == 'Goalkeeper'">
+                    {{players[pick].name}}
                   </div>
                 </li>
               </ul>
             </accordion-group>
-            <accordion-group heading="Defenders - {{ defense }}" is-open="true">
+            <accordion-group heading="Defenders - {{ my_picks[2].length }}" is-open="true">
               <ul>
-                <li ng-repeat="pick in picks">
-                  <div ng-if="players[pick.player_id].positionDescription =='Defender'">
-                    {{players[pick.player_id].name}}
+                <li ng-repeat="pick in my_picks[2]">
+                  <div ng-if="players[pick].positionDescription =='Defender'">
+                    {{players[pick].name}}
                   </div>
                 </li>
               </ul>
             </accordion-group>
-            <accordion-group heading="Midfielders  - {{ midfield }}" is-open="true">
+            <accordion-group heading="Midfielders  - {{ my_picks[3].length }}" is-open="true">
               <ul>
-                <li ng-repeat="pick in picks">
-                  <div ng-if="players[pick.player_id].positionDescription =='Midfielder'">
-                    {{players[pick.player_id].name}}
+                <li ng-repeat="pick in my_picks[3]">
+                  <div ng-if="players[pick].positionDescription =='Midfielder'">
+                    {{players[pick].name}}
                   </div>
                 </li>
               </ul>
             </accordion-group>
-            <accordion-group heading="Forwards - {{ forward }}" is-open="true">
+            <accordion-group heading="Forwards - {{ my_picks[4].length }}" is-open="true">
               <ul>
-                <li ng-repeat="pick in picks">
-                  <div ng-if="players[pick.player_id].positionDescription =='Forward'">
-                    {{players[pick.player_id].name}}
+                <li ng-repeat="pick in my_picks[4]">
+                  <div ng-if="players[pick].positionDescription =='Forward'">
+                    {{players[pick].name}}
                   </div>
                 </li>
               </ul>

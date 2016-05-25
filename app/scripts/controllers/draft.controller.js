@@ -11,13 +11,14 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.user_list = [];
   $scope.players = [];
   $scope.picks = [];
+  $scope.my_picks = [];
   $scope.favorites = [];
   $scope.players_left = [];
   $scope.picked_players = {};
   $scope.picknumber = 0;
   $scope.team = 0;
   $scope.goalkeeper = 0;
-  $scope.defense = 0; 
+  $scope.defense = 0;
   $scope.midfield = 0;
   $scope.forward = 0;
   $scope.owner = false;
@@ -32,42 +33,40 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.ws = null;
   });
 
+  // GET Players
   $http({
     method: 'GET',
     url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
-  }).success(function (data) {
-    $scope.players = data;
+  }).success(function (players) {
+  // GET Me
+  $http({
+    method: 'GET',
+    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
+    headers: {'Authorization': srvAuth.login.token}
+  }).success(function (me) {
+  // GET League
+  $http({
+    method: 'GET',
+    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?id=' + $scope.league_id,
+    headers: {'Authorization': srvAuth.login.token}
+  }).success(function (league) {
+
+    $scope.players = players;
+    $scope.me = me;
+    $scope.league = league;
+    $scope.updateLists();
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
     $scope.ws.$open();
+
+    if($scope.league.creator === $scope.me.id_string) $scope.owner = true;
 
     $scope.ws.$on('$open', function() {
       if ($scope.ws != null) {
         $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
       }
     });
-
-    $http({
-    method: 'GET',
-    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
-      headers: {'Authorization': srvAuth.login.token}
-  }).success(function (me) {
-        $http({
-            method: 'GET',
-            url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?id=' + $scope.league_id,
-      headers: {'Authorization': srvAuth.login.token}
-          }).success(function (league) {
-              if(league.creator === me.id_string)
-                $scope.owner = true;
-            
-            }).error(function(data) { console.log(data)});
-
-    }).error(function(data) { console.log(data)});
-  
-
-
-
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
@@ -87,12 +86,12 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       } else
       if(res.event == 'pick_list') {
         $scope.picks = res.data;
-        $scope.updatePlayersLeft();
+        $scope.updateLists();
       } else
       if(res.event == 'pick') {
         $scope.picks.push(res.data);
-        $scope.updatePlayersLeft();        
-        $scope.incrementTeamDisplay(res.data.player_id);
+        $scope.updateLists();
+        //$scope.incrementTeamDisplay(res.data.player_id);
         $scope.updateFavouritesLeft(res.data.player_id);
       } else
       if(res.event == 'favourite') {
@@ -109,7 +108,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.ws.$on('$close', function() {
       $scope.state='closed';
     });
-  });
+
+  }).error(function(data) { console.log(data)});
+  }).error(function(data) { console.log(data)});
+  }).error(function(data) { console.log(data)});
 
 
   $scope.incrementTeamDisplay = function(player_id)
@@ -125,7 +127,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.team++;
   }
 
-  $scope.updatePlayersLeft = function () {
+  $scope.updateLists = function () {
     $scope.picked_players = {};
     for(var i in $scope.picks) {
       $scope.picked_players[$scope.picks[i].player_id] = true;
@@ -135,7 +137,18 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       if ($scope.picked_players[$scope.players[i].data_id]) continue;
       $scope.players_left.push($scope.players[i]);
     }
+    $scope.my_picks = [];
+    for(var i = 1; i <= 4; i++) $scope.my_picks[i] = [];
+    for(var i in $scope.picks) {
+      if ($scope.picks[i].user_id == $scope.me.id_string) {
+        var position = $scope.players[$scope.picks[i].player_id].position;
+        $scope.my_picks[position].push($scope.picks[i].player_id);
+      }
+    }
+    console.log($scope.my_picks);
   }
+
+
 
   $scope.updateFavouritesLeft = function(player_id)
   {
