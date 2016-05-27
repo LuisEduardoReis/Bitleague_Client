@@ -21,3 +21,8 @@
   -o-transition: $element $time $effect;
   transition: $element $time $effect;
 }
+
+@mixin full_bg($url) {
+  background: url($url) no-repeat center center;
+  background-size: cover;
+}
