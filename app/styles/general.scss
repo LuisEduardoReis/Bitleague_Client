@@ -19,6 +19,7 @@ $contrast: #8C5E5A;*/
 
 html {
   @include full_bg('http://www.img.lx.it.pt/~fp/cav/ano2012_2013/Trabalhos_MEEC_2012_2013/Artigo9/html/images/background/grass.jpg');
+  background-attachment: fixed;
 }
 
 body {

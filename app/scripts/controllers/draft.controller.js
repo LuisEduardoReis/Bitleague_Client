@@ -5,7 +5,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.started = false;
   $scope.league_id = $stateParams.id;
   $scope.currentPage = 1;
-  $scope.pageSize = 8;
+  $scope.pageSize = 10;
   $scope.sortKey = 'position';
   $scope.state = 'loading';
   $scope.user_list = [];
@@ -125,7 +125,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     else if ($scope.players[player_id].positionDescription == 'Forward')
       $scope.forward++;
     $scope.team++;
-  }
+  };
 
   $scope.updateLists = function () {
     $scope.picked_players = {};
@@ -145,8 +145,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
         $scope.my_picks[position].push($scope.picks[i].player_id);
       }
     }
-    console.log($scope.my_picks);
-  }
+  };
 
 
 
@@ -160,25 +159,25 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     }
     $scope.favorites = temp;
 
-  }
+  };
 
   $scope.pick = function (player_id) {
     $scope.ws.$emit('pick',{'player_id': player_id});
-  }
+  };
 
   $scope.favourite = function (player_id) {
     $scope.ws.$emit('favourite',{'player_id': player_id});
-  }
+  };
 
   $scope.sortTable = function(keyname) {
     $scope.sortKey = keyname;
     $scope.reverse = !$scope.reverse;
-  }
+  };
 
 
   $scope.removeFavourite = function (player_id) {
     $scope.ws.$emit('removeFavourite',{'player_id': player_id});
-  }
+  };
 
 
   $scope.startDraft = function () {
@@ -188,7 +187,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       headers: {"Authorization":srvAuth.login.token},
       data: {"id": $scope.league_id}
     }).error(function(data) { console.log(data)});
-  }
+  };
 
   $scope.oneAtATime = false;
 

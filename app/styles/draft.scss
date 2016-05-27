@@ -1,6 +1,11 @@
 @import "navbar";
 
 #draft {
+  .section-title {
+    color: $lighter_2;
+    text-align: center;
+  }
+
   #roundsRow {
     width: 100%;
     margin: -20px 0 2em 0;
@@ -12,7 +17,7 @@
       margin: 0 auto;
       overflow: scroll hidden;
       border-radius: 0;
-      background-color: $darker_2;
+      background-color: transparent;
 
       .user-status {
         font-size: 1.1em;
@@ -110,15 +115,43 @@
   #draftRow {
     max-height: 80%;
 
-    #draft_favorite_section, #draft_team_section {
-      padding-right: 15px !important;
-      margin-top: 5em;
+    #draft_favorite_section {
+      ul {
+        li.item {
+          display: inline-block;
+          width: 6em;
+          padding: 10px 5px;
+          margin: 5px 3px;
+          border: 2px solid #91BED4;
+          border-radius: 10px;
+          background-color: rgba(255, 255, 255, 0.8);
+          font-size: 1.1em;
+          font-weight: bold;
+          text-align: center;
+          cursor: pointer;
+          color: $darker_1;
 
-      .accordion-title {
-        color: $darker_1;
-        text-align: center;
+          small {
+            font-size: 0.7em;
+          }
+
+          button {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            font-size: 1.2em;
+            color: $contrast;
+
+            &:hover, &:active, &:focus {
+              outline: none;
+              text-shadow: none;
+            }
+          }
+        }
       }
+    }
 
+    #draft_team_section {
       accordion {
         .panel-group {
           border: none;
@@ -155,6 +188,10 @@
     }
 
     #draft_table_section {
+      .pagination li {
+        margin: 0;
+      }
+
       #draft-filter {
         padding-left: 5px !important;
 
@@ -274,6 +311,69 @@
             }
           }
         }
+      }
+    }
+  }
+
+  #online_players {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    accordion {
+      .panel-group {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+
+        .panel {
+          border: none;
+          border-radius: 0;
+        }
+
+        .panel-heading {
+          padding: 5px 15px;
+          background: $contrast;
+          color: #fff;
+          border: none;
+          border-radius: 0;
+
+          .panel-title {
+            font-size: 1em;
+
+            a {
+              &:active, &:focus, &:hover {
+                text-decoration: none;
+                outline: none;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+
+        .panel-body {
+          padding: 5px 10px;
+
+          ul {
+            list-style-type: none;
+            padding: 0;
+
+            li {
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+
+    .user-status {
+      font-size: 1.1em;
+
+      &.user-status-online {
+        color: limegreen;
+      }
+      &.user-status-offline {
+        color: red;
       }
     }
   }

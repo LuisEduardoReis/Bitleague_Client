@@ -81,11 +81,28 @@
       </div>
     </div>
     <!-- /ROUNDS  -->
+
     <div class="container-fluid">
       <div class="row" id="draftRow">
       <div class="col-lg-12 no-padding">
+
+        <!-- Favorite Queue -->
+        <div class="col-lg-3" id="draft_favorite_section">
+          <h3 class="section-title"><span class="fa fa-star"></span> Favorite Players</h3>
+          <ul ui-sortable="" ng-model="favorites" class="list">
+            <li ng-repeat="favorite in favorites" class="item">
+              <span class="col-xs-12 no-padding">{{players[favorite.player_id].name }}</span>
+              <small>({{ players[favorite.player_id].positionDescription }})</small>
+              <button ng-click="pick(favorite.player_id)" tooltip-placement="top" tooltip="Pick"><i class="fa fa-hand-pointer-o"></i></button>
+              <button ng-click="removeFavourite(favorite.player_id)" tooltip-placement="top" tooltip="Remove"><i class="fa fa-trash"></i></button>
+            </li>
+          </ul>
+        </div>
+        <!-- /Favorite Queue -->
+
         <!-- Players Section -->
         <div class="col-lg-6"  id="draft_table_section">
+          <h3 class="section-title"><span class="fa fa-plus-circle"></span> Available Players</h3>
           <div class="row no-side-margin">
             <div id="timer" class="col-md-12 col-sm-12 col-xs-12">
               <button ng-if="!started && owner" ng-click="startDraft()">Start Draft</button>
@@ -94,7 +111,7 @@
           </div>
 
           <div class="row no-side-margin">
-            <div id="draft-main-table" class="col-md-9 col-sm-12 no-padding">
+            <div id="draft-main-table" class="col-sm-12 no-padding">
               <tabset >
                 <tab index = "0" heading = "All">
                   <table class = "table table-bordered table-striped">
@@ -303,61 +320,9 @@
         </div>
         <!-- /Players Section -->
 
-        <!-- Favorite Queue -->
-        <div class="col-lg-3 no-padding" id="draft_favorite_section">
-          <h3 class="accordion-title"><span class="fa fa-star"></span> Favorite Players</h3>
-          <accordion close-others="oneAtATime">
-            <accordion-group heading="Goalkeepers" is-open="true">
-              <ul>
-                <li ng-repeat="favorite in favorites">
-                  <div ng-if="players[favorite.player_id].positionDescription =='Goalkeeper'">
-                    {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>
-                </li>
-              </ul>
-            </accordion-group>
-            <accordion-group heading="Defenders" is-open="true">
-              <ul>
-                <li ng-repeat="favorite in favorites">
-                  <div ng-if="players[favorite.player_id].positionDescription =='Defender'">
-                    {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>
-                </li>
-              </ul>
-            </accordion-group>
-            <accordion-group heading="Midfielders" is-open="true">
-              <ul>
-                <li ng-repeat="favorite in favorites">
-                  <div ng-if="players[favorite.player_id].positionDescription =='Midfielder'">
-                    {{players[favorite.player_id].name}}
-                    <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                    <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>
-                </li>
-              </ul>
-            </accordion-group>
-            <accordion-group heading="Forwards" is-open="true">
-              <ul>
-                <li ng-repeat="favorite in favorites">
-                  <div ng-if="players[favorite.player_id].positionDescription =='Forward'">
-                    {{players[favorite.player_id].name}}
-                     <td><button ng-click="pick(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Pick</button></td>
-                     <td><button ng-click="removeFavourite(favorite.player_id)"><i class="fa fa-hand-pointer-o"></i> Remove</button></td>
-                  </div>
-                </li>
-              </ul>
-            </accordion-group>
-          </accordion>
-        </div>
-        <!-- /Favorite Queue -->
-
         <!-- Picked Players -->
-        <div class="col-lg-3 no-padding"  id="draft_team_section">
-          <h3 class="accordion-title"><span class="fa fa-users"></span> My Team {{ my_picks[1].length + my_picks[2].length + my_picks[3].length + my_picks[4].length}} of 23</h3>
+        <div class="col-lg-3"  id="draft_team_section">
+          <h3 class="section-title"><span class="fa fa-users"></span> My Team {{ my_picks[1].length + my_picks[2].length + my_picks[3].length + my_picks[4].length}} of 23</h3>
           <accordion close-others="oneAtATime">
             <accordion-group heading="Goalkeepers - {{ my_picks[1].length }}" is-open="true">
               <ul>
@@ -401,5 +366,21 @@
       </div>
     </div>
     </div>
+
+    <!-- Online Players -->
+    <div id="online_players">
+      <accordion close-others="oneAtATime">
+        <accordion-group heading="Users Online" is-open="true">
+          <ul>
+            <li ng-repeat="user_id in user_list.users">
+              <i ng-if="user_list.online[user_id]" class="fa fa-circle user-status user-status-online"></i>
+              <i ng-if="!user_list.online[user_id]" class="fa fa-circle user-status user-status-offline"></i>
+              {{user_list.usernames[user_id]}}
+            </li>
+          </ul>
+        </accordion-group>
+      </accordion>
+    </div>
+    <!-- /Online Players -->
   </div>
 </div>
