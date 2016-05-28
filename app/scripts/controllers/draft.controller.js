@@ -25,7 +25,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.ws = null;
 
-  $scope.timer = -1;
+  $scope.timer = 30;
   $scope.currentUser = 'noone';
 
   $scope.$on("$destroy", function() {
