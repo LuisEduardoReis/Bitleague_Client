@@ -18,15 +18,6 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     }
   });
 
-  $scope.delete = function() {
-    $http({
-      method: 'DELETE',
-      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
-      headers: {'Authorization': srvAuth.login.token}
-    }).success(function() {
-      $state.go("userpage");
-    });
-  }
 
   $scope.games = [
     { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
@@ -45,12 +36,21 @@ app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $htt
 
   $scope.createLeague = function ()
   {
+    if(!$scope.league_time)
+    {
+      alert("You must define turn times!");
+      return;
+    }
+
+    var integer = parseInt($scope.league_time, 10);
+
     $http({
       method: 'POST',
       url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league',
       headers: {'Authorization': srvAuth.login.token},
       data: {
-        name: $scope.league_name
+        name: $scope.league_name,
+        time: integer
       }
     }).success(function(data) {
       alert("League "+$scope.league_name+" was created!");
