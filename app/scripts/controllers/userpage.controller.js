@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserPageCtrl', function ($scope, $rootScope, $http, srvAuth) {
+app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http, srvAuth, $state) {
 
   $scope.user_json = null;
 
@@ -22,6 +22,16 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $http, srvAuth) {
       }
     }).success(function(data) {
       $scope.user_json = data;
+    });
+  }
+
+   $scope.delete_league = function(leagueId) {
+    $http({
+      method: 'DELETE',
+      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+leagueId,
+      headers: {'Authorization': srvAuth.login.token}
+    }).success(function() {
+      $state.reload();
     });
   }
 });

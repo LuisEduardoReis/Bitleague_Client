@@ -4,7 +4,7 @@
   <p>Your Leagues:</p>
   <ul>
     <li ng-repeat = "league in leagues">
-      <a ui-sref = "league({id:league.id})">{{league.name}}</a>
+      <a ui-sref = "league({id:league.id})">{{league.name}}</a> <a ng-click = "delete_league(league.id)">Delete League</a>
     </li>
   </ul>
 </div>
