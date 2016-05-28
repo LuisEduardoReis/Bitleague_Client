@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6880a53-10e0-4e13-98b7-888816bd5b8e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/navbar.scss" afterPath="$PROJECT_DIR$/app/styles/navbar.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/header.html" afterPath="$PROJECT_DIR$/app/views/partials/header.html" />
     </list>
     <ignored path="Client.iws" />
@@ -25,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="navbar.scss" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/styles/navbar.scss">
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/partials/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+            <state relative-caret-position="448">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -71,8 +69,8 @@
         <option value="$PROJECT_DIR$/app/styles/_mixins&amp;variables.scss" />
         <option value="$PROJECT_DIR$/app/views/draft.view.html" />
         <option value="$PROJECT_DIR$/app/styles/draft.scss" />
-        <option value="$PROJECT_DIR$/app/views/partials/header.html" />
         <option value="$PROJECT_DIR$/app/styles/navbar.scss" />
+        <option value="$PROJECT_DIR$/app/views/partials/header.html" />
       </list>
     </option>
   </component>
@@ -406,15 +404,15 @@
       <workItem from="1463434741305" duration="931000" />
       <workItem from="1464365674973" duration="885000" />
       <workItem from="1464374087084" duration="8949000" />
-      <workItem from="1464431383747" duration="10795000" />
+      <workItem from="1464431383747" duration="11051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59499000" />
+    <option name="totallyTimeSpent" value="59755000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1606,29 +1604,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/partials/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding>
-            <marker date="1464449395479" expanded="true" signature="19:1103" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="90:1096" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="135:1087" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="169:501" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="290:488" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="571:1076" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="608:622" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="745:1062" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="781:841" ph="..." />
-            <marker date="1464449395479" expanded="true" signature="876:1047" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/navbar.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding>
+            <marker date="1464449597965" expanded="true" signature="31:1042" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="227:256" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="266:326" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="345:374" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="390:761" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="400:757" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="485:679" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="627:671" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="705:751" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="779:1040" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="821:1036" ph="{...}" />
+            <marker date="1464449597965" expanded="true" signature="990:1030" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
