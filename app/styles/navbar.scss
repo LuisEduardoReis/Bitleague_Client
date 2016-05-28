@@ -9,6 +9,16 @@
   border-radius: 0;
   margin-bottom: 0;
 
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  #logo {
+    height: 50px;
+    width: auto;
+    padding: 8px 0;
+  }
+
   .navbar-header {
     padding-left: 15px;
   }
