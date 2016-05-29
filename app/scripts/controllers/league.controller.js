@@ -18,15 +18,6 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     }
   });
 
-  $scope.delete = function() {
-    $http({
-      method: 'DELETE',
-      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
-      headers: {'Authorization': srvAuth.login.token}
-    }).success(function() {
-      $state.go("userpage");
-    });
-  }
 
   $scope.games = [
     { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
