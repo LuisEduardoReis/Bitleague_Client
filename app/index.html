@@ -11,9 +11,14 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/responsive.css">
     <link rel="stylesheet" href="styles/sortable.css">
+
+    <link rel = "stylesheet" href = "styles/draft.css"/>
+    <link rel = "stylesheet" href = "styles/userpage.css"/>
+
 
     <!-- endbuild -->
   </head>
@@ -25,9 +30,7 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/partials/header.html'"></div>
 
-    <div class="container">
-      <div ui-view></div>
-    </div>
+    <div ui-view></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -40,7 +43,7 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-    
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -67,16 +70,20 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/routes.js"></script>
         <script src="scripts/dirPagination.js"></script>
+        <script src="scripts/sideMenu.js"></script>
         <script src="scripts/services/facebook.service.js"></script>
         <script src="scripts/controllers/main.controller.js"></script>
         <script src="scripts/controllers/login.controller.js"></script>
         <script src="scripts/controllers/userpage.controller.js"></script>
         <script src="scripts/controllers/drag.controller.js"></script>
+        <script src="scripts/controllers/team_management.controller.js"></script>
+        <script src="scripts/controllers/players.controller.js"></script>
         <script src="scripts/controllers/table.controller.js"></script>
         <script src="scripts/controllers/sortable.controller.js"></script>
         <script src="scripts/controllers/draft.controller.js"></script>
         <script src="scripts/controllers/league.controller.js"></script>
-    
-    
+        <script src="scripts/controllers/admin.controller.js"></script>
+
+
   </body>
 </html>

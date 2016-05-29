@@ -11,17 +11,24 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
     $scope.league = data;
-  })
+    $scope.usernames = {};
+    for(var i in $scope.league.users) {
+      var elem = $scope.league.users[i];
+      $scope.usernames[elem.id] = elem.name;
+    }
+  });
 
-  $scope.delete = function() {
-    $http({
-      method: 'DELETE',
-      url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
-      headers: {'Authorization': srvAuth.login.token}
-    }).success(function() {
-      $state.go("userpage");
-    });
-  }
+
+  $scope.games = [
+    { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
+    { teamA: 'Team 2', winner: 'Team 10', teamB: 'Team 10' },
+    { teamA: 'Team 3', winner: 'Team 11', teamB: 'Team 11' },
+    { teamA: 'Team 4', winner: 'Team 4', teamB: 'Team 12' },
+    { teamA: 'Team 5', winner: 'None', teamB: 'Team 13' },
+    { teamA: 'Team 6', winner: 'Team 6', teamB: 'Team 14' },
+    { teamA: 'Team 7', winner: 'Team 15', teamB: 'Team 15' },
+    { teamA: 'Team 8', winner: 'None', teamB: 'Team 16' }
+  ];
 });
 
 app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
@@ -29,12 +36,21 @@ app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $htt
 
   $scope.createLeague = function ()
   {
+    if(!$scope.league_time)
+    {
+      alert("You must define turn times!");
+      return;
+    }
+
+    var integer = parseInt($scope.league_time, 10);
+
     $http({
       method: 'POST',
       url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league',
       headers: {'Authorization': srvAuth.login.token},
       data: {
-        name: $scope.league_name
+        name: $scope.league_name,
+        time: integer
       }
     }).success(function(data) {
       alert("League "+$scope.league_name+" was created!");

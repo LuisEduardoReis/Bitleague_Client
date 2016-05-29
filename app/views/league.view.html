@@ -1,20 +1,42 @@
-<p ng-if="league==null">Loading...</p>
-<div ng-if="league != null">
-  <p>League "{{league.name}}" </p>
+<div class = "container-fluid">
+  <!-- sidebar -->
+  <div class = "col-xs-6 col-sm-3 sidebar-offcanvas" id = "sidebar" role = "navigation">
+    <ul class = "nav">
+      <li>
+        <a class = "list-group-item" ui-sref = "league({id:league_id})">
+          League: {{league.name}}
+        </a>
+      </li>
+      <li>
+        <a ng-if = "league.state != 'DURATION'" ui-sref = "draft({id:league_id})" class = "list-group-item">
+          <i class = "fa fa-comment-o"></i>
+          Draft
+        </a>
+      </li>
+      <li>
+        <a ui-sref-active = "active" ui-sref = ".matches" class = "list-group-item">
+          <i class = "fa fa-comment-o"></i>
+          Matches
+        </a>
+      </li>
+      <li>
+        <a ui-sref-active = "active" ui-sref = ".players" class = "list-group-item">
+          <i class = "fa fa-comment-o"></i>
+          Players
+        </a>
+      </li>
+      <li>
+        <a ui-sref-active = "active" ui-sref = ".team" class = "list-group-item">
+          <i class = "fa fa-comment-o"></i>
+          Team
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- Testing
+  <p>code: {{league_id}}</p>
+<pre>{{league}}</pre>
+  -->
 
-  <p>code: {{league_id}}<p>
-  <pre>{{league}}</pre>
-
-  <p ng-if="league.state != 'DURATION'"><a ui-sref="draft({id:league_id})">Draft</a></p>
-
-  Users:
-  <ul>
-    <li  ng-repeat="user in league.users">
-      {{user.name}}
-    </li>
-  </ul>
-
-  <p ng-if="user==league.creator"><a ng-click="delete()">Delete</a></p>
-
+  <div class = "col-sm-9" ui-view></div>
 </div>
-

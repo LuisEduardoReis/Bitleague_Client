@@ -1,0 +1,38 @@
+/* football color schema - https://color.adobe.com/pt/Football-colors-color-theme-602794/ */
+$darker_1: #304269;
+$darker_2: #91BED4;
+$lighter_1: #D9E8F5;
+$lighter_2: #FFFFFF;
+$contrast: #F26101;
+
+/* corporate color schema - https://color.adobe.com/pt/Corporate-Orange-Blue-color-theme-8042607/ */
+/*$darker_1: #1C418C;
+$darker_2: #568EBF;
+$lighter_1: #B4BCBF;
+$lighter_2: #DFF0F2;
+$contrast: #8C5E5A;*/
+
+/* Font - Lato */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
+
+@import "mixins&variables";
+
+html {
+  @include full_bg('http://www.img.lx.it.pt/~fp/cav/ano2012_2013/Trabalhos_MEEC_2012_2013/Artigo9/html/images/background/grass.jpg');
+  background-attachment: fixed;
+}
+
+body {
+  font-family: 'Lato', sans-serif !important;
+  color: #000;
+  background: transparent;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-side-margin {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

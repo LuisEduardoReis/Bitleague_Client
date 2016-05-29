@@ -22,40 +22,34 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
-    .state('about', {
-      url: '/about',
-      templateUrl: 'views/about.view.html',
+    .state('league', {
+      url: '/league/:id',
+      templateUrl: 'views/league.view.html',
+      controller: 'LeagueCtrl',
       data: {
-        requireLogin: false,
+        requireLogin: true,
         requireLogout: false
       }
     })
-    .state('drag', {
-      url: '/drag',
-      templateUrl: 'views/drag.view.html',
-      controller: 'DragCtrl',
-      data: {
-        requireLogin: false,
-        requireLogout: false
-      }
-    })
-    .state('sortable', {
-      url: '/sortable',
-      templateUrl: 'views/sortable.view.html',
-      controller: 'sortableController',
-      data: {
-        requireLogin: false,
-        requireLogout: false
-      }
-    })
-    .state('table', {
+    .state('league.table', {
       url: '/table',
       templateUrl: 'views/table.view.html',
-      controller: 'TableCtrl',
-      data: {
-        requireLogin: false,
-        requireLogout: false
-      }
+      controller: 'TableCtrl'
+    })
+    .state('league.players', {
+      url: '/players',
+      templateUrl: 'views/players.view.html',
+      controller: 'PlayersCtrl',
+    })
+    .state('league.matches', {
+      url: '/matches',
+      templateUrl: 'views/matches.view.html',
+      controller: 'LeagueCtrl',
+    })
+    .state('league.team', {
+      url: '/team',
+      templateUrl: 'views/team.view.html',
+      controller: 'TeamCtrl',
     })
     .state('userpage', {
       url: '/userpage',
@@ -70,15 +64,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: '/draft/:id',
       templateUrl: 'views/draft.view.html',
       controller: 'DraftCtrl',
-      data: {
-        requireLogin: true,
-        requireLogout: false
-      }
-    })
-    .state('league', {
-      url: '/league/:id',
-      templateUrl: 'views/league.view.html',
-      controller: 'LeagueCtrl',
       data: {
         requireLogin: true,
         requireLogout: false
@@ -99,6 +84,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'JoinLeagueCtrl',
       data: {
         requireLogin: true,
+        requireLogout: false
+      }
+    })
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'views/admin.view.html',
+      controller: 'AdminCtrl',
+      data: {
+        requireLogin: false,
         requireLogout: false
       }
     })

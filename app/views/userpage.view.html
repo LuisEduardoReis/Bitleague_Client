@@ -1,8 +1,21 @@
-<p>Hello {{user.name}}!</p>
+<div class = "container" id = "user_page">
+  <div class = "col-xs-12" id = "leagues_title">
+    <h1>My Leagues</h1>
+  </div>
 
-<p>Your Leagues:</p>
-<ul>
-  <li ng-repeat="league in leagues">
-    <a ui-sref="league({id:league.id})">{{league.name}}</a>
-  </li>
-</ul>
+  <ul class = "col-xs-12">
+    <li ng-repeat = "league in leagues" class = "">
+      <a ui-sref = "league({id:league.id})">
+        <div class = "col-xs-12 no-padding">
+          <img src = "../images/liganos.jpg" class = "col-sm-7 no-padding" alt = "league logo"/>
+          <div class = "league_info col-sm-5">
+            <h3 class = "league_name">{{league.name}}</h3>
+            <p><span>Started: </span>Yes</p>
+            <p><span>Number of Teams: </span>4</p>
+            <p><span>Current Position: </span>3th</p>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
