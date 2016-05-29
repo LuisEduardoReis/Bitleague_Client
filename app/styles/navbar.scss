@@ -1,5 +1,4 @@
 @import "general";
-@import "mixins&variables";
 
 #my-navbar {
   background-color: $darker_1;
@@ -8,6 +7,17 @@
   border-top: none;
   border-bottom: 3.5px solid $contrast;
   border-radius: 0;
+  margin-bottom: 0;
+
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  #logo {
+    height: 50px;
+    width: auto;
+    padding: 8px 0;
+  }
 
   .navbar-header {
     padding-left: 15px;

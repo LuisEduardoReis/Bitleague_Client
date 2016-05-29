@@ -21,3 +21,35 @@
   -o-transition: $element $time $effect;
   transition: $element $time $effect;
 }
+
+@mixin full_bg($url) {
+  background: url($url) no-repeat center center;
+  background-size: cover;
+}
+
+@mixin font-face($style-name, $file, $family, $category:"") {
+  $filepath: "../fonts/" + $file;
+  @font-face {
+    font-family: "#{$style-name}";
+    src: url($filepath + ".ttf")  format('truetype');
+  }
+  %#{$style-name} {
+    font: {
+      @if $category != "" {
+        family: "#{$style-name}", #{$category};
+      }
+      @else {
+        family: "#{$style-name}";
+        weight: normal;
+      }
+    }
+  }
+}
+
+@mixin gray-filter($percentage) {
+  webkit-filter: grayscale($percentage);
+  -moz-filter: grayscale($percentage);
+  -o-filter: grayscale($percentage);
+  -ms-filter: grayscale($percentage);
+  filter: grayscale($percentage);
+}

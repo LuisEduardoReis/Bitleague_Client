@@ -15,9 +15,17 @@ $contrast: #8C5E5A;*/
 /* Font - Lato */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 
+@import "mixins&variables";
+
+html {
+  @include full_bg('http://www.img.lx.it.pt/~fp/cav/ano2012_2013/Trabalhos_MEEC_2012_2013/Artigo9/html/images/background/grass.jpg');
+  background-attachment: fixed;
+}
+
 body {
   font-family: 'Lato', sans-serif !important;
   color: #000;
+  background: transparent;
 }
 
 .no-padding {

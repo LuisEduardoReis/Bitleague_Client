@@ -1,106 +1,69 @@
 @import "navbar";
+@import url(../fonts/digital-7.ttf);
+
+$digital: 'Digital-7';
+@include font-face('Digital-7', 'digital-7', 'Digital-7');
+
 
 #draft {
+  .section-title {
+    color: $lighter_2;
+    text-align: center;
+  }
+
   #roundsRow {
-    width: 100%;
-    margin: -20px 0 2em 0;
+    #current_round {
+      text-align: center;
 
-    #roundsAccordion {
-      display: block;
-      width: 100%;
-      max-height: 100%;
-      margin: 0 auto;
-      overflow: scroll hidden;
-      border-radius: 0;
-      background-color: $darker_2;
-
-      .user-status {
-        font-size: 1.1em;
-
-        &.user-status-online {
-          color: limegreen;
-        }
-        &.user-status-offline {
-          color: red;
-        }
+      h3 {
+        background-color: $contrast;
+        color: white;
+        text-transform: uppercase;
+        display: inline-table;
+        margin: 0;
+        padding: 2px 20px;
       }
+    }
 
-      ul {
-        list-style: none;
-      }
+    ul {
+      list-style-type: none;
+      text-align: center;
 
-      #roundsList {
-        padding: 0 15px;
-        display: table-row;
+      .item {
+        display: inline-block;
+        width: 12em;
+        background: white;
+        margin: 0;
+        border: none;
         height: 10em;
-        overflow-x: scroll;
-        background: transparent;
+        font-size: 1em;
+        border-radius: 0;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.8);
+        cursor: default;
 
-        &::-webkit-scrollbar {
-          width: 4px;
+        &.previous_picker {
+          @include gray-filter(80%);
+          cursor: not-allowed;
         }
 
-        .panel-horizontal {
-          display: table-cell;
-          margin: 0;
-          border-radius: 0;
-          height: 10em;
-          border: none;
+        &.current_picker {
+          box-shadow: inset 0 1px 1px $contrast, 0 0 40px $contrast;
+          border: 1.5px solid $contrast;
+        }
 
-          .panel-heading, .panel-body {
-            display: table-cell;
-            height: 10em;
-          }
+        img {
+          padding: 0;
+        }
 
-          .panel-body {
-            display: none;
-            padding: 0;
-            overflow-y: scroll;
-            min-width: 8em;
-            background: $lighter_1;
+        .user_name {
+          padding-top: 0.3em;
+        }
 
-            &::-webkit-scrollbar {
-              width: 1px;
-            }
-
-            ul {
-              width: 100%;
-              height: 100%;
-              padding: 0;
-
-              li {
-                border: none;
-                width: 100%;
-                padding: 5px 10px;
-              }
-            }
-          }
-          .panel-heading {
-            cursor: pointer;
-            background: $contrast;
-            color: white;
-            border-top: none;
-            border-bottom: none;
-            border-right: 1px solid white;
-            border-radius: 0;
-            padding: 5px 7px;
-
-            .panel-title {
-              width: 1em;
-              word-break: break-all;
-              text-align: center;
-
-              hr {
-                margin-top: 10px;
-                text-align: center;
-                color: transparent;
-                margin-bottom: 0;
-              }
-            }
-
-            &.active + .panel-body {
-              display: table-cell;
-            }
+        .pickedPlayer {
+          padding-top: 1.5em;
+          p {
+            margin: 0;
           }
         }
       }
@@ -110,15 +73,77 @@
   #draftRow {
     max-height: 80%;
 
-    #draft_favorite_section, #draft_team_section {
-      padding-right: 15px !important;
-      margin-top: 5em;
+    #timer {
+      font-family: 'Digital-7';
+      margin-bottom: 0.5em;
 
-      .accordion-title {
-        color: $darker_1;
-        text-align: center;
+      h1 {
+        font-size: 6em;
+        display: table;
+        margin: 0;
+        padding: 0 5px;
+        @include full_bg('http://www.pixeden.com/media/k2/galleries/44/003-metal-and-carbon-fiber-pattern-background-texture.jpg');
+
+        &.red {
+          color: red;
+          box-shadow: inset 0 1px 1px red, 0 0 25px red;
+        }
+
+        &.green {
+          color: green;
+          box-shadow: inset 0 1px 1px red, 0 0 25px red;
+        }
+
+        button {
+          font-size: 0.2em;
+          background: none;
+          border: none;
+
+          &:active, &:focus, &:hover {
+            outline: none;
+            box-shadow: none;
+          }
+        }
       }
+    }
 
+    #draft_favorite_section {
+      ul {
+        li.item {
+          display: inline-block;
+          width: 6em;
+          padding: 10px 5px;
+          margin: 5px 3px;
+          border: 2px solid #91BED4;
+          border-radius: 10px;
+          background-color: rgba(255, 255, 255, 0.8);
+          font-size: 1.1em;
+          font-weight: bold;
+          text-align: center;
+          cursor: pointer;
+          color: $darker_1;
+
+          small {
+            font-size: 0.7em;
+          }
+
+          button {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            font-size: 1.2em;
+            color: $contrast;
+
+            &:hover, &:active, &:focus {
+              outline: none;
+              text-shadow: none;
+            }
+          }
+        }
+      }
+    }
+
+    #draft_team_section {
       accordion {
         .panel-group {
           border: none;
@@ -155,9 +180,12 @@
     }
 
     #draft_table_section {
+      .pagination li {
+        margin: 0;
+      }
+
       #draft-filter {
-        padding-left: 0;
-        margin-top: 3em;
+        padding-left: 5px !important;
 
         input {
           border-radius: 0;
@@ -225,6 +253,7 @@
 
           table {
             border: none;
+            background: $lighter_2;
 
             thead {
               th {
@@ -274,6 +303,69 @@
             }
           }
         }
+      }
+    }
+  }
+
+  #online_players {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    accordion {
+      .panel-group {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+
+        .panel {
+          border: none;
+          border-radius: 0;
+        }
+
+        .panel-heading {
+          padding: 5px 15px;
+          background: $contrast;
+          color: #fff;
+          border: none;
+          border-radius: 0;
+
+          .panel-title {
+            font-size: 1em;
+
+            a {
+              &:active, &:focus, &:hover {
+                text-decoration: none;
+                outline: none;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+
+        .panel-body {
+          padding: 5px 10px;
+
+          ul {
+            list-style-type: none;
+            padding: 0;
+
+            li {
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+
+    .user-status {
+      font-size: 1.1em;
+
+      &.user-status-online {
+        color: limegreen;
+      }
+      &.user-status-offline {
+        color: red;
       }
     }
   }

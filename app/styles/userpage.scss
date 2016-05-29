@@ -1,0 +1,61 @@
+@import "navbar";
+
+#user_page {
+  #leagues_title {
+    color: white;
+    margin: 6em 0 1.5em 0;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      background-color: rgba(255, 255, 255, 0.7);
+      color: #000;
+      border: 1.5px solid $contrast;
+      display: inline-block;
+      width: 48%;
+
+      &:nth-child(even) {
+        margin-left: 1%;
+      }
+      &:nth-child(odd) {
+         margin-right: 1%;
+       }
+
+      a {
+        color: #000;
+
+        &:hover, &:focus, &:active {
+          text-decoration: none;
+          box-shadow: none;
+          outline: none;
+          color: #000;
+        }
+
+        &:hover {
+
+        }
+
+        .league_info {
+          .league_name {
+            text-align: center;
+            color: $contrast;
+          }
+
+          p {
+            font-size: 1.1em;
+
+            span {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}
