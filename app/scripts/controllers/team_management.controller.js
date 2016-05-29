@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('TeamCtrl', function($scope) {
+app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srvAuth) {
+  /*
   $scope.goalkeeper = [
   { 'id': 'P01', 'title': 'GK1', 'drag': true }
   ];
@@ -29,17 +30,44 @@ app.controller('TeamCtrl', function($scope) {
   { 'id': 'P16', 'title': 'FW3', 'drag': true },
   { 'id': 'P17', 'title': 'FW4', 'drag': true },
   { 'id': 'P18', 'title': 'FW5', 'drag': true }
-  ];
+  ];*/
+  function toDragable(player, playerDescription) { return { 'id': player, 'title': playerDescription, 'drag': true };}
+
+  $scope.goalkeeper = [];
+  $scope.defense = [];
+  $scope.midfield = [];
+  $scope.forward = [];
+  $scope.bench = [];
+
+  $http({
+    method: "GET",
+    url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/players'
+  }).success(function(players) {
+  $http({
+    method: "GET",
+    url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/team?id='+$stateParams.id,
+    headers: {'Authorization': srvAuth.login.token}
+  }).success(function(team) {
+    console.log(team);
+
+    for(var player in team.players) {
+      $scope.bench.push(toDragable(player, [player].name + " - " + players[player].positionDescription));
+    }
+
+  }).error(function (error) {console.log(error);});
+  }).error(function (error) {console.log(error);});
+
+
 
   $scope.playersOnField = function(){
     return $scope.goalkeeper.length + $scope.defense.length + $scope.midfield.length + $scope.forward.length;
-    
+
   }
-  
+
   // Goalkeeper
   $scope.gk_rest = {
     accept: function() {
-      console.log($scope.playersOnField());
+      //console.log($scope.playersOnField());
       if ($scope.goalkeeper.length >= 1) {
         return false;
       } else {
