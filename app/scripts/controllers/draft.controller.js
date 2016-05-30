@@ -38,12 +38,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     method: 'GET',
     url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
   }).success(function (players) {
-  // GET Me
-  $http({
-    method: 'GET',
-    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
-    headers: {'Authorization': srvAuth.login.token}
-  }).success(function (me) {
   // GET League
   $http({
     method: 'GET',
@@ -52,7 +46,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   }).success(function (league) {
 
     $scope.players = players;
-    $scope.me = me;
+    $scope.me = srvAuth.login.user;
     $scope.league = league;
     $scope.updateLists();
 
@@ -60,7 +54,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
     $scope.ws.$open();
 
-    if($scope.league.creator === $scope.me.id_string) $scope.owner = true;
+    if($scope.league.creator === $scope.me) $scope.owner = true;
 
     $scope.ws.$on('$open', function() {
       if ($scope.ws != null) {
@@ -109,7 +103,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       $scope.state='closed';
     });
 
-  }).error(function(data) { console.log(data)});
   }).error(function(data) { console.log(data)});
   }).error(function(data) { console.log(data)});
 
