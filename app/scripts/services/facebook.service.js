@@ -33,7 +33,7 @@ app.run(function ($rootScope, $window, srvAuth) {
 
 
 // Create a authentication service
-app.factory('srvAuth', function ($rootScope, $state, $cookies, $sessionStorage, $http) {
+app.factory('srvAuth', function ($rootScope, $state, $cookies, $http) {
 
   var service = {};
   service.login = null;
