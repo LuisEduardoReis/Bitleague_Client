@@ -31,13 +31,14 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
   { 'id': 'P17', 'title': 'FW4', 'drag': true },
   { 'id': 'P18', 'title': 'FW5', 'drag': true }
   ];*/
-  function toDragable(player, playerDescription) { return { 'id': player, 'title': playerDescription, 'drag': true };}
+  function toDragable(player) { return { 'id': player.data_id, 'title': player.name + " - " + player.positionDescription, 'drag': true };}
 
   $scope.goalkeeper = [];
   $scope.defense = [];
   $scope.midfield = [];
   $scope.forward = [];
   $scope.bench = [];
+  $scope.other = [];
 
   $http({
     method: "GET",
@@ -50,9 +51,31 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
   }).success(function(team) {
     console.log(team);
 
-    for(var player in team.players) {
-      $scope.bench.push(toDragable(player, [player].name + " - " + players[player].positionDescription));
+    if (team.hasTeam) {
+      for(var player in team.lineup) {
+        var playerObj = players[player];
+        delete team.players[player];
+        switch(team.lineup[player]) {
+          case 1: $scope.goalkeeper.push(toDragable(playerObj)); break;
+          case 2: $scope.defense.push(toDragable(playerObj)); break;
+          case 3: $scope.midfield.push(toDragable(playerObj)); break;
+          case 4: $scope.forward.push(toDragable(playerObj)); break;
+        }
+      }
+      for(var player in team.bench) {
+        delete team.players[player];
+        $scope.bench.push(toDragable(players[player]));
+      }
     }
+
+    for(var player in team.players) {
+      $scope.other.push(toDragable(players[player]));
+    }
+
+    /*
+    for(var player in team.players) {
+      $scope.bench.push(toDragable(players[player]));
+    }*/
 
   }).error(function (error) {console.log(error);});
   }).error(function (error) {console.log(error);});
