@@ -21,12 +21,11 @@ var app = angular
     'ui.sortable',
     'ui.bootstrap',
     'ngWebsocket',
-    'angularUtils.directives.dirPagination',
-    'ngStorage'
+    'angularUtils.directives.dirPagination'
   ]);
 
 
-app.run(function ($rootScope, $sessionStorage, srvAuth, $state) {
+app.run(function ($rootScope, srvAuth, $state) {
   $rootScope.user = { id: -1 };
 
   $rootScope.setUser = function(user) { $rootScope.user = user; };
