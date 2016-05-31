@@ -4,7 +4,7 @@
     <ul class = "nav">
       <li>
         <a class = "list-group-item" ui-sref = "league({id:league_id})">
-          <p>League: {{league.name}}</p>
+          <p>League: {{league.name}}</p>         
           Users:
           <ul>
             <li ng-repeat="user in league.users">{{user.name}}</li>
@@ -36,6 +36,9 @@
           <i class = "fa fa-comment-o"></i>
           Team
         </a>
+      </li>
+      <li>
+        <p> Invite Link: http://{{redirect_location}}/#/join_league/{{league_id}} </p>
       </li>
     </ul>
   </div>
