@@ -1,0 +1,16 @@
+<div class="col-sm-4" ng-repeat="matchday in league.matches">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr><th> Team </th></tr>
+      <tr><th> W </th></tr>
+      <tr><th> D </th></tr>
+      <tr><th> L </th></tr>
+      <tr><th> P </th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in league.users">
+        <td><center>{{user.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

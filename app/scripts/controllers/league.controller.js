@@ -53,6 +53,14 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
   ];
 });
 
+app.controller('BoardCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
+
+  $scope.me = srvAuth.login.user;
+
+  
+
+});
+
 app.controller('NewLeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
 
 

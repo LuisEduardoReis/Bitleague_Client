@@ -31,10 +31,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
-    .state('league.table', {
-      url: '/table',
-      templateUrl: 'views/table.view.html',
-      controller: 'TableCtrl'
+    .state('league.board', {
+      url: '/board',
+      templateUrl: 'views/board.view.html',
+      controller: 'BoardCtrl',
     })
     .state('league.players', {
       url: '/players',

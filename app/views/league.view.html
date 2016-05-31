@@ -44,5 +44,27 @@
 <pre>{{league}}</pre>
   -->
 
-  <div class = "col-sm-9" ui-view></div>
+  <div class = "col-sm-9" ui-view>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th> <center>Team </th>
+          <th> <center>W </th>
+          <th> <center>D </th>
+          <th> <center>L </th>
+          <th> <center>P </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in league.users">
+          <td><center>{{user.name}}</td>
+          <td><center>0</td>
+          <td><center>0</td>
+          <td><center>0</td>
+          <td><center>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
