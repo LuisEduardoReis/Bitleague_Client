@@ -33,17 +33,23 @@ app.run(function ($rootScope, $window, srvAuth) {
 
 
 // Create a authentication service
-app.factory('srvAuth', function ($rootScope, $state, $http) {
+app.factory('srvAuth', function ($rootScope, $state, $cookies, $http) {
 
   var service = {};
   service.login = null;
   service.res = null;
   service.user = {id: -1}
 
+  if($cookies.getObject('facebook_login'))
+  {
+    service = $cookies.getObject('facebook_login');
+    $rootScope.user = service.user;
+  }
+
+
   service.watchLoginChange = function () {
     FB.Event.subscribe('auth.authResponseChange', function (res) {
       if (res.status == 'connected') {
-        //console.log(res);
         service.res = res;
         service.getUserInfo();
       }
@@ -68,8 +74,8 @@ app.factory('srvAuth', function ($rootScope, $state, $http) {
         access_token: service.res.authResponse.accessToken
       }
     }).success(function (data) {
-      //console.log(data);
-      service.login = data;
+      service.login = data;     
+      $cookies.putObject('facebook_login', service);
     });
   }
 
