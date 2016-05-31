@@ -38,12 +38,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     method: 'GET',
     url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
   }).success(function (players) {
-  // GET Me
-  $http({
-    method: 'GET',
-    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
-    headers: {'Authorization': srvAuth.login.token}
-  }).success(function (me) {
   // GET League
   $http({
     method: 'GET',
@@ -52,15 +46,16 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   }).success(function (league) {
 
     $scope.players = players;
-    $scope.me = me;
+    $scope.me = srvAuth.login.user;
     $scope.league = league;
+    $scope.timer = league.turn_time;
     $scope.updateLists();
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
     $scope.ws.$open();
 
-    if($scope.league.creator === $scope.me.id_string) $scope.owner = true;
+    if($scope.league.creator === $scope.me) $scope.owner = true;
 
     $scope.ws.$on('$open', function() {
       if ($scope.ws != null) {
@@ -70,11 +65,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
+      //console.log(res);
 
       if (res == 'close') {
-        $scope.state = 'closed'
+        $scope.state = 'closed';
         $scope.ws.$close();
-        $scope.ws = null;
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
@@ -111,7 +106,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   }).error(function(data) { console.log(data)});
   }).error(function(data) { console.log(data)});
-  }).error(function(data) { console.log(data)});
 
 
   $scope.incrementTeamDisplay = function(player_id)
@@ -140,7 +134,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.my_picks = [];
     for(var i = 1; i <= 4; i++) $scope.my_picks[i] = [];
     for(var i in $scope.picks) {
-      if ($scope.picks[i].user_id == $scope.me.id_string) {
+      if ($scope.picks[i].user_id == $scope.me) {
         var position = $scope.players[$scope.picks[i].player_id].position;
         $scope.my_picks[position].push($scope.picks[i].player_id);
       }

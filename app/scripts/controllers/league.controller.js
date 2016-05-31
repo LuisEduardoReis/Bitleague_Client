@@ -16,8 +16,30 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       var elem = $scope.league.users[i];
       $scope.usernames[elem.id] = elem.name;
     }
+    //console.log($scope.league);
   });
 
+  $scope.me = srvAuth.login.user;
+
+  $scope.readyToDraft = function () {
+    $http({
+      method: 'POST',
+      url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/invite/close',
+      headers: {"Authorization":srvAuth.login.token},
+      data: {"id": $scope.league_id}
+    }).success(function(){ $state.go($state.current, {}, {reload: true});})
+      .error(function(data) { alert(data)});
+  };
+
+  $scope.delete = function () {
+    $http({
+      method: 'DELETE',
+      url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/league?id='+$scope.league_id,
+      headers: {"Authorization":srvAuth.login.token},
+    }).success(function(data){ $state.go("userpage"); })
+      .error(function(data) { console.log(data)});
+
+  }
 
   $scope.games = [
     { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
