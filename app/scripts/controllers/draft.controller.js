@@ -48,6 +48,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.players = players;
     $scope.me = srvAuth.login.user;
     $scope.league = league;
+    $scope.timer = league.turn_time;
     $scope.updateLists();
 
     $scope.state = 'connecting';
@@ -64,11 +65,11 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
+      //console.log(res);
 
       if (res == 'close') {
-        $scope.state = 'closed'
+        $scope.state = 'closed';
         $scope.ws.$close();
-        $scope.ws = null;
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
@@ -133,7 +134,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.my_picks = [];
     for(var i = 1; i <= 4; i++) $scope.my_picks[i] = [];
     for(var i in $scope.picks) {
-      if ($scope.picks[i].user_id == $scope.me.id_string) {
+      if ($scope.picks[i].user_id == $scope.me) {
         var position = $scope.players[$scope.picks[i].player_id].position;
         $scope.my_picks[position].push($scope.picks[i].player_id);
       }

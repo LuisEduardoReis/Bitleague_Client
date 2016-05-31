@@ -16,21 +16,19 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       var elem = $scope.league.users[i];
       $scope.usernames[elem.id] = elem.name;
     }
-    console.log($scope.league);
+    //console.log($scope.league);
   });
 
   $scope.me = srvAuth.login.user;
 
   $scope.readyToDraft = function () {
-    /*$http({
+    $http({
       method: 'POST',
       url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/invite/close',
       headers: {"Authorization":srvAuth.login.token},
       data: {"id": $scope.league_id}
-    }).success(function(data){ })
-      .error(function(data) { alert(data)});*/
-
-    $state.go("draft",{id: $scope.league_id});
+    }).success(function(){ $state.go($state.current, {}, {reload: true});})
+      .error(function(data) { alert(data)});
   };
 
   $scope.delete = function () {

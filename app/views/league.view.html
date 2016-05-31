@@ -10,7 +10,6 @@
             <li ng-repeat="user in league.users">{{user.name}}</li>
           </ul>
           <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
-          <button ng-click="readyToDraft()">Ready to draft</button>
           <button ng-show="me == league.creator" ng-click="delete()">Delete</button>
         </a>
       </li>
@@ -21,19 +20,19 @@
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".matches" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".matches" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Matches
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".players" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".players" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Players
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".team" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".team" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Team
         </a>
