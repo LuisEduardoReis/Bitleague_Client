@@ -5,6 +5,8 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
   $scope.league = null;
   $scope.league_id = $stateParams.id;
   $scope.user = srvAuth.login.user;
+  $scope.redirect_location = location.host;
+
   $http({
     method: 'GET',
     url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
@@ -106,3 +108,44 @@ app.controller('JoinLeagueCtrl', function ($rootScope, $scope, $stateParams, $ht
   }
 
 });
+
+app.controller('JoinLeagueUrlCtrl', function ($rootScope, $cookies, $route, $scope, $state, $stateParams, $http) {
+
+  if($cookies.getObject('facebook_login'))
+  {
+    var facebook_login = $cookies.getObject('facebook_login');
+
+    var temp = location.href.split("/");
+    var league_id = temp[temp.length-1];
+
+    $http({
+          method: 'POST',
+          url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league/user',
+          headers: {'Authorization': facebook_login.login.token},
+          data: {
+            id: league_id
+          }
+
+        }).success(function(data) {        
+          if($cookies.getObject("redirect_value"))
+            $cookies.remove("redirect_value");
+          $state.go("userpage");
+        }).error(function(data) {
+          alert("It seems that due to some shenanigans your request has failed, returning such data:" + data);
+        });
+
+  }
+  else
+  {
+    var redirect_value = new Array();
+    redirect_value.location = "/joinLeague";
+    redirect_value.id = $routeParams.id;
+    $cookies.putObject("redirect_value", redirect_value);
+    //$location.path("/login");
+    window.location.href = '/index.html';
+  }
+
+
+
+});
+

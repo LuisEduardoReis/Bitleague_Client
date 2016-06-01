@@ -76,6 +76,13 @@ app.factory('srvAuth', function ($rootScope, $state, $cookies, $http) {
     }).success(function (data) {
       service.login = data;     
       $cookies.putObject('facebook_login', service);
+
+      if($cookies.getObject("redirect_value"))
+      {
+        var redirect_value = $cookies.getObject("redirect_value");
+        window.location.href = redirect_value.location + redirect_value.id;
+          //$location.path(redirect_value.location + redirect_value.id);
+      }
     });
   }
 
