@@ -109,22 +109,27 @@ app.controller('JoinLeagueCtrl', function ($rootScope, $scope, $stateParams, $ht
 
 });
 
-app.controller('JoinLeagueUrlCtrl', function ($rootScope, $cookies, $routeParams, $scope, $stateParams, $http) {
+app.controller('JoinLeagueUrlCtrl', function ($rootScope, $cookies, $route, $scope, $state, $stateParams, $http) {
 
   if($cookies.getObject('facebook_login'))
   {
     var facebook_login = $cookies.getObject('facebook_login');
 
+    var temp = location.href.split("/");
+    var league_id = temp[temp.length-1];
+
     $http({
           method: 'POST',
           url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league/user',
-          headers: {'Authorization': facebook_login.token},
+          headers: {'Authorization': facebook_login.login.token},
           data: {
-            id: $routeParams.id
+            id: league_id
           }
 
-        }).success(function(data) {
-          window.location.href = "/userpage" ;
+        }).success(function(data) {        
+          if($cookies.getObject("redirect_value"))
+            $cookies.remove("redirect_value");
+          $state.go("userpage");
         }).error(function(data) {
           alert("It seems that due to some shenanigans your request has failed, returning such data:" + data);
         });
