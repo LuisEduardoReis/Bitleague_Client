@@ -25,8 +25,10 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
   $scope.ws = null;
 
+  $scope.turn = 0;
   $scope.timer = 30;
   $scope.currentUser = 'noone';
+  $scope.userQueue = [];
 
   $scope.$on("$destroy", function() {
     if ($scope.ws != null) $scope.ws.$close();
@@ -65,7 +67,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
-      //console.log(res);
+      console.log(res);
 
       if (res == 'close') {
         $scope.state = 'closed';
@@ -73,7 +75,9 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
+        $scope.turn = res.data.turn;
         $scope.timer = res.data.timeLeft;
+        $scope.userQueue = res.data.userQueue;
         $scope.currentUser = res.data.currentUser;
       } else
       if(res.event == 'user_list') {
