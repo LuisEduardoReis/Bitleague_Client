@@ -17,6 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/',
       templateUrl: 'views/home.view.html',
+      controller: 'LoginCtrl',
       data: {
         requireLogin: false,
         requireLogout: false
