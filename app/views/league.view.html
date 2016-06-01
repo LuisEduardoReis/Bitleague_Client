@@ -4,32 +4,41 @@
     <ul class = "nav">
       <li>
         <a class = "list-group-item" ui-sref = "league({id:league_id})">
-          League: {{league.name}}
+          <p>League: {{league.name}}</p>         
+          Users:
+          <ul>
+            <li ng-repeat="user in league.users">{{user.name}}</li>
+          </ul>
+          <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
+          <button ng-show="me == league.creator" ng-click="delete()">Delete</button>
         </a>
       </li>
       <li>
-        <a ng-if = "league.state != 'DURATION'" ui-sref = "draft({id:league_id})" class = "list-group-item">
+        <a ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'" ui-sref = "draft({id:league_id})" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Draft
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".matches" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".matches" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Matches
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".players" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".players" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Players
         </a>
       </li>
       <li>
-        <a ui-sref-active = "active" ui-sref = ".team" class = "list-group-item">
+        <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = ".team" class = "list-group-item">
           <i class = "fa fa-comment-o"></i>
           Team
         </a>
+      </li>
+      <li>
+        <p> Invite Link: http://{{redirect_location}}/#/join_league/{{league_id}} </p>
       </li>
     </ul>
   </div>

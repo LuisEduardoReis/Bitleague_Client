@@ -3,19 +3,33 @@
     <h1>My Leagues</h1>
   </div>
 
-  <ul class = "col-xs-12">
+  <ul class = "col-xs-8">
     <li ng-repeat = "league in leagues" class = "">
       <a ui-sref = "league({id:league.id})">
         <div class = "col-xs-12 no-padding">
-          <img src = "../images/liganos.jpg" class = "col-sm-7 no-padding" alt = "league logo"/>
-          <div class = "league_info col-sm-5">
-            <h3 class = "league_name">{{league.name}}</h3>
+          <img src = "../images/liganos.jpg" class = "col-sm-12 no-padding" alt = "league logo"/>
+        </div>
+      </a>
+      <center>
+      <div class = "col-xs-12 no-padding">
+        <div class = "league_info">
+          <h3 class = "league_name">
+            <a ui-sref = "league({id:league.id})">{{league.name}}</a>
+            &nbsp;
+            <button class="btn btn-warning" ng-click = "delete_league(league.id)"> <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+          </h3>
+          <a ui-sref = "league({id:league.id})">
             <p><span>Started: </span>Yes</p>
             <p><span>Number of Teams: </span>4</p>
             <p><span>Current Position: </span>3th</p>
-          </div>
+          </a>
         </div>
-      </a>
+      </div>
     </li>
   </ul>
+
+  <div class = "col-xs-4">
+    <button type="button" class="btn btn-primary" ui-sref="new_league">Create a league</button>
+    <button type="button" class="btn btn-primary" ui-sref="join_league">Join a league</button>
+  </div>
 </div>

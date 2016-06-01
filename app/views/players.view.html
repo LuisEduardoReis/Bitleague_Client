@@ -18,14 +18,11 @@
 
           <br>
           <tabset >
-            <tab index="0" heading="Todos">
+            <tab index="0" heading="All">
               <table class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
-                    <th ng-click="sortTable('game_team')">Game Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='game_team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
                     <th ng-click="sortTable('position')">Position
                       <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
@@ -40,7 +37,6 @@
 
                 <tbody>
                   <tr  pagination-id="0" dir-paginate="player in filtered = (players | filter:{positionDescription: ''} |filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
-                    <td>{{ player.game_team }}</td>
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
@@ -53,14 +49,11 @@
                 </div>
               </div>
             </tab>
-            <tab index="1" heading="Guarda-redes">
+            <tab index="1" heading="Goalkeeper">
               <table class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
-                    <th ng-click="sortTable('game_team')">Game Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='game_team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
                     <th ng-click="sortTable('position')">Position
                       <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
@@ -73,8 +66,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <tr  pagination-id="1" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Guarda-redes'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
-                      <td>{{ player.game_team }}</td>
+                <tr  pagination-id="1" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Goalkeeper'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -87,14 +79,11 @@
                 </div>
               </div>
             </tab>
-            <tab index="2" heading="Defesas">
+            <tab index="2" heading="Defender">
               <table class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
-                    <th ng-click="sortTable('game_team')">Game Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='game_team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
                     <th ng-click="sortTable('position')">Position
                       <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
@@ -107,8 +96,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <tr  pagination-id="2" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Defesa'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
-                      <td>{{ player.game_team }}</td>
+                <tr  pagination-id="2" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Defender'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                       <td>{{ player.positionDescription }}</td>
                       <td>{{ player.name }}</td>
                       <td>{{ player.team }}</td>
@@ -121,14 +109,11 @@
                 </div>
               </div>
             </tab>
-            <tab index="3" heading="Médio">
+            <tab index="3" heading="Midfielder">
               <table class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
-                    <th ng-click="sortTable('game_team')">Game Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='game_team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
                     <th ng-click="sortTable('position')">Position
                       <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
@@ -142,8 +127,7 @@
                 </thead>
 
                 <tbody>
-                  <tr  pagination-id="3" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Médio'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
-                    <td>{{ player.game_team }}</td>
+                  <tr  pagination-id="3" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Midfielder'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
@@ -156,14 +140,11 @@
                 </div>
               </div>
             </tab>
-            <tab index="4" heading="Avançado">
+            <tab index="4" heading="Forward">
               <table class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
-                    <th ng-click="sortTable('game_team')">Game Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='game_team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
                     <th ng-click="sortTable('position')">Position
                       <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
@@ -177,40 +158,7 @@
                 </thead>
 
                 <tbody>
-                  <tr pagination-id="4" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Avançado'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
-                    <td>{{ player.game_team }}</td>
-                    <td>{{ player.positionDescription }}</td>
-                    <td>{{ player.name }}</td>
-                    <td>{{ player.team }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div >
-                <div class="text-center">
-                  <dir-pagination-controls pagination-id="4" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="../scripts/dirPagination.tpl.html"></dir-pagination-controls>
-                </div>
-              </div>
-            </tab>
-            <tab index="5" heading="Free Agent">
-              <table class="table table-bordered table-striped">
-
-                <thead>
-                  <tr>
-                    <th ng-click="sortTable('position')">Position
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='position'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
-                    <th ng-click="sortTable('name')">Player
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
-                    <th ng-click="sortTable('team')">Team
-                      <span class="glyphicon sort-icon" ng-show="sortKey=='team'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr pagination-id="5" dir-paginate="player in filtered = (players | filter:{game_team: 'Free Agent'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
+                  <tr pagination-id="4" dir-paginate="player in filtered = (players | filter:{positionDescription: 'Forward'} | filter:q | orderBy:sortKey:reverse) | itemsPerPage: pageSize" current-page="currentPage" >
                     <td>{{ player.positionDescription }}</td>
                     <td>{{ player.name }}</td>
                     <td>{{ player.team }}</td>
