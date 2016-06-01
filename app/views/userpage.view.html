@@ -1,35 +1,29 @@
 <div class = "container" id = "user_page">
   <div class = "col-xs-12" id = "leagues_title">
+    <button type = "button" class = "btn btn-primary league_btn" ui-sref = "new_league"><i class="fa fa-plus"></i> Create a league</button>
+    <button type = "button" class = "btn btn-primary league_btn" ui-sref = "join_league"><i class="fa fa-link"></i> Join a league</button>
     <h1>My Leagues</h1>
   </div>
 
-  <ul class = "col-xs-8">
+  <ul class = "col-xs-12">
     <li ng-repeat = "league in leagues" class = "">
       <a ui-sref = "league({id:league.id})">
         <div class = "col-xs-12 no-padding">
-          <img src = "../images/liganos.jpg" class = "col-sm-12 no-padding" alt = "league logo"/>
+          <img src = "../images/liganos.jpg" class = "col-xs-7 no-padding" alt = "league logo"/>
+          <div class = "col-xs-5">
+            <div class = "league_info">
+              <h3 class = "league_name">{{league.name}}&nbsp;</h3>
+              <p><span>Started: </span>Yes</p>
+              <p><span>Number of Teams: </span>4</p>
+              <p><span>Current Position: </span>3th</p>
+            </div>
+
+            <button class = "btn btn-sm btn-warning delete_league_btn" ng-click = "delete_league(league.id)"  tooltip-placement = "top" tooltip = "Delete League">
+              <i class = "fa fa-trash-o" aria-hidden = "true"></i>
+            </button>
+          </div>
         </div>
       </a>
-      <center>
-      <div class = "col-xs-12 no-padding">
-        <div class = "league_info">
-          <h3 class = "league_name">
-            <a ui-sref = "league({id:league.id})">{{league.name}}</a>
-            &nbsp;
-            <button class="btn btn-warning" ng-click = "delete_league(league.id)"> <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
-          </h3>
-          <a ui-sref = "league({id:league.id})">
-            <p><span>Started: </span>Yes</p>
-            <p><span>Number of Teams: </span>4</p>
-            <p><span>Current Position: </span>3th</p>
-          </a>
-        </div>
-      </div>
     </li>
   </ul>
-
-  <div class = "col-xs-4">
-    <button type="button" class="btn btn-primary" ui-sref="new_league">Create a league</button>
-    <button type="button" class="btn btn-primary" ui-sref="join_league">Join a league</button>
-  </div>
 </div>

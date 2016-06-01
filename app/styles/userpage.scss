@@ -1,6 +1,20 @@
-@import "navbar";
+@import "home";
 
 #user_page {
+  .league_btn {
+    background: $darker_1;
+    border-color: $darker_1;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-bottom: 1em;
+
+    &:hover, &:active, &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
   #leagues_title {
     color: white;
     margin: 6em 0 1.5em 0;
@@ -19,6 +33,20 @@
       border: 1.5px solid $contrast;
       display: inline-block;
       width: 48%;
+
+      .delete_league_btn {
+        float: right;
+        background: $contrast;
+        border-color: $contrast;
+        box-shadow: none;
+        outline: none;
+
+        &:hover, &:active, &:focus {
+          background: $contrast;
+          outline: none;
+          box-shadow: none;
+        }
+      }
 
       &:nth-child(even) {
         margin-left: 1%;
