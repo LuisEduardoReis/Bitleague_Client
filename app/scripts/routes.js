@@ -17,6 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/',
       templateUrl: 'views/home.view.html',
+      controller: 'HomeCtrl',
       data: {
         requireLogin: false,
         requireLogout: false
@@ -39,17 +40,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('league.players', {
       url: '/players',
       templateUrl: 'views/players.view.html',
-      controller: 'PlayersCtrl',
+      controller: 'PlayersCtrl'
     })
     .state('league.matches', {
       url: '/matches',
       templateUrl: 'views/matches.view.html',
-      controller: 'LeagueCtrl',
+      controller: 'LeagueCtrl'
     })
     .state('league.team', {
       url: '/team',
       templateUrl: 'views/team.view.html',
-      controller: 'TeamCtrl',
+      controller: 'TeamCtrl'
     })
     .state('userpage', {
       url: '/userpage',
@@ -106,6 +107,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     });
   $urlRouterProvider.otherwise('/');
-})
+});
 
 
