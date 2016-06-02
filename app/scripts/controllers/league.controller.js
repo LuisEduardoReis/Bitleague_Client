@@ -19,6 +19,13 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       $scope.usernames[elem.id] = elem.name;
     }
 
+    /* split league matches into array chunks with length 6 */
+    $scope.matchesSlides = [];
+    var copy = $scope.league.matches;
+    for (var i = 0, len = copy.length; i < len; i += 3) {
+      $scope.matchesSlides.push(copy.slice(i, i + 3));
+    }
+
     // Calculate match results
     $scope.results = {};
     for(var i in $scope.league.users) {
