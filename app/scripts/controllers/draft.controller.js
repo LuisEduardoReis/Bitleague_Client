@@ -66,7 +66,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
-      console.log(res);
+      //console.log(res);
 
       if (res == 'close') {
         $scope.state = 'closed';
