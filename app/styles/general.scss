@@ -96,3 +96,59 @@ h2 {
 .clear {
   clear: both;
 }
+
+.my-table {
+  border: none;
+  background: $lighter_2;
+
+  thead {
+    tr {
+      border: none !important;
+
+      th {
+        cursor: pointer;
+        background: $contrast;
+        color: white;
+        border: none !important;
+
+        span {
+          float: right;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr:nth-of-type(odd) {
+      background: $lighter_1;
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: none !important;
+      }
+    }
+
+    td {
+      border-color: $lighter_1;
+      border-left: none !important;
+      border-right: none !important;
+
+      button {
+        border: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        background-color: $darker_2;
+        color: white;
+        padding: 1px 7px;
+
+        @include transition(all, 0.3s, ease-in-out);
+
+        &:hover, &:focus {
+          background-color: $contrast;
+          outline: none;
+        }
+      }
+    }
+  }
+}

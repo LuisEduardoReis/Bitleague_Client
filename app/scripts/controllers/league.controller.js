@@ -126,7 +126,7 @@ app.controller('JoinLeagueUrlCtrl', function ($rootScope, $cookies, $route, $sco
             id: league_id
           }
 
-        }).success(function(data) {        
+        }).success(function(data) {
           if($cookies.getObject("redirect_value"))
             $cookies.remove("redirect_value");
           $state.go("userpage");

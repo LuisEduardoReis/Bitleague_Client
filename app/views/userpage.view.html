@@ -1,13 +1,15 @@
 <div class = "container" id = "user_page">
   <div class = "col-xs-12" id = "leagues_title">
-    <button type = "button" class = "btn btn-primary league_btn" ui-sref = "new_league"><i class="fa fa-plus"></i> Create a league</button>
-    <button type = "button" class = "btn btn-primary league_btn" ui-sref = "join_league"><i class="fa fa-link"></i> Join a league</button>
-    <h1>My Leagues</h1>
+    <h1 class="col-xs-6">My Leagues</h1>
+    <div class="col-xs-6 text-right">
+      <button type = "button" class = "btn btn-primary league_btn" ui-sref = "new_league"><i class="fa fa-plus"></i> Create a league</button>
+      <button type = "button" class = "btn btn-primary league_btn" ui-sref = "join_league"><i class="fa fa-link"></i> Join a league</button>
+    </div>
   </div>
 
   <ul class = "col-xs-12">
     <li ng-repeat = "league in leagues" class = "">
-      <a ui-sref = "league({id:league.id})">
+      <a ui-sref = "league.menu({id:league.id})">
         <div class = "col-xs-12 no-padding">
           <img src = "../images/liganos.jpg" class = "col-xs-7 no-padding" alt = "league logo"/>
           <div class = "col-xs-5">

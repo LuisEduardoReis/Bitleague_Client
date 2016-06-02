@@ -1,12 +1,21 @@
+<div class="col-xs-12 back_to_menu">
+  <a ui-sref = "league.menu({id:league_id})">
+    <i class = "fa fa-arrow-circle-o-left"></i>
+  </a>
+</div>
+
 <div class="col-sm-4" ng-repeat="matchday in league.matches">
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped my-table matchday-table">
     <thead>
-      <tr><th colspan="2" > <center> Matchday</th></tr>
+      <tr>
+        <th colspan="3" class="text-center" >Match Day</th>
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="match in matchday">
-        <td><center>{{usernames[match.homePlayer]}}</td>
-        <td><center>{{usernames[match.awayPlayer]}}</td>
+        <td class="text-center">{{usernames[match.homePlayer]}}</td>
+        <td class="text-center"><small>vs</small></td>
+        <td class="text-center">{{usernames[match.awayPlayer]}}</td>
       </tr>
     </tbody>
   </table>

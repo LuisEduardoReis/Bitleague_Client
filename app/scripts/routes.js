@@ -32,10 +32,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
-    .state('league.table', {
-      url: '/table',
-      templateUrl: 'views/table.view.html',
-      controller: 'TableCtrl'
+    .state('league.menu', {
+      url: '/menu',
+      templateUrl: 'views/league_menu.view.html',
+      controller: 'LeagueCtrl'
+    })
+    .state('league.board', {
+      url: '/board',
+      templateUrl: 'views/leading_board.view.html',
+      controller: 'LeagueCtrl'
     })
     .state('league.players', {
       url: '/players',
