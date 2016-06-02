@@ -1,0 +1,53 @@
+<div class = "col-xs-12 big_title">
+  <h1 class="col-xs-6">{{league.name}}</h1>
+</div>
+
+<ul class = "col-xs-12" id="league_menu">
+  <!--<li>
+	<a class = "list-group-item" ui-sref = "league({id:league_id})">
+	  <p>League: {{league.name}}</p>
+	  Users:
+	  <ul>
+		<li ng-repeat="user in league.users">{{user.name}}</li>
+	  </ul>
+	  <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
+	</a>
+  </li>-->
+  <!--<li>
+	<a ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'" ui-sref = "draft({id:league_id})" class = "list-group-item">
+	  <i class = "fa fa-comment-o"></i>
+	  Draft
+	</a>
+  </li>-->
+  <li class="text-center">
+    <a ng-if = "league.state == 'DURATION'" ui-sref = "league.board" class = "list-group-item">
+      <i class = "fa fa-area-chart"></i>
+      <br/>
+      <span>Leading Board</span>
+    </a>
+  </li>
+  <li class="text-center">
+    <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = "league.matches" class = "list-group-item">
+      <i class = "fa fa-users"></i>&nbsp;&nbsp;<i class = "fa fa-times"></i>&nbsp;&nbsp;<i class = "fa fa-users"></i>
+      <br/>
+      <span>Matches</span>
+    </a>
+  </li>
+  <li class="text-center">
+    <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = "league.players" class = "list-group-item">
+      <i class = "fa fa-users"></i>
+      <br/>
+      <span>Players</span>
+    </a>
+  </li>
+  <li class="text-center">
+    <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = "league.team" class = "list-group-item">
+      <i class = "fa fa-users"></i>
+      <br/>
+      <span>My Team</span>
+    </a>
+  </li>
+  <!--<li>
+	<p> Invite Link: http://{{redirect_location}}/#/join_league/{{league_id}} </p>
+  </li>-->
+</ul>

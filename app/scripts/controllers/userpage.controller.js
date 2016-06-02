@@ -1,7 +1,6 @@
 'use strict';
 
 app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http, srvAuth, $state) {
-
   $scope.user_json = null;
 
   $http({

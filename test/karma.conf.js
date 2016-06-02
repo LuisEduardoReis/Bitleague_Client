@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
       'bower_components/ng-websocket/ng-websocket.js',
       'bower_components/angular-utils-pagination/dirPagination.js',
+      'bower_components/angular-scroll-animate/dist/angular-scroll-animate.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

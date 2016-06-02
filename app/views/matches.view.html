@@ -1,25 +1,28 @@
-<div class="col-sm-5" ng-repeat="matchday in league.matches track by $index">
-  <table class="table table-bordered table-striped">
+<div class="col-xs-12 back_to_menu big_title">
+  <h1>
+    <a ui-sref = "league.menu({id:league_id})" tooltip-placement = "top" tooltip = "Back to Menu">
+      <i class = "fa fa-arrow-circle-o-left"></i>
+    </a>
+    <span>Matches Calendar</span>
+  </h1>
+</div>
+
+<div class="col-sm-4" ng-repeat="matchday in league.matches track by $index">
+  <table class="table table-bordered table-striped my-table matchday-table">
     <thead>
-      <tr><th colspan="2" > <center> Matchday {{$index+1}} </center></th></tr>
+      <tr>
+        <th colspan="3" class="text-center" >Match Day {{$index+1}}</th>
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="match in matchday">
 
-          <td ng-if="match.result == 0"><center>{{usernames[match.homePlayer]}}</center></td>
-          <td ng-if="match.result == 0"><center>{{usernames[match.awayPlayer]}}</center></td>
+        <td ng-if="match.result == 0 || match.result == 2" class="text-center">{{usernames[match.homePlayer]}}</td>
+		    <td ng-if="match.result == 1 || match.result == 3" class="text-center"><strong>{{usernames[match.homePlayer]}}</strong></td>
+		    <td class="text-center"><small>vs</small></td>
+		    <td ng-if="match.result == 0 || match.result == 1" class="text-center">{{usernames[match.awayPlayer]}}</td>
+		    <td ng-if="match.result == 2 || match.result == 3" class="text-center"><strong>{{usernames[match.awayPlayer]}}</strong></td>
 
-
-          <td ng-if="match.result == 1"><strong><center>{{usernames[match.homePlayer]}}</center></strong></td>
-          <td ng-if="match.result == 1"><center>{{usernames[match.awayPlayer]}}</center></td>
-
-
-          <td ng-if="match.result == 2"><center>{{usernames[match.homePlayer]}}</center></td>
-          <td ng-if="match.result == 2"><strong><center>{{usernames[match.awayPlayer]}}</center></strong></td>
-
-          <td ng-if="match.result == 3"><strong><center>{{usernames[match.homePlayer]}}</center></strong></td>
-          <td ng-if="match.result == 3"><strong><center>{{usernames[match.awayPlayer]}}</center></strong></td>
-        </div>
       </tr>
     </tbody>
   </table>

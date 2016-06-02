@@ -50,6 +50,7 @@ app.factory('srvAuth', function ($rootScope, $state, $cookies, $http) {
   service.watchLoginChange = function () {
     FB.Event.subscribe('auth.authResponseChange', function (res) {
       if (res.status == 'connected') {
+        //console.log(res);
         service.res = res;
         service.getUserInfo();
       }
@@ -74,8 +75,15 @@ app.factory('srvAuth', function ($rootScope, $state, $cookies, $http) {
         access_token: service.res.authResponse.accessToken
       }
     }).success(function (data) {
-      service.login = data;     
+      service.login = data;
       $cookies.putObject('facebook_login', service);
+
+      if($cookies.getObject("redirect_value"))
+      {
+        var redirect_value = $cookies.getObject("redirect_value");
+        window.location.href = redirect_value.location + redirect_value.id;
+          //$location.path(redirect_value.location + redirect_value.id);
+      }
     });
   }
 

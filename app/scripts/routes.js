@@ -17,7 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/',
       templateUrl: 'views/home.view.html',
-      controller: 'LoginCtrl',
+      controller: 'HomeCtrl',
       data: {
         requireLogin: false,
         requireLogout: false
@@ -32,25 +32,30 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogout: false
       }
     })
+    .state('league.menu', {
+      url: '/menu',
+      templateUrl: 'views/league_menu.view.html',
+      controller: 'LeagueCtrl'
+    })
     .state('league.board', {
       url: '/board',
-      templateUrl: 'views/board.view.html',
-      controller: 'BoardCtrl',
+      templateUrl: 'views/leading_board.view.html',
+      controller: 'LeagueCtrl'
     })
     .state('league.players', {
       url: '/players',
       templateUrl: 'views/players.view.html',
-      controller: 'PlayersCtrl',
+      controller: 'PlayersCtrl'
     })
     .state('league.matches', {
       url: '/matches',
       templateUrl: 'views/matches.view.html',
-      controller: 'LeagueCtrl',
+      controller: 'LeagueCtrl'
     })
     .state('league.team', {
       url: '/team',
       templateUrl: 'views/team.view.html',
-      controller: 'TeamCtrl',
+      controller: 'TeamCtrl'
     })
     .state('userpage', {
       url: '/userpage',
@@ -87,6 +92,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogin: true,
         requireLogout: false
       }
+    }).state('join_league_url', {
+      url: '/join_league/:id',
+      templateUrl: 'views/join_leagueurl.view.html',
+      controller: 'JoinLeagueUrlCtrl',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
     })
     .state('admin', {
       url: '/admin',
@@ -107,6 +120,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     });
   $urlRouterProvider.otherwise('/');
-})
+});
 
 

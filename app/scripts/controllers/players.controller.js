@@ -3,7 +3,7 @@
 app.controller('PlayersCtrl', function ($rootScope, $scope, $stateParams, $http, $websocket, srvAuth) {
   $scope.pls = [];
   $scope.currentPage = 1;
-  $scope.pageSize = 8;
+  $scope.pageSize = 10;
   $scope.sortKey = 'position';
 
   $scope.sortTable = function(keyname) {
