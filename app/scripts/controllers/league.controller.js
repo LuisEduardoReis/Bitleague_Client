@@ -18,7 +18,6 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       var elem = $scope.league.users[i];
       $scope.usernames[elem.id] = elem.name;
     }
-    console.log($scope.league);
 
     // Calculate match results
     $scope.results = {};

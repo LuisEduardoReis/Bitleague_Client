@@ -53,7 +53,9 @@
     tbody {
       tr {
         td {
-          &:nth-child(2) {
+          padding: 8px 0;
+
+          &.versus_column {
             color: $contrast;
           }
         }

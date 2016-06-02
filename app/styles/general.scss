@@ -189,3 +189,22 @@ h2 {
     margin-top: 9em;
   }
 }
+
+.popover {
+  width: 100% !important;
+  border-radius: 0;
+  border-color: $lighter_1;
+  background: $lighter_1;
+
+  .arrow {
+    &:after {
+      border-bottom-color: $lighter_1 !important;
+    }
+  }
+}
+
+.popover-inner {
+  .popover-content {
+    padding: 8px 3px
+  }
+}
