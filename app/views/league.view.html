@@ -10,7 +10,6 @@
             <li ng-repeat="user in league.users">{{user.name}}</li>
           </ul>
           <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
-          <button ng-show="me == league.creator" ng-click="delete()">Delete</button>
         </a>
       </li>
       <li>
@@ -57,12 +56,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="user in league.users">
-          <td><center>{{user.name}}</td>
-          <td><center>0</td>
-          <td><center>0</td>
-          <td><center>0</td>
-          <td><center>0</td>
+        <tr ng-repeat="result in resultsArray">
+          <td><center>{{result.name}}</center></td>
+          <td><center>{{results[result.user][0]}}</center></td>
+          <td><center>{{results[result.user][1]}}</center></td>
+          <td><center>{{results[result.user][2]}}</center></td>
+          <td><center>{{results[result.user][3]}}</center></td>
+
         </tr>
       </tbody>
     </table>

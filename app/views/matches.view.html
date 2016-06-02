@@ -1,12 +1,25 @@
-<div class="col-sm-5" ng-repeat="matchday in league.matches">
+<div class="col-sm-5" ng-repeat="matchday in league.matches track by $index">
   <table class="table table-bordered table-striped">
     <thead>
-      <tr><th colspan="2" > <center> Matchday</th></tr>
+      <tr><th colspan="2" > <center> Matchday {{$index+1}} </center></th></tr>
     </thead>
     <tbody>
       <tr ng-repeat="match in matchday">
-        <td><center>{{usernames[match.homePlayer]}}</td>
-        <td><center>{{usernames[match.awayPlayer]}}</td>
+
+          <td ng-if="match.result == 0"><center>{{usernames[match.homePlayer]}}</center></td>
+          <td ng-if="match.result == 0"><center>{{usernames[match.awayPlayer]}}</center></td>
+
+
+          <td ng-if="match.result == 1"><strong><center>{{usernames[match.homePlayer]}}</center></strong></td>
+          <td ng-if="match.result == 1"><center>{{usernames[match.awayPlayer]}}</center></td>
+
+
+          <td ng-if="match.result == 2"><center>{{usernames[match.homePlayer]}}</center></td>
+          <td ng-if="match.result == 2"><strong><center>{{usernames[match.awayPlayer]}}</center></strong></td>
+
+          <td ng-if="match.result == 3"><strong><center>{{usernames[match.homePlayer]}}</center></strong></td>
+          <td ng-if="match.result == 3"><strong><center>{{usernames[match.awayPlayer]}}</center></strong></td>
+        </div>
       </tr>
     </tbody>
   </table>

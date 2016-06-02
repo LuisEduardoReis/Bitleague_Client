@@ -16,7 +16,41 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
       var elem = $scope.league.users[i];
       $scope.usernames[elem.id] = elem.name;
     }
-    //console.log($scope.league);
+    console.log($scope.league);
+
+    // Calculate match results
+    $scope.results = {};
+    for(var i in $scope.league.users) {
+      $scope.results[$scope.league.users[i].id] = [0,0,0,0];
+    }
+    for(var i in $scope.league.matches) {
+      for(var j in $scope.league.matches[i]) {
+        var match = $scope.league.matches[i][j];
+        switch(match.result) {
+          case 1:
+            $scope.results[match.homePlayer][0]++;
+            $scope.results[match.homePlayer][3]+=3;
+            $scope.results[match.awayPlayer][2]++;
+            break;
+          case 2:
+            $scope.results[match.awayPlayer][0]++;
+            $scope.results[match.awayPlayer][3]+=3;
+            $scope.results[match.homePlayer][2]++;
+            break;
+          case 3:
+            $scope.results[match.homePlayer][1]++;
+            $scope.results[match.homePlayer][3]+=1;
+            $scope.results[match.awayPlayer][1]++;
+            $scope.results[match.awayPlayer][3]+=1;
+            break;
+        }
+      }
+    }
+    $scope.resultsArray = [];
+    for(var i in $scope.league.users) {
+      $scope.resultsArray[i] = {user:$scope.league.users[i].id,name:$scope.league.users[i].name, points: $scope.results[$scope.league.users[i].id][3]};
+    }
+    $scope.resultsArray.sort(function(a,b) {return b.points-a.points});
   });
 
   $scope.me = srvAuth.login.user;
@@ -41,23 +75,13 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
 
   }
 
-  $scope.games = [
-    { teamA: 'Team 1', winner: 'Team 1', teamB: 'Team 9' },
-    { teamA: 'Team 2', winner: 'Team 10', teamB: 'Team 10' },
-    { teamA: 'Team 3', winner: 'Team 11', teamB: 'Team 11' },
-    { teamA: 'Team 4', winner: 'Team 4', teamB: 'Team 12' },
-    { teamA: 'Team 5', winner: 'None', teamB: 'Team 13' },
-    { teamA: 'Team 6', winner: 'Team 6', teamB: 'Team 14' },
-    { teamA: 'Team 7', winner: 'Team 15', teamB: 'Team 15' },
-    { teamA: 'Team 8', winner: 'None', teamB: 'Team 16' }
-  ];
 });
 
 app.controller('BoardCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
 
   $scope.me = srvAuth.login.user;
 
-  
+
 
 });
 
