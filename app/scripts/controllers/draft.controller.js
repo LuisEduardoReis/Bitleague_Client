@@ -70,7 +70,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
 
       if (res == 'close') {
         $scope.state = 'closed';
-        $scope.ws.$close();
+        if ($scope.ws != null) $scope.ws.$close();
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
@@ -109,6 +109,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
 
     $scope.ws.$on('$close', function() {
       $scope.state='closed';
+      $state.go('league',{'id':$scope.league_id});
     });
 
   }).error(function(data) { console.log(data)});
