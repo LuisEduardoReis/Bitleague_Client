@@ -7,42 +7,26 @@
     <div class = "row no-side-margin" id = "roundsRow">
       <div class="col-sm-8 col-sm-offset-2 no-padding">
         <div class="col-xs-12" id="current_round">
-          <h3>Round 1/20</h3>
+          <h3>Round {{turn}}/23</h3>
         </div>
         <ul class="no-padding">
-          <li class = "item previous_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p>Paulo Lopes</p>
-              <small>Goalkeeper</small>
-            </div>
-          </li>
-          <li class = "item previous_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p>Paulo Lopes</p>
-              <small>Goalkeeper</small>
-            </div>
-          </li>
-          <li class = "item current_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p class="picking">Picking...</p>
-            </div>
-          </li>
-          <li class = "item next_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-            </div>
-          </li>
-          <li class = "item next_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
+          <li ng-repeat="user in userQueue track by $index"
+              ng-class = "{'item':true, 'previous_picker': ($index < 2), 'current_picker': ($index == 2), 'next_picker': ($index > 2)}">
+            <div ng-if="user.user_id!=null">
+              <img ng-src = "{{user_list.userpictures[user.user_id]}}" class="col-sm-5" alt = "user"/>
+              <p class="user_name col-sm-7">{{user_list.usernames[user.user_id]}}</p>
+              <div class="pickedPlayer col-xs-12">
+                <div ng-if="$index<2">
+                  <p>{{players[user.pick_id].name}}</p>
+                  <small>{{players[user.pick_id].positionDescription}}</small>
+                </div>
+                <div ng-if="$index==2">
+                  <p>Picking...</p>
+                </div>
+                <div ng-if="$index>2">
+                  <p>Next</p>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
@@ -297,7 +281,7 @@
             <accordion close-others = "oneAtATime">
               <accordion-group heading = "Goalkeepers - {{ my_picks[1].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[1]">
+                  <li ng-repeat = "pick in my_picks[1] track by $index">
                     <div ng-if = "players[pick].positionDescription == 'Goalkeeper'">
                       {{players[pick].name}}
                     </div>
@@ -306,7 +290,7 @@
               </accordion-group>
               <accordion-group heading = "Defenders - {{ my_picks[2].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[2]">
+                  <li ng-repeat = "pick in my_picks[2] track by $index">
                     <div ng-if = "players[pick].positionDescription =='Defender'">
                       {{players[pick].name}}
                     </div>
@@ -315,7 +299,7 @@
               </accordion-group>
               <accordion-group heading = "Midfielders  - {{ my_picks[3].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[3]">
+                  <li ng-repeat = "pick in my_picks[3] track by $index">
                     <div ng-if = "players[pick].positionDescription =='Midfielder'">
                       {{players[pick].name}}
                     </div>
@@ -324,7 +308,7 @@
               </accordion-group>
               <accordion-group heading = "Forwards - {{ my_picks[4].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[4]">
+                  <li ng-repeat = "pick in my_picks[4] track by $index">
                     <div ng-if = "players[pick].positionDescription =='Forward'">
                       {{players[pick].name}}
                     </div>
