@@ -178,3 +178,14 @@ h2 {
     }
   }
 }
+
+.duotone4 {
+  @include full_bg('../images/duotone4.jpg');
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin-top: -53.5px;
+
+  .big_title {
+    margin-top: 9em;
+  }
+}

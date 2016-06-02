@@ -25,7 +25,8 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/partials/header.html'" ng-if="location.path() !== '/'"></div>
 
-    <div ui-view></div>
+    <div ui-view ng-if="location.path() == '/userpage'" class="duotone4"></div>
+    <div ui-view ng-if="location.path() != '/userpage'"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

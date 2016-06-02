@@ -9,6 +9,7 @@ $digital: 'Digital-7';
   .section-title {
     color: $lighter_2;
     text-align: center;
+    margin-bottom: 2.5em;
   }
 
   #roundsRow {
@@ -82,6 +83,8 @@ $digital: 'Digital-7';
         display: table;
         margin: 0;
         padding: 0 5px;
+        min-width: 1.2em;
+        text-align: center;
         @include full_bg('http://www.pixeden.com/media/k2/galleries/44/003-metal-and-carbon-fiber-pattern-background-texture.jpg');
 
         &.red {
@@ -180,11 +183,15 @@ $digital: 'Digital-7';
     }
 
     #draft_table_section {
+      .section-title {
+        margin-bottom: 0;
+      }
+
       .pagination li {
         margin: 0;
       }
 
-      #draft-filter {
+      .draft-filter {
         padding-left: 5px !important;
 
         input {
@@ -196,7 +203,7 @@ $digital: 'Digital-7';
             box-shadow: none;
           }
 
-          &#search {
+          &.search {
             border-radius: 20px;
 
             &:focus {

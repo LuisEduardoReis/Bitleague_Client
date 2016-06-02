@@ -83,6 +83,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
       } else
       if(res.event == 'user_list') {
         $scope.user_list = res.data;
+        console.log(user_list);
       } else
       if(res.event == 'pick_list') {
         for(var i in res.data) {

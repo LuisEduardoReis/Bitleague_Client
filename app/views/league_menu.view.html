@@ -13,22 +13,22 @@
 	  <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
 	</a>
   </li>-->
-  <!--<li>
+  <li>
 	<a ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'" ui-sref = "draft({id:league_id})" class = "list-group-item">
 	  <i class = "fa fa-comment-o"></i>
 	  Draft
 	</a>
-  </li>-->
+  </li>
   <li class="text-center">
     <a ng-if = "league.state == 'DURATION'" ui-sref = "league.board" class = "list-group-item">
-      <i class = "fa fa-comment-o"></i>
+      <i class = "fa fa-area-chart"></i>
       <br/>
       <span>Leading Board</span>
     </a>
   </li>
   <li class="text-center">
     <a ng-if = "league.state == 'DURATION'" ui-sref-active = "active" ui-sref = "league.matches" class = "list-group-item">
-      <i class = "fa fa-calendar"></i>&nbsp;&nbsp;<i class = "fa fa-times"></i>&nbsp;&nbsp;<i class = "fa fa-users"></i>
+      <i class = "fa fa-users"></i>&nbsp;&nbsp;<i class = "fa fa-times"></i>&nbsp;&nbsp;<i class = "fa fa-users"></i>
       <br/>
       <span>Matches</span>
     </a>
