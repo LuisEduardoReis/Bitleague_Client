@@ -16,9 +16,10 @@ $contrast: #8C5E5A;*/
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 
 @import "mixins&variables";
+@import "_flaticon";
 
 html {
-  @include full_bg('http://www.img.lx.it.pt/~fp/cav/ano2012_2013/Trabalhos_MEEC_2012_2013/Artigo9/html/images/background/grass.jpg');
+  @include full_bg('../images/normal.jpg');
   background-attachment: fixed;
 }
 
@@ -149,6 +150,31 @@ h2 {
           outline: none;
         }
       }
+    }
+  }
+}
+
+.big_title {
+  color: white;
+  margin: 6em 0 1.5em 0;
+
+  h1 {
+    margin: 0;
+    padding-left: 0;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover, &:active, &:focus {
+        color: #fff;
+        text-shadow: none;
+        outline: none;
+      }
+    }
+
+    span {
+      padding-left: 2em;
     }
   }
 }

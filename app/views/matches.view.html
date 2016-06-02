@@ -1,7 +1,10 @@
-<div class="col-xs-12 back_to_menu">
-  <a ui-sref = "league.menu({id:league_id})">
-    <i class = "fa fa-arrow-circle-o-left"></i>
-  </a>
+<div class="col-xs-12 back_to_menu big_title">
+  <h1>
+    <a ui-sref = "league.menu({id:league_id})" tooltip-placement = "top" tooltip = "Back to Menu">
+      <i class = "fa fa-arrow-circle-o-left"></i>
+    </a>
+    <span>Matches Calendar</span>
+  </h1>
 </div>
 
 <div class="col-sm-4" ng-repeat="matchday in league.matches">
