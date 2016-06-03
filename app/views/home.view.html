@@ -3,8 +3,6 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
-          <h1 class="text-warning" id="logo"></h1>
-
           <a ng-if="!loggedIn()" class="btn btn-lg btn-primary" ui-sref="login" id="login_home_btn">Login Now</a>
           <div ng-if="loggedIn()"  id="user_home_btn">
             <a ui-sref="userpage"><img width="50" height="50" ng-src="{{user.picture.data.url}}"></a>
