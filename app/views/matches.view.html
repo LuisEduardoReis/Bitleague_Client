@@ -6,8 +6,8 @@
     <span>Matches Calendar</span>
   </h1>
 </div>
-
-<div class="col-sm-4" ng-repeat="matchday in league.matches track by $index">
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class="col-sm-4" ng-repeat="matchday in league.matches track by $index">
   <table class="table table-bordered table-striped my-table matchday-table">
     <thead>
       <tr>

@@ -4,6 +4,7 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
 
   function toDragable(player) { return { 'id': player.data_id, 'title': player.name + " - " + player.positionDescription, 'drag': true };}
 
+  $scope.loaded = false;
   $scope.goalkeeper = [];
   $scope.defense = [];
   $scope.midfield = [];
@@ -21,6 +22,7 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(team) {
     //console.log(team);
+    $scope.loaded = true;
 
     if (team.hasTeam) {
       for(var player in team.lineup) {

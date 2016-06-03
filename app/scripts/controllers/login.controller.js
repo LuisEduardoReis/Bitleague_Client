@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('LoginCtrl', function ($rootScope, $state, $scope, srvAuth) {
+app.controller('LoginCtrl', function ($rootScope, $state, $scope, srvAuth, $sessionStorage) {
 
 
   $scope.login = function () {

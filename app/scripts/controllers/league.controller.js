@@ -2,6 +2,8 @@
 
 app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, srvAuth, $state) {
 
+  $scope.loaded = false;
+
   $scope.league = null;
   $scope.league_id = $stateParams.id;
   $scope.user = srvAuth.login.user;
@@ -12,6 +14,7 @@ app.controller('LeagueCtrl', function ($rootScope, $scope, $stateParams, $http, 
     url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/league?id='+$stateParams.id,
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
+    $scope.loaded = true;
     $scope.league = data;
     $scope.usernames = {};
     for(var i in $scope.league.users) {

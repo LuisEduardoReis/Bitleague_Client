@@ -7,7 +7,9 @@
   </h1>
 </div>
 
-<ul class = "col-xs-12" id="league_menu">
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+
+<ul ng-show="loaded" class = "col-xs-12" id="league_menu">
   <li>
 	<a class = "list-group-item" ui-sref = "league({id:league_id})">
 	  <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>

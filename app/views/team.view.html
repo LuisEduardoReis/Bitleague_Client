@@ -6,7 +6,8 @@
     <span>My Team</span>
   </h1>
 </div>
-<div class = "col-xs-12">
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class = "col-xs-12">
   <h4>
     Team Formation: {{defense.length}} - {{midfield.length}} - {{forward.length}}
     <button ng-click="saveTeam()">Save</button>
