@@ -19,7 +19,10 @@
           <div class = "col-xs-5">
             <div class = "league_info">
               <h3 class = "league_name">{{league.name}}&nbsp;</h3>
-              <p><span>State: </span>{{league.state}}</p>
+              <p ng-if="league.state == 'INVITE'"><span>State: </span>Invitations Open</p>
+              <p ng-if="league.state == 'READYTODRAFT'"><span>State: </span>Preparing draft</p>
+              <p ng-if="league.state == 'DRAFTING'"><span>State: </span>Draft occurring</p>
+              <p ng-if="league.state == 'DURATION'"><span>State: </span>Ongoing</p>
               <p><span>Number of Teams: </span>{{league.numTeams}}</p>
               <!--<p><span>Current Position: </span>3th</p>-->
             </div>

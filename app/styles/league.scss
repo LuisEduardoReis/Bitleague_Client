@@ -5,6 +5,11 @@
   #league_menu {
     list-style-type: none;
 
+    &.single_option {
+      margin: 2.5em auto 0 auto !important;
+      text-align: center;
+    }
+
     li {
       background-color: rgba(255, 255, 255, 0.7);
       border: 1.5px solid $contrast;
