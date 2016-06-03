@@ -1,6 +1,8 @@
 'use strict';
 
 app.controller('PlayersCtrl', function ($rootScope, $scope, $stateParams, $http, $websocket, srvAuth) {
+  
+  $scope.loaded = false;
   $scope.pls = [];
   $scope.currentPage = 1;
   $scope.pageSize = 10;
@@ -17,7 +19,7 @@ app.controller('PlayersCtrl', function ($rootScope, $scope, $stateParams, $http,
     method: 'GET',
     url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
   }).success(function (pls) {
-
+    $scope.loaded = true;
     $scope.pls = pls;
     $scope.players = [];
     for(var i in $scope.pls) {

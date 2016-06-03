@@ -8,7 +8,8 @@
 
   <h4 class="col-xs-6 no-padding text-right"><span class="text-uppercase">Team Formation </span>{{defense.length}} - {{midfield.length}} - {{forward.length}}</h4>
 </div>
-<div class = "col-xs-12">
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class = "col-xs-12">
   <h4>
     <button ng-click="saveTeam()">Save</button>
   </h4>

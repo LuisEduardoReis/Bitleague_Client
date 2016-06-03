@@ -6,8 +6,8 @@
     <span>League Players</span>
   </h1>
 </div>
-
-<div class = "container">
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class = "container">
   <div class = "row">
     <div class = "col-lg-12">
       <tabset id = "players_available">
