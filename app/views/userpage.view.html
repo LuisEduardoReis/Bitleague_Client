@@ -14,8 +14,7 @@
   <ul class = "col-xs-12">
     <li ng-repeat = "league in leagues" class = "">
       <div class = "col-xs-12 no-padding">
-        <a ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'" ui-sref = "draft({id:league_id})">
-        <a ng-if = "league.state != 'READYTODRAFT' && league.state != 'DRAFTING'" ui-sref = "league.menu({id:league.id})">
+        <a ui-sref = "league.menu({id:league.id})">
           <img src = "../images/liganos.jpg" class = "col-xs-7 no-padding" alt = "league logo"/>
           <div class = "col-xs-5">
             <div class = "league_info">
