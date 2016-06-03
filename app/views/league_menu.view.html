@@ -8,17 +8,17 @@
 </div>
 
 <ul class = "col-xs-12" id="league_menu">
-  <!--<li>
+  <li>
 	<a class = "list-group-item" ui-sref = "league({id:league_id})">
 	  <button ng-show="me == league.creator && league.state=='INVITE'" ng-click="readyToDraft()">Ready to draft</button>
 	</a>
-  </li>-->
-  <!--<li>
+  </li>
+  <li>
 	<a ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'" ui-sref = "draft({id:league_id})" class = "list-group-item">
 	  <i class = "fa fa-comment-o"></i>
 	  Draft
 	</a>
-  </li>-->
+  </li>
   <li class="text-center" ng-if = "league.state == 'DURATION'" >
     <a ui-sref = "league.board" class = "list-group-item">
       <i class = "fa fa-area-chart"></i>

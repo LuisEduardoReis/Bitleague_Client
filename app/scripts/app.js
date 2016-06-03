@@ -22,9 +22,9 @@ var app = angular
     'ui.bootstrap',
     'ngWebsocket',
     'angularUtils.directives.dirPagination',
-    'angular-scroll-animate'
+    'angular-scroll-animate',
+    'toaster'
   ]);
-
 
 app.run(function ($rootScope, srvAuth, $state, $location) {
   $rootScope.user = { id: -1 };

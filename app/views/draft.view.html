@@ -30,6 +30,10 @@
             </div>
           </li>
         </ul>
+
+        <div id = "timer_2" class = "col-md-12 col-sm-12 col-xs-12 no-padding">
+          <h1>00:{{("0" + timer).slice(-2)}}<button ng-if = "!started && owner" ng-click = "startDraft()" tooltip-placement = "top" tooltip = "Start Draft"><i class="fa fa-play"></i></button></h1>
+        </div>
       </div>
     </div>
     <!-- /ROUNDS  -->
@@ -58,9 +62,9 @@
           <div class = "col-lg-6" id = "draft_table_section">
             <h3 class = "section-title"><span class = "fa fa-plus-circle"></span> Available Players</h3>
             <div class = "row no-side-margin">
-              <div id = "timer" class = "col-md-12 col-sm-12 col-xs-12 no-padding">
+              <!--<div id = "timer" class = "col-md-12 col-sm-12 col-xs-12 no-padding">
                 <h1 ng-class = "{'green':started,'red':!started}">{{timer}}<button ng-if = "!started && owner" ng-click = "startDraft()" tooltip-placement = "top" tooltip = "Start Draft"><i class="fa fa-play"></i></button></h1>
-              </div>
+              </div>-->
             </div>
 
             <div class = "row no-side-margin">

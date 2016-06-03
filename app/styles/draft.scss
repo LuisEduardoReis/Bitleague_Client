@@ -9,10 +9,35 @@ $digital: 'Digital-7';
   .section-title {
     color: $lighter_2;
     text-align: center;
-    margin-bottom: 2.5em;
+    margin-bottom: 1em;
   }
 
   #roundsRow {
+    #timer_2 {
+      font-family: 'Digital-7';
+      margin-bottom: 1em;
+      text-align: center;
+
+      h1 {
+        font-size: 5em;
+        display: table;
+        margin: 0 auto;
+        padding: 0 5px;
+        min-width: 2.4em;
+        text-align: center;
+        color: #fff;
+        background: $contrast;
+        box-shadow: 0px 2px 10px #fff,
+        -2px 2px 15px #fff, 2px 2px 15px #fff;
+
+        button {
+          background: none;
+          border: none;
+          font-size: 0.3em;
+        }
+      }
+    }
+
     #current_round {
       text-align: center;
 
@@ -29,6 +54,7 @@ $digital: 'Digital-7';
     ul {
       list-style-type: none;
       text-align: center;
+      margin-bottom: -5px;
 
       .item {
         display: inline-block;
@@ -184,7 +210,7 @@ $digital: 'Digital-7';
 
     #draft_table_section {
       .section-title {
-        margin-bottom: 0;
+        margin-bottom: 1em;
       }
 
       .pagination li {

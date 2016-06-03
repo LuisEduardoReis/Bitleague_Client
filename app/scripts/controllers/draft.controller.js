@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $websocket, srvAuth) {
+app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $websocket, srvAuth, toaster) {
 
   $scope.started = false;
   $scope.initialized = false;
@@ -93,6 +93,13 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
       } else
       if(res.event == 'pick') {
         $scope.picks[res.data.turn] = (res.data);
+
+        /* Popup notification */
+        var picker = $scope.user_list.usernames[res.data.user_id];
+        var picked_player = $scope.players[res.data.player_id];
+        toaster.pop("success", picker + " picked " + picked_player.name, "");
+        /* /Popup notification */
+
         $scope.updateLists();
         //$scope.incrementTeamDisplay(res.data.player_id);
         $scope.updateFavouritesLeft(res.data.player_id);

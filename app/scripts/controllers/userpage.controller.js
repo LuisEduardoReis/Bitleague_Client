@@ -9,7 +9,6 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
     $scope.leagues = data;
-    console.log($scope.leagues);
   });
 
 
