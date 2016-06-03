@@ -1,24 +1,95 @@
-<div class = "container-fluid">
-  <div class = "jumbotron">
-    <h1>Bitleague</h1>
-    <p class = "lead">
-      <img width = "350" height = "200" src = "http:\\placehold.it\350x200">
-    </p>
+<div class = "" id="home">
+  <div class="cover" id="landing_img">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1 class="text-warning" id="logo"></h1>
+          <br>
+          <br>
+          <a ng-if="!loggedIn()" class="btn btn-lg btn-primary" ui-sref="login" id="login_home_btn">Login Now</a>
+          <div ng-if="loggedIn()"  id="user_home_btn">
+            <a ui-sref="userpage"><img width="50" height="50" ng-src="{{user.picture.data.url}}"></a>
+            <a ui-sref="userpage">Hi, {{user.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section my-hidden" when-visible="animateElementLeft" when-not-visible="animateElementOut">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive" id="league_creation_img">
+        </div>
+        <div class="col-md-6">
+          <h1 class="text-primary">Cria a tua liga</h1>
+
+          <p class="text">No Bitleague tens oportunidade de criar uma liga, convidar os teus amigos para se juntarem e escolher as regras com que jogas. &nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section my-hidden" when-visible="animateElementRight" when-not-visible="animateElementOut">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="text-primary">Recruta a melhor equipa</h1>
+
+          <p class="text">Depois de criar uma liga, poderás definir a data para o Draft. O Draft
+            é a parte mais importante da época para a tua equipa, aqui escolhes, em
+            rondas alternantes, os melhores jogadores que conseguires, mas apressa-te, porque os teus adversários podem querer os mesmos jogadores que tu!</p>
+        </div>
+        <div class="col-md-6">
+          <img src="http://i.imgur.com/VdvETNA.png" class="img-responsive" id="draft_table_img">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section my-hidden" when-visible="animateElementLeft" when-not-visible="animateElementOut">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive" id="league_creation_img">
+        </div>
+        <div class="col-md-6">
+          <h1 class="text-primary">Cria a tua liga</h1>
+
+          <p class="text">No Bitleague tens oportunidade de criar uma liga, convidar os teus amigos para se juntarem e escolher as regras com que jogas. &nbsp;</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class = "row marketing">
-
-    <h4>HTML5 Boilerplate</h4>
-    <p>
-      HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-    </p>
-
-    <h4>Angular</h4>
-    <p>
-      AngularJS is a toolset for building the framework most suited to your application development.
-    </p>
-
-    <h4>Karma</h4>
-    <p>Spectacular Test Runner for JavaScript.</p>
+  <footer class="section section-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Bitleague</h1>
+          <p>&copy; 2016 <small>All rights reserved</small></p>
   </div>
+        <div class="col-sm-6">
+          <p class="text-info text-right">
+            <br>
+            <br>
+          </p>
+          <div class="row">
+            <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+              <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 hidden-xs text-right">
+              <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+              <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>

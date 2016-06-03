@@ -16,9 +16,10 @@ $contrast: #8C5E5A;*/
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 
 @import "mixins&variables";
+@import "_flaticon";
 
 html {
-  @include full_bg('http://www.img.lx.it.pt/~fp/cav/ano2012_2013/Trabalhos_MEEC_2012_2013/Artigo9/html/images/background/grass.jpg');
+  @include full_bg('../images/normal.jpg');
   background-attachment: fixed;
 }
 
@@ -35,4 +36,175 @@ body {
 .no-side-margin {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.my-hidden {
+  visibility: hidden;
+}
+
+.list {
+  list-style: none outside none;
+  margin: 10px 0 30px;
+}
+
+.item {
+  width: 200px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border: 2px solid #444;
+  border-radius: 5px;
+  background-color: #EA8A8A;
+
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ui-sortable-helper {
+  cursor: move;
+}
+
+
+/***  Extra ***/
+
+.logList {
+  margin-top: 20px;
+  width: 250px;
+  min-height: 200px;
+  padding: 5px 15px;
+  border: 5px solid #000;
+  border-radius: 15px;
+}
+
+.logList:before {
+  content: 'log';
+  padding: 0 5px;
+  position: relative;
+  top: -1.1em;
+  background-color: #FFF;
+}
+
+
+h2 {
+  text-align: center;
+}
+
+.floatleft {
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.my-table {
+  border: none;
+  background: $lighter_2;
+
+  thead {
+    tr {
+      border: none !important;
+
+      th {
+        cursor: pointer;
+        background: $contrast;
+        color: white;
+        border: none !important;
+
+        span {
+          float: right;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr:nth-of-type(odd) {
+      background: $lighter_1;
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: none !important;
+      }
+    }
+
+    td {
+      border-color: $lighter_1;
+      border-left: none !important;
+      border-right: none !important;
+
+      button {
+        border: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        background-color: $darker_2;
+        color: white;
+        padding: 1px 7px;
+
+        @include transition(all, 0.3s, ease-in-out);
+
+        &:hover, &:focus {
+          background-color: $contrast;
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.big_title {
+  color: white;
+  margin: 6em 0 1.5em 0;
+
+  h1 {
+    margin: 0;
+    padding-left: 0;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover, &:active, &:focus {
+        color: #fff;
+        text-shadow: none;
+        outline: none;
+      }
+    }
+
+    span {
+      padding-left: 2em;
+    }
+  }
+}
+
+.duotone4 {
+  @include full_bg('../images/duotone4.jpg');
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin-top: -53.5px;
+
+  .big_title {
+    margin-top: 9em;
+  }
+}
+
+.popover {
+  width: 100% !important;
+  border-radius: 0;
+  border-color: $lighter_1;
+  background: $lighter_1;
+
+  .arrow {
+    &:after {
+      border-bottom-color: $lighter_1 !important;
+    }
+  }
+}
+
+.popover-inner {
+  .popover-content {
+    padding: 8px 3px
+  }
 }

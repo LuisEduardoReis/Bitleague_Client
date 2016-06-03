@@ -1,7 +1,6 @@
 'use strict';
 
 app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http, srvAuth, $state) {
-
   $scope.user_json = null;
 
   $http({
@@ -10,6 +9,7 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(data) {
     $scope.leagues = data;
+    console.log($scope.leagues);
   });
 
 

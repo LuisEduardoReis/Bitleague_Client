@@ -1,0 +1,135 @@
+@import "draft";
+
+#league {
+  /* MENU */
+  #league_menu {
+    list-style-type: none;
+
+    li {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid $contrast;
+      display: inline-block;
+      width: 48%;
+      margin-bottom: 2%;
+
+      &:nth-child(even) {
+        margin-left: 1%;
+      }
+      &:nth-child(odd) {
+        margin-right: 1%;
+      }
+
+      a {
+        background: transparent;
+        color: #000;
+        font-size: 35px;
+        color: rgba(0, 0, 0, 0.6);
+        @include transition();
+
+        &:hover {
+          box-shadow: none;
+          outline: none;
+          color: rgba(0, 0, 0, 1);
+        }
+
+        i {
+          font-size: 3.5em;
+          margin-bottom: 0.1em;
+          margin-top: 20px;
+
+          &:nth-child(2) {
+            font-size: 0.8em;
+          }
+        }
+
+        span {
+        }
+      }
+    }
+  }
+
+  /* Matches */
+  .matchday-table {
+    tbody {
+      tr {
+        td {
+          padding: 8px 0;
+
+          &.versus_column {
+            color: $contrast;
+          }
+        }
+      }
+    }
+  }
+
+  /* Players */
+  #players_available {
+    .nav-tabs {
+      li {
+        a {
+          background-color: $darker_1;
+          color: $lighter_2;
+          border: none;
+          border-radius: 0;
+          margin-right: 0;
+          @include transition(all, 0.3s, ease);
+        }
+
+        &.active {
+          a {
+            background-color: $contrast;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      .pagination {
+        margin-top: 0;
+        border-radius: 0;
+
+        li {
+          a {
+            color: black;
+            border-radius: 0;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: $darker_2;
+          }
+
+          &.active {
+            a {
+              border-color: $darker_2;
+              background-color: $darker_2;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .draft-filter {
+    padding-left: 5px !important;
+
+    input {
+      border-radius: 0;
+      color: black;
+      border-color: black;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &.search {
+        border-radius: 20px;
+
+        &:focus {
+          box-shadow: inset 0 1px 1px $contrast, 0 0 8px $contrast;
+        }
+      }
+    }
+  }
+}

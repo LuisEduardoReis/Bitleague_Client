@@ -21,16 +21,18 @@ var app = angular
     'ui.sortable',
     'ui.bootstrap',
     'ngWebsocket',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'angular-scroll-animate'
   ]);
 
 
-app.run(function ($rootScope, srvAuth, $state) {
+app.run(function ($rootScope, srvAuth, $state, $location) {
   $rootScope.user = { id: -1 };
 
   $rootScope.setUser = function(user) { $rootScope.user = user; };
 
   $rootScope.SERVER_PORT = 9090;
 
+  $rootScope.location = $location;
 });
 
