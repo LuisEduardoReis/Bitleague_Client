@@ -180,10 +180,10 @@ app.controller('JoinLeagueUrlCtrl', function ($rootScope, $cookies, $route, $sco
   {
     var redirect_value = new Array();
     redirect_value.location = "/joinLeague";
-    redirect_value.id = $routeParams.id;
+    redirect_value.id = $stateParams.id;
     $cookies.putObject("redirect_value", redirect_value);
     //$location.path("/login");
-    window.location.href = '/index.html';
+    $state.go('home');
   }
 
 

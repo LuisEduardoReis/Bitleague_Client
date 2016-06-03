@@ -106,17 +106,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'views/admin.view.html',
       controller: 'AdminCtrl',
       data: {
-        requireLogin: false,
+        requireLogin: true,
         requireLogout: false
-      }
-    })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'views/login.view.html',
-      controller: 'LoginCtrl',
-      data: {
-        requireLogin: false,
-        requireLogout: true
       }
     });
   $urlRouterProvider.otherwise('/');
