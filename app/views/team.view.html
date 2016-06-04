@@ -14,10 +14,9 @@
 
 <h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
 <div ng-show="loaded" class = "col-xs-12" id="team_management">
-  <div class="col-xs-4" id="squad" data-drop = "true" ng-model = 'other' data-jqyoui-options = "other" jqyoui-droppable = "{multiple:true}">
+  <!--<div class="col-xs-4" id="squad" data-drop = "true" ng-model = 'other' data-jqyoui-options = "other" jqyoui-droppable = "{multiple:true}">
     <h4 class="title">Squad</h4>
     <div class="row no-side-margin">
-      <!-- Goalkeepers -->
       <div class="col-xs-6 no-padding ">
         <table class = "table table-bordered table-striped table-condensed my-table">
           <thead>
@@ -37,9 +36,7 @@
           </tbody>
         </table>
       </div>
-      <!-- /Goalkeepers -->
 
-      <!-- Defenders -->
       <div class="col-xs-6 no-padding ">
         <table class = "table table-bordered table-striped table-condensed my-table">
           <thead>
@@ -59,11 +56,9 @@
           </tbody>
         </table>
       </div>
-      <!-- /Defenders -->
     </div>
 
     <div class="row no-side-margin">
-      <!-- Midfielders -->
       <div class="col-xs-6 no-padding ">
         <table class = "table table-bordered table-striped table-condensed my-table">
           <thead>
@@ -83,9 +78,7 @@
           </tbody>
         </table>
       </div>
-      <!-- /Midfielders -->
 
-      <!-- Forwards -->
       <div class="col-xs-6 no-padding ">
         <table class = "table table-bordered table-striped table-condensed my-table">
           <thead>
@@ -105,7 +98,40 @@
           </tbody>
         </table>
       </div>
-      <!-- /Forwards -->
+    </div>
+  </div>-->
+  <div class="col-xs-4" id="squad" data-drop = "true" ng-model = 'other' data-jqyoui-options = "other" jqyoui-droppable = "{multiple:true}">
+    <h4 class="title">Squad</h4>
+    <div class="row no-side-margin">
+      <table class = "table table-bordered table-striped table-condensed my-table">
+        <thead>
+        <tr>
+          <th class = "text-center"><small>Drag to here</small></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Goalkeeper'">
+          <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+            {{ item.name }} - GK
+          </td>
+        </tr>
+        <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Defender'">
+          <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+            {{ item.name }} - DF
+          </td>
+        </tr>
+        <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Midfielder'">
+          <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+            {{ item.name }} - MD
+          </td>
+        </tr>
+        <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Forward'">
+          <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+            {{ item.name }} - FW
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="col-xs-4" id="lineup">
@@ -114,7 +140,7 @@
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'goalkeeper' data-jqyoui-options = "gk_rest" jqyoui-droppable = "{multiple:true}">
       <thead>
       <tr>
-        <th class = "text-center">Goalkeeper</th>
+        <th class = "text-center">Goalkeeper - GK</th>
       </tr>
       </thead>
       <tbody>
@@ -130,11 +156,11 @@
     </table>
     <!-- /Goalkeeper -->
 
-    <!-- Defenders -->
+    <!-- DFenders -->
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'defense' data-jqyoui-options = "df_rest" jqyoui-droppable = "{multiple:true}">
       <thead>
       <tr>
-        <th class = "text-center">Defenders</th>
+        <th class = "text-center">Defenders - DF</th>
       </tr>
       </thead>
       <tbody>
@@ -154,7 +180,7 @@
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'midfield' data-jqyoui-options = "mf_rest" jqyoui-droppable = "{multiple:true}">
       <thead>
       <tr>
-        <th class = "text-center">Midfielders</th>
+        <th class = "text-center">Midfielders - MD</th>
       </tr>
       </thead>
       <tbody>
@@ -174,7 +200,7 @@
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'forward' data-jqyoui-options = "fw_rest" jqyoui-droppable = "{multiple:true}">
       <thead>
       <tr>
-        <th class = "text-center">Forwards</th>
+        <th class = "text-center">Forwards - FW</th>
       </tr>
       </thead>
       <tbody>
@@ -190,9 +216,8 @@
     </table>
     <!-- /Forwards -->
   </div>
-  <div class="col-xs-4" id="bench" data-drop = "true" ng-model = 'bench' data-jqyoui-options = "bench" jqyoui-droppable = "{multiple:true}">
+  <!--<div class="col-xs-4" id="bench" data-drop = "true" ng-model = 'bench' data-jqyoui-options = "bench" jqyoui-droppable = "{multiple:true}">
     <h4 class="title">Bench <span>{{ bench.length }} / 7</span></h4>
-    <!-- Goalkeepers -->
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
       <thead>
       <tr>
@@ -210,9 +235,7 @@
       </tr>
       </tbody>
     </table>
-    <!-- /Goalkeepers -->
 
-    <!-- Defenders -->
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
       <thead>
       <tr>
@@ -230,9 +253,7 @@
       </tr>
       </tbody>
     </table>
-    <!-- /Defenders -->
 
-    <!-- Midfielders -->
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
       <thead>
       <tr>
@@ -250,9 +271,7 @@
       </tr>
       </tbody>
     </table>
-    <!-- /Midfielders -->
 
-    <!-- Forwards -->
     <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
       <thead>
       <tr>
@@ -270,6 +289,37 @@
       </tr>
       </tbody>
     </table>
-    <!-- /Forwards -->
+  </div>-->
+  <div class="col-xs-4" id="bench" data-drop = "true" ng-model = 'bench' data-jqyoui-options = "bench" jqyoui-droppable = "{multiple:true}">
+    <h4 class="title">Bench <span>{{ bench.length }} / 7</span></h4>
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
+      <thead>
+      <tr>
+        <th class = "text-center"><small>Drag to here</small></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Goalkeeper'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }} - GK
+        </td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Defender'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }} - DF
+        </td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Midfielder'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }} - MD
+        </td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Forward'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }} - FW
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
