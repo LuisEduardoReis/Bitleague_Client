@@ -74,24 +74,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         requireLogin: true,
         requireLogout: false
       }
-    })
-    .state('new_league', {
-      url: '/new_league',
-      templateUrl: 'views/new_league.view.html',
-      controller: 'NewLeagueCtrl',
-      data: {
-        requireLogin: true,
-        requireLogout: false
-      }
-    })
-    .state('join_league', {
-      url: '/join_league',
-      templateUrl: 'views/join_league.view.html',
-      controller: 'JoinLeagueCtrl',
-      data: {
-        requireLogin: true,
-        requireLogout: false
-      }
     }).state('join_league_url', {
       url: '/join_league/:id',
       templateUrl: 'views/join_leagueurl.view.html',

@@ -5,7 +5,7 @@
       <button type = "button" class = "btn btn-primary league_btn"  data-toggle="modal" data-target="#create_league_modal">
         <i class = "fa fa-plus"></i> Create a league
       </button>
-      <button type = "button" class = "btn btn-primary league_btn" ui-sref = "join_league">
+      <button type = "button" class = "btn btn-primary league_btn"  data-toggle="modal" data-target="#join_league_modal">
         <i class = "fa fa-link"></i> Join a league
       </button>
     </div>
@@ -42,21 +42,60 @@
   </ul>
 </div>
 
+<!-- Join league Modal -->
+<div id="join_league_modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle-o"></span></button>
+        <h4 class="modal-title">Joining to a league</h4>
+      </div>
+      <div class="modal-body">
+        <form action = "" class="form-horizontal">
+          <div class="form-group">
+            <label for="league_id" class="col-sm-2 control-label">League ID</label>
+            <div class="col-sm-10">
+              <input type = "text" id="league_id" ng-model = "join_league_id" class="form-control" placeholder = "League ID">
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-default" ng-click = "joinLeague()">Join League!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Join league Modal -->
 
+<!-- Create league Modal -->
 <div id="create_league_modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">New League</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle-o"></span></button>
+        <h4 class="modal-title">Creating a new league</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
+        <form action = "" class = "form-horizontal">
+          <div class="form-group">
+            <label for="create_league_name" class="col-sm-4 control-label">League Name</label>
+            <div class="col-sm-8">
+              <input type = "text" id="create_league_name" class="form-control" ng-model = "create_league_name" placeholder = "League Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="create_league_time" class="col-sm-4 control-label">Draft Turn Time (seconds)</label>
+            <div class="col-sm-8">
+              <input type = "number" id="create_league_time" class="form-control" min="10" max="60" ng-model = "create_league_time" placeholder="10">
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-default" ng-click = "createLeague()">Create League!</button>
+          </div>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
+<!-- /Create league Modal -->
