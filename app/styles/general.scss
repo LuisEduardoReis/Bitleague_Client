@@ -208,3 +208,67 @@ h2 {
     padding: 8px 3px
   }
 }
+
+.my-modal {
+  .modal-dialog {
+    margin-top: 10%;
+
+    .modal-content {
+      border-radius: 0;
+      background: $darker_2;
+      border: none;
+      color: white;
+
+      .modal-header {
+        background: $darker_1;
+        border: none;
+        border-bottom: 2px solid $contrast;
+
+        .close {
+          margin-top: 0;
+          color: #fff;
+          text-shadow: none;
+          font-size: 1.8em;
+          opacity: 1;
+        }
+      }
+
+      .modal-body {
+
+        form {
+          .form-group {
+            .control-label {
+
+            }
+
+            input.form-control {
+              color: $darker_1;
+              border-color: $darker_1;
+              border-radius: 0;
+
+              &:focus {
+                outline: none;
+                box-shadow: none;
+              }
+            }
+
+            .btn {
+              background: $contrast;
+              border-color: $contrast;
+              box-shadow: none;
+              border-radius: 0;
+              color: #fff;
+              text-transform: uppercase;
+              margin-top: 1.2em;
+
+              &:focus,  &:active, &:hover {
+                box-shadow: none;
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
