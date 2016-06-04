@@ -223,6 +223,8 @@ h2 {
         background: $darker_1;
         border: none;
         border-bottom: 2px solid $contrast;
+        padding: 10px 15px;
+        max-height: 50px;
 
         .close {
           margin-top: 0;
@@ -268,6 +270,10 @@ h2 {
             }
           }
         }
+      }
+
+      .modal-footer {
+        border: none;
       }
     }
   }

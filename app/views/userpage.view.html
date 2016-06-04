@@ -15,7 +15,7 @@
     <li ng-repeat = "league in leagues" class = "">
       <div class = "col-xs-12 no-padding">
         <a ui-sref = "league.menu({id:league.id})">
-          <img src = "../images/liganos.jpg" class = "col-xs-7 no-padding" alt = "league logo"/>
+          <img src = "../images/league.jpg" class = "col-xs-7 no-padding" alt = "league logo"/>
           <div class = "col-xs-5">
             <div class = "league_info">
               <h3 class = "league_name">{{league.name}}&nbsp;</h3>
@@ -33,7 +33,7 @@
           <button class = "btn btn-sm btn-warning delete_league_btn" ng-click = "delete_league(league.id)" tooltip-placement = "top" tooltip = "Delete League">
             <i class = "fa fa-trash-o" aria-hidden = "true"></i>
           </button>
-          <button popover-placement="bottom" popover = "http://{{redirect_location}}/#/join_league/{{league.id}}" class = "btn btn-sm btn-warning delete_league_btn" >
+          <button ng-click="shareLink(league.name, league.id)" class = "btn btn-sm btn-warning delete_league_btn" >
             <i class = "fa fa-share" aria-hidden = "true"></i>
           </button>
         </div>
@@ -99,3 +99,24 @@
   </div>
 </div>
 <!-- /Create league Modal -->
+
+<!-- Share Link Modal -->
+<div id="share_link_modal" class="modal fade my-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle-o"></span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <h4 class="col-xs-12 text-center">Share this link with your friends</h4>
+        <br/>
+        <p class="col-xs-12 text-center" id="league_link"></p>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Share Link Modal -->

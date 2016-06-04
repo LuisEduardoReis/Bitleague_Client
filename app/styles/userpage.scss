@@ -31,6 +31,7 @@
         border-color: $contrast;
         box-shadow: none;
         outline: none;
+        margin-top: 2em;
 
         &:hover, &:active, &:focus {
           background: $contrast;

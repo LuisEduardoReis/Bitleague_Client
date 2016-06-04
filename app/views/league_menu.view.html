@@ -8,7 +8,7 @@
 </div>
 
 <h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
-<ul ng-show="loaded" class = "" ng-class="{'single_option col-xs-4':(league.state=='INVITE' || league.state=='READYTODRAFT' || league.state=='DRAFTING')}" id="league_menu">
+<ul ng-show="loaded" class = "" ng-class="{'invite-state col-xs-4':(league.state=='INVITE'), 'col-xs-12':league.state!='INVITE', 'single_option text-center':(league.state=='READYTODRAFT' || league.state=='DRAFTING')}" id="league_menu">
   <li class="text-center" ng-show="me == league.creator && league.state=='INVITE'">
     <a class = "list-group-item pointer" style="cursor: pointer" ng-click="readyToDraft()">
       <i class = "fa fa-lock"></i>
