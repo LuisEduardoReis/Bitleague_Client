@@ -2,7 +2,7 @@
 
 app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srvAuth) {
 
-  function toDragable(player) { return { 'id': player.data_id, 'title': player.name + " - " + player.positionDescription, 'drag': true };}
+  function toDragable(player) { return { 'id': player.data_id, 'name': player.name, 'position': player.positionDescription, 'drag': true };}
 
   $scope.loaded = false;
   $scope.goalkeeper = [];
@@ -21,7 +21,6 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
     url: 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT+'/api/team?id='+$stateParams.id,
     headers: {'Authorization': srvAuth.login.token}
   }).success(function(team) {
-    //console.log(team);
     $scope.loaded = true;
 
     if (team.hasTeam) {
@@ -124,4 +123,14 @@ app.controller('TeamCtrl', function($rootScope, $scope, $http, $stateParams, srv
       }
     }
   };
+  
+  /* Utils */
+  $scope.playersPerPosition = function (players, position) {
+    for(var i = 0; i<players.length; i++) {
+      if(players[i].position == position)
+        return 1;
+    }
+    
+    return 0;
+  }
 });

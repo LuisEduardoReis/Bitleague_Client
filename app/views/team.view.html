@@ -1,79 +1,275 @@
 <div class="col-xs-12 back_to_menu big_title">
-  <h1 class="col-xs-6 no-padding">
+  <h1 class="col-xs-4 no-padding">
     <a ui-sref = "league.menu({id:league_id})" tooltip-placement = "top" tooltip = "Back to Menu">
       <i class = "fa fa-arrow-circle-o-left"></i>
     </a>
     <span>My Team</span>
   </h1>
 
-  <h4 class="col-xs-6 no-padding text-right"><span class="text-uppercase">Team Formation </span>{{defense.length}} - {{midfield.length}} - {{forward.length}}</h4>
-</div>
-<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
-<div ng-show="loaded" class = "col-xs-12">
-  <h4>
-    <button ng-click="saveTeam()">Save</button>
+  <h4 class="col-xs-8 no-padding text-center">
+    <span class="text-uppercase">Team Formation </span>{{defense.length}} - {{midfield.length}} - {{forward.length}}
+    <button class="btn" id="save_btn" ng-click="saveTeam()"><i class="fa fa-save"></i>Save</button>
   </h4>
-  <div>
-    <div class = "col-lg-12">
-      <div class = 'contentWrapper ng-cloak col-lg-7'>
-        <div class = 'content'>
-          <div class = "row-fluid">
-            <h3>Lineup</h3>
-            <ul class = "thumbnails">
+</div>
 
-              <li class = "span3" style = 'margin-left:10px;'>
-                <div class = "thumbnail" data-drop = "true" ng-model = 'goalkeeper' data-jqyoui-options = "gk_rest" jqyoui-droppable = "{multiple:true}">
-                  <div class = "caption">
-                    <div class = "btn btn-info btn-draggable" ng-repeat = "item in goalkeeper" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "goalkeeper" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-                  </div>
-                </div>
-              </li>
-
-              <li class = "span3" style = 'margin-left:10px;'>
-                <div class = "thumbnail" data-drop = "true" ng-model = 'defense' data-jqyoui-options = "df_rest" jqyoui-droppable = "{multiple:true}">
-                  <div class = "caption">
-                    <div class = "btn btn-info btn-draggable" ng-repeat = "item in defense" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "defense" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-                  </div>
-                </div>
-              </li>
-
-              <li class = "span3" style = 'margin-left:10px;'>
-                <div class = "thumbnail" data-drop = "true" ng-model = 'midfield' data-jqyoui-options = "mf_rest" jqyoui-droppable = "{multiple:true}">
-                  <div class = "caption">
-                    <div class = "btn btn-info btn-draggable" ng-repeat = "item in midfield" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "midfield" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-                  </div>
-                </div>
-              </li>
-
-              <li class = "span3" style = 'margin-left:10px;'>
-                <div class = "thumbnail" data-drop = "true" ng-model = 'forward' data-jqyoui-options = "fw_rest" jqyoui-droppable = "{multiple:true}">
-                  <div class = "caption">
-                    <div class = "btn btn-info btn-draggable" ng-repeat = "item in forward" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "forward" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class = "col-xs-12" id="team_management">
+  <div class="col-xs-4" id="squad" data-drop = "true" ng-model = 'other' data-jqyoui-options = "other" jqyoui-droppable = "{multiple:true}">
+    <h4 class="title">Squad</h4>
+    <div class="row no-side-margin">
+      <!-- Goalkeepers -->
+      <div class="col-xs-6 no-padding ">
+        <table class = "table table-bordered table-striped table-condensed my-table">
+          <thead>
+          <tr>
+            <th class = "text-center">Goalkeepers</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="playersPerPosition(other, 'Goalkeeper') == 0">
+            <td class="text-center text-muted"><small>Drag to here</small></td>
+          </tr>
+          <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Goalkeeper'">
+            <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+              {{ item.name }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+      <!-- /Goalkeepers -->
 
-      <div class = "navbar-inner col-lg-5">
-        <h3>Benchers</h3>
-        <div class = "thumbnail" data-drop = "true" ng-model = 'bench' data-jqyoui-options = "bench" jqyoui-droppable = "{multiple:true}">
-          <div class = "caption">
-            <div class = "btn btn-info btn-draggable" ng-repeat = "item in bench" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "bench" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-          </div>
-        </div>
+      <!-- Defenders -->
+      <div class="col-xs-6 no-padding ">
+        <table class = "table table-bordered table-striped table-condensed my-table">
+          <thead>
+          <tr>
+            <th class = "text-center">Defenders</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="playersPerPosition(other, 'Defender') == 0">
+            <td class="text-center text-muted"><small>Drag to here</small></td>
+          </tr>
+          <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Defender'">
+            <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+              {{ item.name }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class = "navbar-inner col-lg-5">
-        <h3>Other</h3>
-        <div class = "thumbnail" data-drop = "true" ng-model = 'other' data-jqyoui-options = "other" jqyoui-droppable = "{multiple:true}">
-          <div class = "caption">
-            <div class = "btn btn-info btn-draggable" ng-repeat = "item in other" ng-show = "item.title" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">{{item.title}}</div>
-          </div>
-        </div>
-      </div>
+      <!-- /Defenders -->
     </div>
+
+    <div class="row no-side-margin">
+      <!-- Midfielders -->
+      <div class="col-xs-6 no-padding ">
+        <table class = "table table-bordered table-striped table-condensed my-table">
+          <thead>
+          <tr>
+            <th class = "text-center">Midfielders</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="playersPerPosition(other, 'Midfielder') == 0">
+            <td class="text-center text-muted"><small>Drag to here</small></td>
+          </tr>
+          <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Midfielder'">
+            <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+              {{ item.name }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /Midfielders -->
+
+      <!-- Forwards -->
+      <div class="col-xs-6 no-padding ">
+        <table class = "table table-bordered table-striped table-condensed my-table">
+          <thead>
+          <tr>
+            <th class = "text-center">Forwards</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-if="playersPerPosition(other, 'Forward') == 0">
+            <td class="text-center text-muted"><small>Drag to here</small></td>
+          </tr>
+          <tr class="" ng-repeat = "item in other" ng-if = "item.position == 'Forward'">
+            <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+              {{ item.name }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /Forwards -->
+    </div>
+  </div>
+  <div class="col-xs-4" id="lineup">
+    <h4 class="title">Lineup <span>{{ playersOnField() }} / 11</span></h4>
+    <!-- Goalkeeper -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'goalkeeper' data-jqyoui-options = "gk_rest" jqyoui-droppable = "{multiple:true}">
+      <thead>
+      <tr>
+        <th class = "text-center">Goalkeeper</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="goalkeeper.length == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in goalkeeper" ng-if = "item.name">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "goalkeeper" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Goalkeeper -->
+
+    <!-- Defenders -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'defense' data-jqyoui-options = "df_rest" jqyoui-droppable = "{multiple:true}">
+      <thead>
+      <tr>
+        <th class = "text-center">Defenders</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="defense.length == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in defense" ng-if = "item.name">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "defense" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Defenders -->
+
+    <!-- Midfielders -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'midfield' data-jqyoui-options = "mf_rest" jqyoui-droppable = "{multiple:true}">
+      <thead>
+      <tr>
+        <th class = "text-center">Midfielders</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="midfield.length == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class=""  ng-repeat = "item in midfield" ng-if = "item.name">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "midfield" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Midfielders -->
+
+    <!-- Forwards -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin" data-drop = "true" ng-model = 'forward' data-jqyoui-options = "fw_rest" jqyoui-droppable = "{multiple:true}">
+      <thead>
+      <tr>
+        <th class = "text-center">Forwards</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="forward.length == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class=""  ng-repeat = "item in forward" ng-if = "item.name">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "forward" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Forwards -->
+  </div>
+  <div class="col-xs-4" id="bench" data-drop = "true" ng-model = 'bench' data-jqyoui-options = "bench" jqyoui-droppable = "{multiple:true}">
+    <h4 class="title">Bench <span>{{ bench.length }} / 7</span></h4>
+    <!-- Goalkeepers -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
+      <thead>
+      <tr>
+        <th class = "text-center">Goalkeepers</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="playersPerPosition(bench, 'Goalkeeper') == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Goalkeeper'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Goalkeepers -->
+
+    <!-- Defenders -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
+      <thead>
+      <tr>
+        <th class = "text-center">Defenders</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="playersPerPosition(bench, 'Defender') == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Defender'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Defenders -->
+
+    <!-- Midfielders -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
+      <thead>
+      <tr>
+        <th class = "text-center">Midfielders</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="playersPerPosition(bench, 'Midfielder') == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Midfielder'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Midfielders -->
+
+    <!-- Forwards -->
+    <table class = "table table-bordered table-striped table-condensed my-table no-bottom-margin">
+      <thead>
+      <tr>
+        <th class = "text-center">Forwards</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="playersPerPosition(bench, 'Forward') == 0">
+        <td class="text-center text-muted"><small>Drag to here</small></td>
+      </tr>
+      <tr class="" ng-repeat = "item in bench" ng-if = "item.position == 'Forward'">
+        <td class="text-center webkit-grabbing moz-grabbing" data-drag = "{{item.drag}}" data-jqyoui-options = "{revert: 'invalid'}" ng-model = "other" jqyoui-draggable = "{index: {{$index}},animate:true}">
+          {{ item.name }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /Forwards -->
   </div>
 </div>

@@ -137,4 +137,54 @@
       }
     }
   }
+
+  /* Team Management */
+  #save_btn {
+    background: $darker_1;
+    border-color: $darker_1;
+    color: white;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+    float: right;
+
+    i {
+      padding-right: 8px;
+    }
+
+    &:focus, &:hover, &:active {
+      outline: none;
+    }
+  }
+
+  #team_management {
+    .title {
+      color: white;
+
+      span {
+        float: right;
+      }
+    }
+
+    #squad {
+      .row {
+        div:last-child {
+          table {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    #lineup {
+      padding-right: 0;
+      padding-left: 15px;
+    }
+
+    .my-table {
+      &.no-bottom-margin {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
