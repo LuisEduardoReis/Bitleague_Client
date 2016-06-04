@@ -8,14 +8,15 @@
 </div>
 
 <h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
-<ul ng-show="loaded" class = "col-xs-12" ng-class="{'single_option':(league.state=='INVITE' || league.state=='READYTODRAFT' || league.state=='DRAFTING')}" id="league_menu">
+<ul ng-show="loaded" class = "" ng-class="{'single_option col-xs-4':(league.state=='INVITE' || league.state=='READYTODRAFT' || league.state=='DRAFTING')}" id="league_menu">
   <li class="text-center" ng-show="me == league.creator && league.state=='INVITE'">
-    <a class = "list-group-item pointer" ng-click="readyToDraft()">
+    <a class = "list-group-item pointer" style="cursor: pointer" ng-click="readyToDraft()">
       <i class = "fa fa-lock"></i>
       <br/>
       <span>Close Invitations</span>
     </a>
   </li>
+
   <li class="text-center" ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'">
     <a ui-sref = "draft({id:league_id})" class = "list-group-item">
       <i class = "fa fa-table"></i>
@@ -23,6 +24,7 @@
       <span>Draft</span>
     </a>
   </li>
+
   <li class="text-center" ng-if = "league.state == 'DURATION'" >
     <a ui-sref = "league.board" class = "list-group-item">
       <i class = "fa fa-area-chart"></i>
@@ -52,3 +54,27 @@
     </a>
   </li>
 </ul>
+
+
+<div class="col-xs-8 current_teams" ng-show="me == league.creator && league.state=='INVITE'">
+  <div class="col-xs-4 no-padding current_team" ng-repeat="user in league.users">
+    <div class="col-xs-3 no-padding">
+      <img ng-if="user.picture" width="50" height="50" src = "{{ user.picture }}" alt = ""/>
+      <img ng-if="!user.picture" width="50" height="50" src = "../images/avatar.jpg" alt = ""/>
+    </div>
+    <h5 class="col-xs-9">{{ user.name }}</h5>
+  </div>
+</div>
+
+
+<div class="col-xs-12 current_teams" ng-show="me != league.creator && league.state=='INVITE'">
+  <div class="col-xs-3 current_team" ng-repeat="user in league.users">
+    <div class="col-xs-3 no-padding">
+      <img ng-if="user.picture" width="50" height="50" src = "{{ user.picture }}" alt = ""/>
+      <img ng-if="!user.picture" width="50" height="50" src = "../images/avatar.jpg" alt = ""/>
+    </div>
+    <h5 class="col-xs-9">{{ user.name }}</h5>
+  </div>
+
+  <h3 class=" col-xs-12 text-center">League accepting players! <br/> Invite your friends now!</h3>
+</div>
