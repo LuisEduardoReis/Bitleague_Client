@@ -93,7 +93,7 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http
   /* Share Link */
   $scope.shareLink = function (league_name, league_id) {
     var modal = $('#share_link_modal');
-    var url = 'http://'+window.location.hostname+':'+$rootScope.SERVER_PORT + "/#/join_league/" + league_id;
+    var url = 'http://'+window.location.hostname+':'+window.location.port + "/#/join_league/" + league_id;
     modal.find('.modal-title').html(league_name);
     modal.find('#league_link').html(url);
 
