@@ -30,7 +30,7 @@
         </a>
 
         <div class="text-center">
-          <button class = "btn btn-sm btn-warning delete_league_btn" ng-click = "delete_league(league.id)" tooltip-placement = "top" tooltip = "Delete League">
+          <button ng-show="me == league.creator" class = "btn btn-sm btn-warning delete_league_btn" ng-click = "delete_league(league.id)" tooltip-placement = "top" tooltip = "Delete League">
             <i class = "fa fa-trash-o" aria-hidden = "true"></i>
           </button>
           <button ng-click="shareLink(league.name, league.id)" class = "btn btn-sm btn-warning delete_league_btn" >

@@ -5,6 +5,7 @@ app.controller('UserPageCtrl', function ($scope, $rootScope, $stateParams, $http
   $scope.join_league_id = null;
   $scope.create_league_name = null;
   $scope.create_league_time = null;
+  $scope.me = srvAuth.login.user;
 
   $scope.getLeagues = function () {
     $http({
