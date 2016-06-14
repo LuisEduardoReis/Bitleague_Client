@@ -117,7 +117,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
 
     $scope.ws.$on('$close', function() {
       $scope.state='closed';
-      $state.go('league',{'id':$scope.league_id});
+      $state.go('league.menu',{'id':$scope.league_id});
     });
 
   }).error(function(data) { console.log(data)});

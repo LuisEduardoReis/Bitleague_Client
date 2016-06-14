@@ -7,7 +7,7 @@
     <div class = "row no-side-margin" id = "roundsRow">
       <div class="col-sm-8 col-sm-offset-2 no-padding">
         <div class="col-xs-12" id="current_round">
-          <h3>Round {{turn}}/23</h3>
+          <h3>Round {{Math.floor(turn/user_list.length)+1}}/23</h3>
         </div>
         <ul class="no-padding">
           <li ng-repeat="user in userQueue track by $index"
