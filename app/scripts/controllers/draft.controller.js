@@ -23,6 +23,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, 
   $scope.midfield = 0;
   $scope.forward = 0;
   $scope.owner = false;
+  $scope.Math = window.Math;
 
   $scope.ws = null;
 

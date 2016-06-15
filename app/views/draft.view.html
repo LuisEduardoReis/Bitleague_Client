@@ -1,13 +1,13 @@
-<p ng-if = "state=='connecting'"> Connecting to draft...</p>
-<p ng-if = "state=='loading'"> Loading...</p>
-<p ng-if = "state=='closed'"> Closed.</p>
+<h1 ng-if = "state=='connecting'" class="text-center big_title"> Connecting to draft...</h1>
+<h1 ng-if = "state=='loading'" class="text-center big_title"> Loading...</h1>
+<h1 ng-if = "state=='closed'" class="text-center big_title"> Closed.</h1>
 <div ng-if = "state=='connected'">
   <div class = "" id = "draft">
     <!-- ROUNDS  -->
     <div class = "row no-side-margin" id = "roundsRow">
       <div class="col-sm-8 col-sm-offset-2 no-padding">
         <div class="col-xs-12" id="current_round">
-          <h3>Round {{Math.floor(turn/user_list.length)+1}}/23</h3>
+          <h3>Round {{user_list.users ? Math.floor(turn/user_list.users.length)+1 : 0}}/23</h3>
         </div>
         <ul class="no-padding">
           <li ng-repeat="user in userQueue track by $index"
