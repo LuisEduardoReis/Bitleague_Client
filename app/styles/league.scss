@@ -1,0 +1,220 @@
+@import "draft";
+
+#league {
+  /* MENU */
+  #league_menu {
+    list-style-type: none;
+
+    &.single_option {
+      margin: 2.5em auto 0 auto !important;
+    }
+
+    &.invite-state {
+      margin: 2.5em auto 0 auto !important;
+
+      li {
+        width: 100%;
+        margin-right: 0 !important;
+      }
+    }
+
+    li {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid $contrast;
+      display: inline-block;
+      width: 48%;
+      margin-bottom: 2%;
+
+      &:nth-child(even) {
+        margin-left: 1%;
+      }
+      &:nth-child(odd) {
+        margin-right: 1%;
+      }
+
+      a {
+        background: transparent;
+        color: #000;
+        font-size: 35px;
+        color: rgba(0, 0, 0, 0.6);
+        @include transition();
+
+        &:hover {
+          box-shadow: none;
+          outline: none;
+          color: rgba(0, 0, 0, 1);
+        }
+
+        i {
+          font-size: 3.5em;
+          margin-bottom: 0.1em;
+          margin-top: 20px;
+
+          &:nth-child(2) {
+            font-size: 0.8em;
+          }
+        }
+
+        span {
+        }
+      }
+    }
+  }
+  .current_teams {
+    margin-top: 2.5em;
+
+    .current_team {
+      color: white;
+      text-transform: uppercase;
+      margin-bottom: 1em;
+
+      &>div, h5 {
+        background: $darker_2;
+      }
+
+      h5 {
+        margin: 0;
+        height: 50px;
+        padding-top: 15px;
+      }
+    }
+
+    &>h3 {
+      color: #fff;
+      margin-top: 3em;
+    }
+  }
+
+  /* Matches */
+  .matchday-table {
+    tbody {
+      tr {
+        td {
+          padding: 8px 0;
+
+          &.versus_column {
+            color: $contrast;
+          }
+        }
+      }
+    }
+  }
+
+  /* Players */
+  #players_available {
+    .nav-tabs {
+      li {
+        a {
+          background-color: $darker_1;
+          color: $lighter_2;
+          border: none;
+          border-radius: 0;
+          margin-right: 0;
+          @include transition(all, 0.3s, ease);
+        }
+
+        &.active {
+          a {
+            background-color: $contrast;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      .pagination {
+        margin-top: 0;
+        border-radius: 0;
+
+        li {
+          a {
+            color: black;
+            border-radius: 0;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: $darker_2;
+          }
+
+          &.active {
+            a {
+              border-color: $darker_2;
+              background-color: $darker_2;
+            }
+          }
+        }
+      }
+    }
+  }
+  .draft-filter {
+    padding-left: 5px !important;
+
+    input {
+      border-radius: 0;
+      color: black;
+      border-color: black;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &.search {
+        border-radius: 20px;
+
+        &:focus {
+          box-shadow: inset 0 1px 1px $contrast, 0 0 8px $contrast;
+        }
+      }
+    }
+  }
+
+  /* Team Management */
+  #save_btn {
+    background: $darker_1;
+    border-color: $darker_1;
+    color: white;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+    float: right;
+
+    i {
+      padding-right: 8px;
+    }
+
+    &:focus, &:hover, &:active {
+      outline: none;
+    }
+  }
+  #team_management {
+    .title {
+      color: white;
+
+      span {
+        float: right;
+      }
+    }
+
+    #squad {
+      .row {
+        div:last-child {
+          table {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    #lineup {
+      padding-right: 0;
+      padding-left: 15px;
+    }
+
+    .my-table {
+      &.no-bottom-margin {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

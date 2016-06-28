@@ -1,0 +1,41 @@
+@import "navbar";
+
+#home {
+  background: $lighter_1;;
+
+  .cover {
+    height: 100vh;
+    @include full_bg('../images/banner.png');
+
+    #login_home_btn {
+      margin-top: 60%;
+      background: $contrast;
+      color: #fff;
+      border-color: $contrast;
+      border-radius: 0;
+    }
+
+    #user_home_btn {
+      margin-top: 60%;
+      background: $contrast;
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.1em;
+
+        &:last-child{
+          padding: 5px 15px;
+        }
+      }
+    }
+  }
+
+  footer {
+    background: $darker_2;
+    color: white;
+    padding: 50px 0;
+  }
+}

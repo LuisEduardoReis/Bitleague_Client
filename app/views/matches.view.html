@@ -1,12 +1,44 @@
-<div class="col-sm-4" ng-repeat="matchday in league.matches">
-  <table class="table table-bordered table-striped">
+<div class = "col-xs-12 back_to_menu big_title">
+  <h1>
+    <a ui-sref = "league.menu({id:league_id})" tooltip-placement = "top" tooltip = "Back to Menu">
+      <i class = "fa fa-arrow-circle-o-left"></i>
+    </a>
+    <span>Matches Calendar</span>
+  </h1>
+</div>
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<div ng-show="loaded" class="col-sm-4" ng-repeat="matchday in league.matches track by $index">
+  <table class="table table-bordered table-striped my-table matchday-table">
     <thead>
-      <tr><th colspan="2" > <center> Matchday</th></tr>
+      <tr>
+        <th colspan="3" class="text-center" >Match Day {{$index+1}}</th>
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="match in matchday">
-        <td><center>{{usernames[match.homePlayer]}}</td>
-        <td><center>{{usernames[match.awayPlayer]}}</td>
+
+        <td ng-if="match.result == 0 || match.result == 2" class="text-center">
+          {{usernames[match.homePlayer]}}
+          <br/>
+          <span ng-if="match.result != 0">{{ match.homePoints }}Pts.</span>
+        </td>
+		    <td ng-if="match.result == 1 || match.result == 3" class="text-center">
+          <strong>{{usernames[match.homePlayer]}}</strong>
+          <br/>
+          <strong>{{ match.homePoints }}Pts.</strong>
+        </td>
+		    <td class="text-center versus_column"><small>vs</small></td>
+		    <td ng-if="match.result == 0 || match.result == 1" class="text-center">
+          {{usernames[match.awayPlayer]}}
+          <br/>
+          <span ng-if="match.result != 0">{{ match.awayPoints }}Pts.</span>
+        </td>
+		    <td ng-if="match.result == 2 || match.result == 3" class="text-center">
+          <strong>{{usernames[match.awayPlayer]}}</strong>
+          <br/>
+          <strong ng-if="match.result == 2 || match.result == 3">{{ match.awayPoints }}Pts.</strong>
+        </td>
+
       </tr>
     </tbody>
   </table>

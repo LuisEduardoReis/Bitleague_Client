@@ -19,12 +19,12 @@
         <a ui-sref="home"><img src = "../../images/logo_navbar.png" alt = "" id="logo"/></a>
 
         <div class="nav navbar-nav navbar-right">
-          <div ng-if="!loggedIn()">
-            <a ui-sref="login"> Login </a>
-          </div>
           <div ng-if="loggedIn()">
             <a ui-sref="userpage">{{user.name}}</a>
-            <a ui-sref="userpage"><img width="50" height="50" ng-src="{{user.picture.data.url}}"></a>
+            <a ui-sref="userpage">
+              <img ng-if="user.picture.data.url" width="50" height="50" ng-src="{{user.picture.data.url}}">
+              <img ng-if="!user.picture.data.url" width="50" height="50" src = "../images/avatar.jpg" alt = ""/>
+            </a>
           </div>
         </div>
 

@@ -1,0 +1,30 @@
+<div class="col-xs-12 back_to_menu big_title">
+  <h1>
+    <a ui-sref = "league.menu({id:league_id})" tooltip-placement = "top" tooltip = "Back to Menu">
+      <i class = "fa fa-arrow-circle-o-left"></i>
+    </a>
+    <span>Leading Board</span>
+  </h1>
+</div>
+
+<table class="table table-bordered table-striped my-table">
+  <thead>
+  <tr>
+    <th class="text-center"> Team </th>
+    <th class="text-center"> Pts. </th>
+    <th class="text-center"> W </th>
+    <th class="text-center"> D </th>
+    <th class="text-center"> L </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="result in resultsArray">
+    <td class="text-center">{{result.name}}</td>
+    <td class="text-center">{{results[result.user][3]}}</td>
+    <td class="text-center">{{results[result.user][0]}}</td>
+    <td class="text-center">{{results[result.user][1]}}</td>
+    <td class="text-center">{{results[result.user][2]}}</td>
+
+  </tr>
+  </tbody>
+</table>

@@ -1,51 +1,39 @@
-<p ng-if = "state=='connecting'"> Connecting to draft...</p>
-<p ng-if = "state=='loading'"> Loading...</p>
-<p ng-if = "state=='closed'"> Closed.</p>
+<h1 ng-if = "state=='connecting'" class="text-center big_title"> Connecting to draft...</h1>
+<h1 ng-if = "state=='loading'" class="text-center big_title"> Loading...</h1>
+<h1 ng-if = "state=='closed'" class="text-center big_title"> Closed.</h1>
 <div ng-if = "state=='connected'">
   <div class = "" id = "draft">
     <!-- ROUNDS  -->
     <div class = "row no-side-margin" id = "roundsRow">
       <div class="col-sm-8 col-sm-offset-2 no-padding">
         <div class="col-xs-12" id="current_round">
-          <h3>Round 1/20</h3>
+          <h3>Round {{user_list.users ? Math.floor(turn/user_list.users.length)+1 : 0}}/23</h3>
         </div>
         <ul class="no-padding">
-          <li class = "item previous_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p>Paulo Lopes</p>
-              <small>Goalkeeper</small>
-            </div>
-          </li>
-          <li class = "item previous_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p>Paulo Lopes</p>
-              <small>Goalkeeper</small>
-            </div>
-          </li>
-          <li class = "item current_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-              <p class="picking">Picking...</p>
-            </div>
-          </li>
-          <li class = "item next_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
-            </div>
-          </li>
-          <li class = "item next_picker">
-            <img src = "../images/user.jpg" class="col-sm-5" alt = "user"/>
-            <p class="user_name col-sm-7">Mário Macedo</p>
-            <div class="pickedPlayer col-xs-12">
+          <li ng-repeat="user in userQueue track by $index"
+              ng-class = "{'item':true, 'previous_picker': ($index < 2), 'current_picker': ($index == 2), 'next_picker': ($index > 2)}">
+            <div ng-if="user.user_id!=null">
+              <img ng-src = "{{user_list.userpictures[user.user_id]}}" class="col-sm-5" alt = "user"/>
+              <p class="user_name col-sm-7">{{user_list.usernames[user.user_id]}}</p>
+              <div class="pickedPlayer col-xs-12">
+                <div ng-if="$index<2">
+                  <p>{{players[user.pick_id].name}}</p>
+                  <small>{{players[user.pick_id].positionDescription}}</small>
+                </div>
+                <div ng-if="$index==2">
+                  <p>Picking...</p>
+                </div>
+                <div ng-if="$index>2">
+                  <p>Next</p>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
+
+        <div id = "timer_2" class = "col-md-12 col-sm-12 col-xs-12 no-padding">
+          <h1>00:{{("0" + timer).slice(-2)}}<button ng-if = "!started && owner" ng-click = "startDraft()" tooltip-placement = "top" tooltip = "Start Draft"><i class="fa fa-play"></i></button></h1>
+        </div>
       </div>
     </div>
     <!-- /ROUNDS  -->
@@ -74,16 +62,10 @@
           <div class = "col-lg-6" id = "draft_table_section">
             <h3 class = "section-title"><span class = "fa fa-plus-circle"></span> Available Players</h3>
             <div class = "row no-side-margin">
-              <div id = "timer" class = "col-md-12 col-sm-12 col-xs-12 no-padding">
-                <h1 ng-class = "{'green':started,'red':!started}">{{timer}}<button ng-if = "!started && owner" ng-click = "startDraft()" tooltip-placement = "top" tooltip = "Start Draft"><i class="fa fa-play"></i></button></h1>
-              </div>
-            </div>
-
-            <div class = "row no-side-margin">
               <div id = "draft-main-table" class = "col-sm-12 no-padding">
                 <tabset>
                   <tab index = "0" heading = "All">
-                    <table class = "table table-bordered table-striped">
+                    <table class = "table table-bordered table-striped my-table">
                       <thead>
                       <tr>
                         <th ng-click = "sortTable('position')">Position
@@ -122,7 +104,7 @@
                     </div>
                   </tab>
                   <tab index = "1" heading = "Goalkeepers">
-                    <table class = "table table-bordered table-striped">
+                    <table class = "table table-bordered table-striped my-table">
 
                       <thead>
                       <tr>
@@ -161,7 +143,7 @@
                     </div>
                   </tab>
                   <tab index = "2" heading = "Defenders">
-                    <table class = "table table-bordered table-striped">
+                    <table class = "table table-bordered table-striped my-table">
                       <thead>
                       <tr>
                         <th ng-click = "sortTable('position')">Position
@@ -199,7 +181,7 @@
                     </div>
                   </tab>
                   <tab index = "3" heading = "Midfielders">
-                    <table class = "table table-bordered table-striped">
+                    <table class = "table table-bordered table-striped my-table">
 
                       <thead>
                       <tr>
@@ -239,7 +221,7 @@
                     </div>
                   </tab>
                   <tab index = "4" heading = "Forwards">
-                    <table class = "table table-bordered table-striped">
+                    <table class = "table table-bordered table-striped my-table">
 
                       <thead>
                       <tr>
@@ -278,9 +260,9 @@
                       </div>
                     </div>
                   </tab>
-                  <div class = "col-xs-4 no-padding" id = "draft-filter">
+                  <div class = "col-xs-4 no-padding draft-filter">
                     <div class = "form-group">
-                      <input ng-model = "q" id = "search" class = "form-control" placeholder = "Name, Position, Nationality...">
+                      <input ng-model = "q" class = "search form-control" placeholder = "Name, Position, Nationality...">
                     </div>
                   </div>
                 </tabset>
@@ -297,7 +279,7 @@
             <accordion close-others = "oneAtATime">
               <accordion-group heading = "Goalkeepers - {{ my_picks[1].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[1]">
+                  <li ng-repeat = "pick in my_picks[1] track by $index" class="col-xs-6">
                     <div ng-if = "players[pick].positionDescription == 'Goalkeeper'">
                       {{players[pick].name}}
                     </div>
@@ -306,7 +288,7 @@
               </accordion-group>
               <accordion-group heading = "Defenders - {{ my_picks[2].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[2]">
+                  <li ng-repeat = "pick in my_picks[2] track by $index" class="col-xs-6">
                     <div ng-if = "players[pick].positionDescription =='Defender'">
                       {{players[pick].name}}
                     </div>
@@ -315,7 +297,7 @@
               </accordion-group>
               <accordion-group heading = "Midfielders  - {{ my_picks[3].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[3]">
+                  <li ng-repeat = "pick in my_picks[3] track by $index" class="col-xs-6">
                     <div ng-if = "players[pick].positionDescription =='Midfielder'">
                       {{players[pick].name}}
                     </div>
@@ -324,7 +306,7 @@
               </accordion-group>
               <accordion-group heading = "Forwards - {{ my_picks[4].length }}" is-open = "true">
                 <ul>
-                  <li ng-repeat = "pick in my_picks[4]">
+                  <li ng-repeat = "pick in my_picks[4] track by $index" class="col-xs-6">
                     <div ng-if = "players[pick].positionDescription =='Forward'">
                       {{players[pick].name}}
                     </div>

@@ -1,8 +1,9 @@
 'use strict';
 
-app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $websocket, srvAuth) {
+app.controller('DraftCtrl', function ($rootScope, $scope, $state, $stateParams, $http, $websocket, srvAuth, toaster) {
 
   $scope.started = false;
+  $scope.initialized = false;
   $scope.league_id = $stateParams.id;
   $scope.currentPage = 1;
   $scope.pageSize = 10;
@@ -10,7 +11,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.state = 'loading';
   $scope.user_list = [];
   $scope.players = [];
-  $scope.picks = [];
+  $scope.picks = {};
   $scope.my_picks = [];
   $scope.favorites = [];
   $scope.players_left = [];
@@ -22,11 +23,14 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   $scope.midfield = 0;
   $scope.forward = 0;
   $scope.owner = false;
+  $scope.Math = window.Math;
 
   $scope.ws = null;
 
+  $scope.turn = 0;
   $scope.timer = 30;
   $scope.currentUser = 'noone';
+  $scope.userQueue = [];
 
   $scope.$on("$destroy", function() {
     if ($scope.ws != null) $scope.ws.$close();
@@ -38,12 +42,6 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     method: 'GET',
     url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/players'
   }).success(function (players) {
-  // GET Me
-  $http({
-    method: 'GET',
-    url: 'http://' + window.location.hostname +':'+ $rootScope.SERVER_PORT +'/api/me',
-    headers: {'Authorization': srvAuth.login.token}
-  }).success(function (me) {
   // GET League
   $http({
     method: 'GET',
@@ -52,44 +50,57 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
   }).success(function (league) {
 
     $scope.players = players;
-    $scope.me = me;
+    $scope.me = srvAuth.login.user;
     $scope.league = league;
+    $scope.timer = league.turn_time;
     $scope.updateLists();
 
     $scope.state = 'connecting';
     $scope.ws = $websocket.$new("ws://"+window.location.hostname+':'+$rootScope.SERVER_PORT+"/api/socket")
     $scope.ws.$open();
 
-    if($scope.league.creator === $scope.me.id_string) $scope.owner = true;
+    if($scope.league.creator === $scope.me) $scope.owner = true;
 
     $scope.ws.$on('$open', function() {
-      if ($scope.ws != null) {
-        $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
-      }
+      if ($scope.ws != null) $scope.ws.$emit('init',{'Authorization': srvAuth.login.token, 'league_id': $scope.league_id});
     });
 
     $scope.ws.$on('$message', function(res) {
       $scope.state = 'connected';
+      //console.log(res);
 
       if (res == 'close') {
-        $scope.state = 'closed'
-        $scope.ws.$close();
-        $scope.ws = null;
+        $scope.state = 'closed';
+        if ($scope.ws != null) $scope.ws.$close();
       } else
       if (res.event == 'turn_update') {
         $scope.started = true;
+        $scope.turn = res.data.turn;
         $scope.timer = res.data.timeLeft;
+        $scope.userQueue = res.data.userQueue;
         $scope.currentUser = res.data.currentUser;
+
+        if ($scope.timer < 0) $state.go('league',{'id':$scope.league_id});
       } else
       if(res.event == 'user_list') {
         $scope.user_list = res.data;
+        console.log(user_list);
       } else
       if(res.event == 'pick_list') {
-        $scope.picks = res.data;
+        for(var i in res.data) {
+          picks[i] = res[i];
+        };
         $scope.updateLists();
       } else
       if(res.event == 'pick') {
-        $scope.picks.push(res.data);
+        $scope.picks[res.data.turn] = (res.data);
+
+        /* Popup notification */
+        var picker = $scope.user_list.usernames[res.data.user_id];
+        var picked_player = $scope.players[res.data.player_id];
+        toaster.pop("success", picker + " picked " + picked_player.name, "");
+        /* /Popup notification */
+
         $scope.updateLists();
         //$scope.incrementTeamDisplay(res.data.player_id);
         $scope.updateFavouritesLeft(res.data.player_id);
@@ -107,9 +118,9 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
 
     $scope.ws.$on('$close', function() {
       $scope.state='closed';
+      $state.go('league.menu',{'id':$scope.league_id});
     });
 
-  }).error(function(data) { console.log(data)});
   }).error(function(data) { console.log(data)});
   }).error(function(data) { console.log(data)});
 
@@ -140,7 +151,7 @@ app.controller('DraftCtrl', function ($rootScope, $scope, $stateParams, $http, $
     $scope.my_picks = [];
     for(var i = 1; i <= 4; i++) $scope.my_picks[i] = [];
     for(var i in $scope.picks) {
-      if ($scope.picks[i].user_id == $scope.me.id_string) {
+      if ($scope.picks[i].user_id == $scope.me) {
         var position = $scope.players[$scope.picks[i].player_id].position;
         $scope.my_picks[position].push($scope.picks[i].player_id);
       }

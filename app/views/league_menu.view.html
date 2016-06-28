@@ -1,0 +1,80 @@
+<div class = "col-xs-12 back_to_menu big_title">
+  <h1>
+    <a ui-sref = "userpage" tooltip-placement = "top" tooltip = "Back to Menu">
+      <i class = "fa fa-arrow-circle-o-left"></i>
+    </a>
+    <span>{{league.name}}</span>
+  </h1>
+</div>
+
+<h1 ng-show="!loaded" class="text-center big_title">Loading...</h1>
+<ul ng-show="loaded" class = "" ng-class="{'invite-state col-xs-4':(league.state=='INVITE'), 'col-xs-12':league.state!='INVITE', 'single_option text-center':(league.state=='READYTODRAFT' || league.state=='DRAFTING')}" id="league_menu">
+  <li class="text-center" ng-show="me == league.creator && league.state=='INVITE'">
+    <a class = "list-group-item pointer" style="cursor: pointer" ng-click="readyToDraft()">
+      <i class = "fa fa-lock"></i>
+      <br/>
+      <span>Close Invitations</span>
+    </a>
+  </li>
+
+  <li class="text-center" ng-if = "league.state == 'READYTODRAFT' || league.state == 'DRAFTING'">
+    <a ui-sref = "draft({id:league_id})" class = "list-group-item">
+      <i class = "fa fa-table"></i>
+      <br/>
+      <span>Draft</span>
+    </a>
+  </li>
+
+  <li class="text-center" ng-if = "league.state == 'DURATION'" >
+    <a ui-sref = "league.board" class = "list-group-item">
+      <i class = "fa fa-area-chart"></i>
+      <br/>
+      <span>Leading Board</span>
+    </a>
+  </li>
+  <li class="text-center" ng-if = "league.state == 'DURATION'">
+    <a ui-sref-active = "active" ui-sref = "league.matches" class = "list-group-item">
+      <i class = "fa fa-users"></i>&nbsp;&nbsp;<i class = "fa fa-times"></i>&nbsp;&nbsp;<i class = "fa fa-users"></i>
+      <br/>
+      <span>Matches</span>
+    </a>
+  </li>
+  <li class="text-center" ng-if = "league.state == 'DURATION'">
+    <a ui-sref-active = "active" ui-sref = "league.players" class = "list-group-item">
+      <i class = "fa fa-users"></i>
+      <br/>
+      <span>Players</span>
+    </a>
+  </li>
+  <li class="text-center" ng-if = "league.state == 'DURATION'">
+    <a ui-sref-active = "active" ui-sref = "league.team" class = "list-group-item">
+      <i class = "fa fa-users"></i>
+      <br/>
+      <span>My Team</span>
+    </a>
+  </li>
+</ul>
+
+
+<div class="col-xs-8 current_teams" ng-show="me == league.creator && league.state=='INVITE'">
+  <div class="col-xs-4 no-padding current_team" ng-repeat="user in league.users">
+    <div class="col-xs-3 no-padding">
+      <img ng-if="user.picture" width="50" height="50" ng-src = "{{user.picture}}" alt = ""/>
+      <img ng-if="!user.picture" width="50" height="50" src = "../images/avatar.jpg" alt = ""/>
+    </div>
+    <h5 class="col-xs-9">{{ user.name }}</h5>
+  </div>
+</div>
+
+
+<div class="col-xs-12 current_teams" ng-show="me != league.creator && league.state=='INVITE'">
+  <div class="col-xs-3 current_team" ng-repeat="user in league.users">
+    <div class="col-xs-3 no-padding">
+      <img ng-if="user.picture" width="50" height="50" ng-src = "{{user.picture}}" alt = ""/>
+      <img ng-if="!user.picture" width="50" height="50" src = "../images/avatar.jpg" alt = ""/>
+    </div>
+    <h5 class="col-xs-9">{{ user.name }}</h5>
+  </div>
+
+  <h3 class=" col-xs-12 text-center">League accepting players! <br/> Invite your friends now!</h3>
+</div>
